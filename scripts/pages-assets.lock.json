@@ -423,9 +423,24 @@
     },
     {
       "path": "wasm/orca/mt/slicer.mjs",
-      "bytes": 99884,
-      "sha256": "3f7beb280eeb133d43e7443f68f0cf18c4701adae423bb36de9cea7a8ef6837e",
-      "sourceUrl": "https://cubbycad.com/slicer/wasm/orca/mt/slicer.mjs"
+      "bytes": 100020,
+      "sha256": "b1b81b018827cb8113e57a2ee354c1ac82b934cef9b115283a0616de6ea8185e",
+      "sourceUrl": "https://cubbycad.com/slicer/wasm/orca/mt/slicer.mjs",
+      "transformation": {
+        "id": "orca-mt-core-budget-v1",
+        "helper": "scripts/transform-mt-core-budget.mjs",
+        "reason": "Keep TBB warmup concurrency equal to the actual engine thread budget, including child pthreads, instead of the physical host core count.",
+        "source": {
+          "bytes": 99884,
+          "sha256": "3f7beb280eeb133d43e7443f68f0cf18c4701adae423bb36de9cea7a8ef6837e"
+        },
+        "output": {
+          "bytes": 100020,
+          "sha256": "b1b81b018827cb8113e57a2ee354c1ac82b934cef9b115283a0616de6ea8185e"
+        },
+        "find": "_emscripten_num_logical_cores=()=>ENVIRONMENT_IS_NODE?require(\"node:os\").cpus().length:navigator[\"hardwareConcurrency\"]",
+        "replace": "_emscripten_num_logical_cores=/* OrcaSlicer Web: TBB warmup concurrency must match the active engine thread budget. See scripts/transform-mt-core-budget.mjs. */()=>typeof Module[\"_cs_thread_count\"]===\"function\"?Module[\"_cs_thread_count\"]():csThreadCount()"
+      }
     },
     {
       "path": "wasm/orca/mt/slicer.wasm",
@@ -6595,8 +6610,8 @@
     "added": 4
   },
   "snapshot": {
-    "url": "https://github.com/Psych0h3ad/orcaslicer-web/releases/download/assets-2026-11-16-mt/pages-assets.zip",
-    "bytes": 62912969,
-    "sha256": "a4411dd47399e262b18d736e083d2c44597e95a57835cd4c4737bfdeceab434f"
+    "url": "https://github.com/Psych0h3ad/orcaslicer-web/releases/download/assets-2026-11-16-mt2/pages-assets.zip",
+    "bytes": 62913038,
+    "sha256": "23c0021cbcbb45bd1ac38314ff5a8b7aa1cc127d9be34c8e29498969415becdc"
   }
 }

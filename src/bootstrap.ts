@@ -7,5 +7,14 @@ void prepareThreadIsolation().then((result) => {
 }).catch((error: unknown) => {
   console.error(error);
   const root = document.getElementById('app');
-  if (root) root.textContent = 'アプリを読み込めませんでした。ページを再読み込みしてください。';
+  if (root) {
+    const message = document.createElement('p');
+    message.textContent = 'アプリを読み込めませんでした。';
+    const recover = document.createElement('a');
+    const url = new URL(location.href);
+    url.searchParams.set('threads', 'single');
+    recover.href = url.href;
+    recover.textContent = 'シングルスレッドで開き直す';
+    root.replaceChildren(message, recover);
+  }
 });

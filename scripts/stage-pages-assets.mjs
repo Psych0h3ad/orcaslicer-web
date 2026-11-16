@@ -16,6 +16,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { MT_CORE_BUDGET_TRANSFORM, transformMtCoreBudget } from './transform-mt-core-budget.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const publicRoot = join(root, 'public');
@@ -24,8 +25,9 @@ const update = process.argv.includes('--update-lock');
 const verifyOnly = process.argv.includes('--verify');
 const addCovers = process.argv.includes('--add-covers');
 const addMt = process.argv.includes('--add-mt');
-if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify', '--add-covers', '--add-mt'].includes(arg)) || [update, verifyOnly, addCovers, addMt].filter(Boolean).length > 1) {
-  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock | --add-covers | --add-mt]');
+const patchMt = process.argv.includes('--patch-mt');
+if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify', '--add-covers', '--add-mt', '--patch-mt'].includes(arg)) || [update, verifyOnly, addCovers, addMt, patchMt].filter(Boolean).length > 1) {
+  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock | --add-covers | --add-mt | --patch-mt]');
 }
 const base = 'https://cubbycad.com/slicer/';
 const concurrency = 4;
@@ -222,6 +224,8 @@ async function validateSnapshot() {
       if (mt[key] !== version[key] || lock.multiThreadedEngine?.version?.[key] !== version[key]) throw new Error(`Multi-threaded ${key} must match the single-threaded engine metadata`);
     }
     if (lock.multiThreadedEngine.workerEntrypoint !== 'wasm/orca/mt/slicer.mjs') throw new Error('Multi-threaded worker entrypoint is not locked');
+    const glue = lock.files.find((entry) => entry.path === 'wasm/orca/mt/slicer.mjs');
+    if (glue.sha256 !== MT_CORE_BUDGET_TRANSFORM.output.sha256 || glue.transformation?.id !== MT_CORE_BUDGET_TRANSFORM.id) throw new Error('MT JS does not include the reviewed core-budget guard. Run --patch-mt before publishing.');
   } else if (lock.multiThreadedEngine) throw new Error('Multi-threaded metadata exists without its engine assets');
   const omittedCovers = new Set((lock.omittedOptionalAssets ?? []).filter((entry) => entry.kind === 'printer-cover' && entry.reasonCode && entry.reason).map((entry) => entry.path));
   let presets = 0;
@@ -292,6 +296,7 @@ async function captureMultiThreadedEngine(files, expected) {
     files.set(path, entry);
     downloaded++;
   });
+  const transformed = await patchMtGlue(files);
   // This Emscripten build boots workers by re-importing slicer.mjs itself.
   // The successful factory startup below loads the actual pthread pool; a
   // missing external worker dependency consequently fails before lock changes.
@@ -321,7 +326,19 @@ async function captureMultiThreadedEngine(files, expected) {
     const metadata = await readJson(path);
     for (const key of ['engine', 'version', 'bridge']) if (metadata[key] !== runtime.version[key]) throw new Error(`Locked MT metadata disagrees with the actual WASM ${key}`);
   }
-  return { observedAt: new Date().toISOString(), version: runtime.version, workerEntrypoint: `${dir}slicer.mjs`, metadataSource, startupValidation: { threads: runtime.threads, sharedMemory: runtime.sharedMemory, heapBytes: runtime.heapBytes }, added: files.size - existing };
+  return { observedAt: new Date().toISOString(), version: runtime.version, workerEntrypoint: `${dir}slicer.mjs`, metadataSource, startupValidation: { threads: runtime.threads, sharedMemory: runtime.sharedMemory, heapBytes: runtime.heapBytes }, added: files.size - existing, transformed };
+}
+
+async function patchMtGlue(files) {
+  const path = 'wasm/orca/mt/slicer.mjs';
+  const entry = files.get(path);
+  if (!entry) throw new Error('No locked MT JS to patch; run --add-mt first');
+  const source = await readFile(targetFor(path));
+  check(path, source, entry);
+  const result = transformMtCoreBudget(source);
+  if (result.changed) await save(path, result.bytes);
+  files.set(path, { ...entry, bytes: result.bytes.length, sha256: sha256(result.bytes), transformation: MT_CORE_BUDGET_TRANSFORM });
+  return result.changed;
 }
 
 let lock;
@@ -420,13 +437,25 @@ if (update) {
     const files = new Map(original.map((entry) => [entry.path, entry]));
     const captured = await captureMultiThreadedEngine(files, lock.engine);
     const multiThreadedEngine = captured.added || !lock.multiThreadedEngine ? captured : lock.multiThreadedEngine;
-    for (const entry of original) if (files.get(entry.path) !== entry) throw new Error(`Existing locked asset was replaced: ${entry.path}`);
+    for (const entry of original) if (entry.path !== 'wasm/orca/mt/slicer.mjs' && files.get(entry.path) !== entry) throw new Error(`Existing locked asset was replaced: ${entry.path}`);
     lock = { ...lock, files: [...files.values()].sort((a, b) => a.path.localeCompare(b.path, 'en')), multiThreadedEngine };
-    if (captured.added) delete lock.snapshot;
+    if (captured.added || captured.transformed) delete lock.snapshot;
     await validateSnapshot();
     await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
     console.log(`Multi-threaded engine: ${multiThreadedEngine.version.version}, bridge ${multiThreadedEngine.version.bridge}; two-thread startup passed, ${captured.added} assets added.`);
     console.warn('Run the real asynchronous MT slicing integration check before enabling this engine. Publish an expanded immutable snapshot before CI deployment.');
+  }
+  if (patchMt) {
+    const original = lock.files;
+    const files = new Map(original.map((entry) => [entry.path, entry]));
+    const changed = await patchMtGlue(files);
+    for (const entry of original) if (entry.path !== 'wasm/orca/mt/slicer.mjs' && files.get(entry.path) !== entry) throw new Error(`Existing locked asset was replaced: ${entry.path}`);
+    lock = { ...lock, files: [...files.values()].sort((a, b) => a.path.localeCompare(b.path, 'en')) };
+    if (changed) delete lock.snapshot;
+    await validateSnapshot();
+    await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
+    console.log(`MT core-budget guard ${changed ? 'applied' : 'already present'}; WASM and all other asset hashes preserved.`);
+    if (changed) console.warn('Publish the reviewed guarded MT snapshot and add lock.snapshot before CI deployment.');
   }
 }
 

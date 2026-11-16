@@ -5,6 +5,7 @@
  * resolution, blob packer and heap helpers; no mocked slicer or browser.
  * Run after `npm run stage:pages` (or `node scripts/stage-pages-assets.mjs`).
  * Default: ST. Add --mt (or --all) to also check MT against the ST result.
+ * --mt-threads 4 selects a budget; 0 checks automatic selection (default 2).
  */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -21,6 +22,8 @@ const outputDir = join(root, 'e2e-out/engine-smoke');
 const textDecoder = new TextDecoder();
 const started = performance.now();
 const checkMt = process.argv.includes('--mt') || process.argv.includes('--all');
+const mtThreads = integerOption('--mt-threads', 2);
+assert.ok(mtThreads === 0 || (mtThreads >= 2 && mtThreads <= 16), '--mt-threads must be 0 (auto) or 2–16');
 
 // Load production TypeScript modules without opening a development server.
 const vite = await createServer({
@@ -29,7 +32,7 @@ const vite = await createServer({
   appType: 'custom',
   logLevel: 'error',
   optimizeDeps: { noDiscovery: true, include: [] },
-  server: { middlewareMode: true, hmr: false, watch: null },
+  server: { middlewareMode: true, hmr: false, ws: false, watch: null },
 });
 
 try {
@@ -185,10 +188,12 @@ try {
     // An independent host Worker makes the deadline enforceable even if a
     // buggy pthread build blocks its host. Cleanup terminates the pool first,
     // and the parent always terminates the host before resolving/rejecting.
-    const mt = await runMtCheck(join(engineDir, 'mt'), packed, 60_000);
+    const mt = await runMtCheck(join(engineDir, 'mt'), packed, 60_000, mtThreads);
     assert.deepEqual(mt.version, stagedVersion, 'MT and ST must expose the same engine/bridge versions');
     assert.equal(mt.sharedMemory, true, 'The MT engine must use SharedArrayBuffer-backed memory');
     assert.ok(mt.threads >= 2, 'The MT engine must use at least two threads');
+    const expectedThreads = mtThreads || Math.max(2, Math.min(16, globalThis.navigator?.hardwareConcurrency || 4));
+    assert.equal(mt.threads, expectedThreads, 'The engine must honor the selected or automatic thread budget');
     assert.equal(mt.rc, 0, mt.report?.error ?? 'MT slice failed');
     assert.equal(mt.report.ok, true, mt.report.error ?? 'MT slice failed');
     assert.equal(mt.report.stats.layers, sliced.report.stats.layers);
@@ -206,7 +211,7 @@ try {
       writeFile(join(outputDir, 'cube-mt.gcode'), mt.gcode),
       writeFile(join(outputDir, 'report-mt.json'), `${JSON.stringify(mt.report, null, 2)}\n`),
     ]);
-    console.log(JSON.stringify({ ok: true, mode: 'multi-threaded', version: mt.version, threads: mt.threads,
+    console.log(JSON.stringify({ ok: true, mode: 'multi-threaded', version: mt.version, requestedThreads: mtThreads, threads: mt.threads,
       sharedMemory: mt.sharedMemory, layers: mt.report.stats.layers, gcodeBytes: mt.gcode.byteLength,
       progressEvents: mt.progressEvents, elapsedMs: mt.elapsedMs, matchesSingleThreaded: true }, null, 2));
   }
@@ -216,11 +221,23 @@ try {
 
 async function readJson(file) { return JSON.parse(await readFile(file, 'utf8')); }
 
-async function runMtCheck(directory, payload, timeoutMs) {
+function integerOption(name, fallback) {
+  const inline = process.argv.find((argument) => argument.startsWith(`${name}=`));
+  const index = process.argv.indexOf(name);
+  let raw;
+  if (inline) raw = inline.slice(name.length + 1);
+  else if (index >= 0) raw = process.argv[index + 1];
+  else return fallback;
+  const value = Number(raw);
+  assert.ok(raw !== undefined && raw !== '' && Number.isInteger(value), `${name} needs an integer`);
+  return value;
+}
+
+async function runMtCheck(directory, payload, timeoutMs, threads) {
   const source = `(${mtWorkerMain.toString()})()`;
   const worker = new Worker(source, {
     eval: true,
-    workerData: { directory, json: payload.json, blob: payload.blob, timeoutMs: timeoutMs - 5_000 },
+    workerData: { directory, json: payload.json, blob: payload.blob, timeoutMs: timeoutMs - 5_000, threads },
   });
   return new Promise((resolveResult, rejectResult) => {
     let settled = false;
@@ -253,12 +270,12 @@ async function mtWorkerMain() {
   const { readFile } = await import('node:fs/promises');
   const { join } = await import('node:path');
   const { pathToFileURL } = await import('node:url');
-  const { directory, json, blob, timeoutMs } = workerData;
+  const { directory, json, blob, timeoutMs, threads } = workerData;
   const started = performance.now();
   // Atomics.waitAsync alone does not keep a Node Worker alive, and the
   // Emscripten pool deliberately unrefs idle pthreads.
   const keepAlive = setInterval(() => {}, 1_000);
-  const diagnostics = { progress: [], stderr: [], version: null, threads: 0, sharedMemory: false, state: null };
+  const diagnostics = { progress: [], progressEvents: 0, stderr: [], version: null, threads: 0, sharedMemory: false, state: null };
   let mod, message;
   let inputs = [], output = 0, state = 0, gcodePtr = 0, reportPtr = 0;
   const readWord = (pointer) => { mod.csSyncHeap?.(); return mod.HEAPU32[(pointer >>> 0) >>> 2] >>> 0; };
@@ -275,7 +292,7 @@ async function mtWorkerMain() {
     ]);
     const compiled = await WebAssembly.compile(wasm);
     mod = await factory({
-      csThreads: 2,
+      csThreads: threads,
       locateFile: (file) => join(directory, file),
       // Node's Worker constructor wants an absolute native path; browsers use
       // the equivalent same-origin URL in the production runtime.
@@ -286,6 +303,7 @@ async function mtWorkerMain() {
         return {};
       },
       csProgress(percent, text) {
+        diagnostics.progressEvents++;
         diagnostics.progress.push({ percent, text });
         if (diagnostics.progress.length > 10) diagnostics.progress.shift();
         parentPort.postMessage({ status: 'progress', percent, text });
@@ -334,7 +352,7 @@ async function mtWorkerMain() {
       rc: diagnostics.state[1], version: diagnostics.version, threads: diagnostics.threads,
       sharedMemory: diagnostics.sharedMemory, report,
       gcode: gcodeLen ? copyOut(gcodePtr, gcodeLen) : new Uint8Array(),
-      progressEvents: diagnostics.progress.length, elapsedMs: Math.round(performance.now() - started),
+      progressEvents: diagnostics.progressEvents, elapsedMs: Math.round(performance.now() - started),
     } };
   } catch (error) {
     message = { error: String(error.stack ?? error), diagnostics };

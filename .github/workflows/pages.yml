@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: read
@@ -32,8 +32,8 @@ jobs:
       - name: Fetch pinned Orca WASM builds and profiles
         run: npm run assets
       - run: npm test
-      - name: Slice a cube with the real Orca engine
-        run: npm run test:engine
+      - name: Compare real single-threaded and multi-threaded Orca slicing
+        run: npm run test:engine -- --mt
       - name: Build for the actual Pages URL
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/
@@ -47,7 +47,7 @@ jobs:
           path: dist
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     permissions:
       pages: write

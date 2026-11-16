@@ -69,7 +69,9 @@ npm run preview
 
 ## 資産の固定とソース
 
-`scripts/pages-assets.lock.json`に取得URL・サイズ・SHA-256とソース情報を記録しています。MTエンジン・プリンター画像442枚を含む1,166資産は、このリポジトリの[固定スナップショット](https://github.com/Psych0h3ad/orcaslicer-web/releases/tag/assets-2026-11-16-mt)にも保存しました。`npm run assets`は一致するローカルファイルを再利用し、不足があれば約63MBのスナップショットZIPを取得します。ZIP全体と各ファイルのSHA-256を検証してから展開するため、上流の配信内容の変化に左右されません。
+`scripts/pages-assets.lock.json`に取得URL・サイズ・SHA-256とソース情報を記録しています。MTエンジン・プリンター画像442枚を含む1,166資産は、このリポジトリの[固定スナップショット](https://github.com/Psych0h3ad/orcaslicer-web/releases/tag/assets-2026-11-16-mt2)にも保存しました。`npm run assets`は一致するローカルファイルを再利用し、不足があれば約63MBのスナップショットZIPを取得します。ZIP全体と各ファイルのSHA-256を検証してから展開するため、上流の配信内容の変化に左右されません。
+
+MTのJavaScript接続部分には、TBBが認識する論理コア数を選択スレッド数と一致させるガードを加えています。スレッド数を制限した際の初回処理停止を防ぐためです。WASM本体は変更せず、元JavaScriptのSHA・置換内容・派生版SHAを追跡して再現できるようにしています。
 
 `npm run assets:verify`はネット接続なしで完全性を検証します。意図的に上流から更新するときだけ `node scripts/stage-pages-assets.mjs --update-lock` を実行し、ソース・エンジンABI・差分を確認して再テストしてください。この操作は古いsnapshot指定を外します。更新後は新しい固定スナップショットを公開し、そのURL・サイズ・SHA-256をlockの `snapshot` に記録してください。元の上流URLは可変です。公開済みスナップショットを置き換えず、新しいタグを使用します。
 
