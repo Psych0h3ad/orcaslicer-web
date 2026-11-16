@@ -75,6 +75,17 @@ afterEach(() => {
 });
 
 describe('sliceJob multi-threaded recovery', () => {
+  it('honors selecting ST after an MT opt-in without reloading the editor', async () => {
+    const current = { href: 'https://example.test/orcaslicer-web/?threads=multi', search: '?threads=multi' };
+    vi.stubGlobal('location', current);
+    const replaceState = vi.fn((_state, _title, href: string) => { current.href = href; current.search = new URL(href).search; });
+    vi.stubGlobal('history', { state: null, replaceState });
+    const { engineThreadsPref, setEngineThreadsPref } = await import('./client');
+    setEngineThreadsPref(1);
+    expect(engineThreadsPref()).toBe(1);
+    expect(new URL(current.href).searchParams.get('threads')).toBe('auto');
+    expect(replaceState).toHaveBeenCalledTimes(1);
+  });
   it('forces the single-thread recovery URL even when MT is saved', async () => {
     localStorage.setItem('cubby-slicer:engine-threads', '8');
     vi.stubGlobal('location', { href: 'https://example.test/orcaslicer-web/?threads=single', search: '?threads=single' });

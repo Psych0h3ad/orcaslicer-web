@@ -48,6 +48,14 @@ export function engineThreadsPref(): number {
 }
 /** Set the thread preference (Preferences); idle engines restart so the next slice uses it. */
 export function setEngineThreadsPref(n: number): void {
+  // An explicit selection of ST must win over the earlier MT opt-in URL,
+  // both now and after a later reload. This changes no project or navigation.
+  if (n === 1 && typeof location !== 'undefined' && typeof history !== 'undefined'
+      && new URLSearchParams(location.search).get('threads') === 'multi') {
+    const url = new URL(location.href);
+    url.searchParams.set('threads', 'auto');
+    history.replaceState(history.state, '', url.href);
+  }
   if (n > 0) writeString(THREADS_KEY, String(Math.min(64, Math.floor(n)))); else removeKey(THREADS_KEY);
   for (const w of workers.values()) if (w.idle) w.reset(null);
 }
