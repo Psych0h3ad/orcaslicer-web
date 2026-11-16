@@ -5,6 +5,8 @@
  * restoring missing assets from its immutable, separately hashed release ZIP.
  * Maintainers can deliberately refresh the snapshot with --update-lock, inspect
  * its diff, publish an immutable ZIP, and set lock.snapshot before committing.
+ * --add-covers preserves every existing locked byte and adds only printer
+ * selection thumbnails, followed by publication of an expanded snapshot ZIP.
  * No assets are fetched by the deployed app from CubbyCAD: everything is staged
  * under public/ and served by the same GitHub Pages origin as the application.
  */
@@ -18,8 +20,9 @@ const publicRoot = join(root, 'public');
 const lockPath = join(root, 'scripts/pages-assets.lock.json');
 const update = process.argv.includes('--update-lock');
 const verifyOnly = process.argv.includes('--verify');
-if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify'].includes(arg)) || (update && verifyOnly)) {
-  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock]');
+const addCovers = process.argv.includes('--add-covers');
+if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify', '--add-covers'].includes(arg)) || [update, verifyOnly, addCovers].filter(Boolean).length > 1) {
+  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock | --add-covers]');
 }
 const base = 'https://cubbycad.com/slicer/';
 const concurrency = 4;
@@ -84,6 +87,7 @@ function check(path, bytes, entry) {
     throw new Error(`Integrity mismatch for ${path}. Refusing changed or incomplete upstream assets; restore the pinned snapshot or explicitly review --update-lock.`);
   }
   if (/\.wasm$/.test(path) && !bytes.subarray(0, 4).equals(Buffer.from([0, 97, 115, 109]))) throw new Error(`Invalid WebAssembly file: ${path}`);
+  if (/_cover\.png$/i.test(path) && !checkCover(bytes)) throw new Error(`Invalid printer-cover PNG: ${path}`);
   if (/\.json$/.test(path)) parseJson(bytes.toString('utf8'));
 }
 
@@ -149,13 +153,66 @@ async function stageLockedSnapshot(lock) {
 
 async function readJson(path) { return parseJson(await readFile(targetFor(path), 'utf8')); }
 
+function checkCover(bytes) {
+  const png = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  return bytes.length >= 24 && bytes.subarray(0, 8).equals(png)
+    && bytes.toString('ascii', 12, 16) === 'IHDR' && bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0;
+}
+
+async function capturePrinterCovers(files, omitted, sourceCommit) {
+  if (!/^[a-f0-9]{40}$/.test(sourceCommit ?? '')) throw new Error('A pinned Orca source commit is required to discover printer covers.');
+  const vendors = await readJson('wasm/orca/profiles/_index.json');
+  const models = new Map();
+  for (const vendor of vendors) {
+    const catalog = await readJson(`wasm/orca/profiles/${vendor}.json`);
+    const bundle = await readJson(`wasm/orca/profiles/_bundles/${vendor}.json`);
+    for (const model of catalog.machine_model_list ?? []) {
+      const raw = bundle[model.sub_path] ?? await readJson(`wasm/orca/profiles/${vendor}/${model.sub_path}`);
+      const name = raw?.name || model.name;
+      if (typeof name !== 'string' || !name || /[\\/]/.test(name)) throw new Error(`Invalid printer model name in ${vendor}: ${String(name)}`);
+      const path = `wasm/orca/profiles/${vendor}/${name}_cover.png`;
+      targetFor(path);
+      models.set(path, { path, vendor, name });
+    }
+  }
+  let added = 0, available = 0;
+  await parallel([...models.values()], async ({ path, vendor, name }) => {
+    if (files.has(path)) { available++; return; }
+    const originalPath = `resources/profiles/${vendor}/${name}_cover.png`;
+    const urls = [base + encodePath(path), `https://raw.githubusercontent.com/OrcaSlicer/OrcaSlicer/${sourceCommit}/${encodePath(originalPath)}`];
+    const attempts = [];
+    for (const url of urls) {
+      let bytes;
+      try { bytes = await fetchBytes(url); } catch (error) {
+        if (![404, 410].includes(error.status)) throw error;
+        attempts.push({ url, status: error.status, reason: 'not-found' });
+        continue;
+      }
+      if (!checkCover(bytes)) { attempts.push({ url, status: 200, reason: 'not-a-valid-png' }); continue; }
+      const entry = { path, bytes: bytes.length, sha256: sha256(bytes), sourceUrl: url };
+      check(path, bytes, entry);
+      await save(path, bytes);
+      files.set(path, entry);
+      available++;
+      added++;
+      downloaded++;
+      return;
+    }
+    omitted.push({ path, kind: 'printer-cover', vendor, model: name, reasonCode: 'cover-unavailable-in-live-and-pinned-upstream', reason: 'No valid manufacturer-provided PNG was available from the live distribution or pinned Orca source; the UI should display its missing-image fallback.', attempts });
+  });
+  return { observedAt: new Date().toISOString(), sourceCommit, models: models.size, available, unavailable: models.size - available, added };
+}
+
 async function validateSnapshot() {
   const version = await readJson('wasm/orca/version.json');
   if (version.engine !== 'orca' || version.version !== '2.5.0' || version.bridge !== 1) throw new Error(`Unsupported Orca engine: ${JSON.stringify(version)}`);
   const cad = await readJson('wasm/cad/version.json');
   if (cad.module !== 'orca-cad' || cad.orca !== version.version || cad.abi !== 1) throw new Error(`Unsupported CAD engine: ${JSON.stringify(cad)}`);
   const vendors = await readJson('wasm/orca/profiles/_index.json');
+  const paths = new Set(lock.files.map((entry) => entry.path));
+  const omittedCovers = new Set((lock.omittedOptionalAssets ?? []).filter((entry) => entry.kind === 'printer-cover' && entry.reasonCode && entry.reason).map((entry) => entry.path));
   let presets = 0;
+  const covers = new Set();
   for (const vendor of vendors) {
     const catalog = await readJson(`wasm/orca/profiles/${vendor}.json`);
     const bundle = await readJson(`wasm/orca/profiles/_bundles/${vendor}.json`);
@@ -169,9 +226,18 @@ async function validateSnapshot() {
         }
       }
     }
+    for (const entry of catalog.machine_model_list ?? []) {
+      const raw = bundle[entry.sub_path] ?? await readJson(`wasm/orca/profiles/${vendor}/${entry.sub_path}`);
+      const name = raw?.name || entry.name;
+      const cover = `wasm/orca/profiles/${vendor}/${name}_cover.png`;
+      targetFor(cover);
+      if (!paths.has(cover) && !omittedCovers.has(cover)) throw new Error(`Printer cover was not staged or explicitly classified as unavailable: ${cover}. Run --add-covers before publishing a new snapshot.`);
+      covers.add(cover);
+    }
     presets += Object.keys(bundle).length;
   }
-  return { version, cad, vendors: vendors.length, presets };
+  if (lock.printerCovers?.models !== covers.size) throw new Error(`Printer-cover coverage metadata is stale: expected ${covers.size} models`);
+  return { version, cad, vendors: vendors.length, presets, covers: covers.size };
 }
 
 async function validateEngineRuntime(expected) {
@@ -239,6 +305,7 @@ if (update) {
   const api = async (path) => JSON.parse((await fetchBytes(`https://api.github.com/repos/${path}`)).toString('utf8'));
   const source = await api('JoshTheDerf/orcaslicer-wasm/commits/main');
   const submodule = await api(`JoshTheDerf/orcaslicer-wasm/contents/orca?ref=${source.sha}`);
+  const printerCovers = await capturePrinterCovers(files, omittedOptionalAssets, submodule.sha);
   lock = {
     format: 1,
     baseUrl: base,
@@ -255,6 +322,7 @@ if (update) {
     },
     files: [...files.values()].sort((a, b) => a.path.localeCompare(b.path, 'en')),
     omittedOptionalAssets: omittedOptionalAssets.sort((a, b) => a.path.localeCompare(b.path, 'en')),
+    printerCovers,
   };
   await validateSnapshot();
   await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
@@ -263,6 +331,21 @@ if (update) {
   lock = JSON.parse(await readFile(lockPath, 'utf8'));
   if (lock.format !== 1 || lock.baseUrl !== base || !Array.isArray(lock.files) || !lock.files.length) throw new Error('Invalid pages-assets.lock.json');
   await stageLockedSnapshot(lock);
+  if (addCovers) {
+    const original = lock.files;
+    const files = new Map(original.map((entry) => [entry.path, entry]));
+    const omitted = (lock.omittedOptionalAssets ?? []).filter((entry) => entry.kind !== 'printer-cover');
+    const printerCovers = await capturePrinterCovers(files, omitted, lock.provenance?.observedOrcaSubmoduleCommit);
+    // This maintenance mode never recaptures an engine, profile, or prior image.
+    // Keep old entry objects intact and assert their hashes before changing lock.
+    for (const entry of original) if (files.get(entry.path) !== entry) throw new Error(`Existing locked asset was replaced: ${entry.path}`);
+    lock = { ...lock, files: [...files.values()].sort((a, b) => a.path.localeCompare(b.path, 'en')), omittedOptionalAssets: omitted.sort((a, b) => a.path.localeCompare(b.path, 'en')), printerCovers };
+    if (printerCovers.added) delete lock.snapshot;
+    await validateSnapshot();
+    await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
+    console.log(`Printer covers: ${printerCovers.available}/${printerCovers.models} available; ${printerCovers.added} added, ${printerCovers.unavailable} unavailable in both upstream sources.`);
+    if (printerCovers.added) console.warn('Existing asset hashes were preserved. Publish the expanded immutable ZIP and add lock.snapshot { url, bytes, sha256 } before CI deployment.');
+  }
 }
 
 const result = await validateSnapshot();
@@ -271,4 +354,4 @@ const totalBytes = lock.files.reduce((total, entry) => total + entry.bytes, 0);
 if (!verifyOnly) await writeFile(join(publicRoot, 'wasm/pages-assets-provenance.json'), `${JSON.stringify({ ...lock, files: undefined }, null, 2)}\n`);
 console.log(`Staged OrcaSlicer ${result.version.version} / bridge ${result.version.bridge}; CAD ABI ${result.cad.abi}; ${result.vendors} vendors / ${result.presets} presets.`);
 console.log(`${lock.files.length} assets, ${(totalBytes / 1048576).toFixed(1)} MiB; ${downloaded} downloaded, ${reused} verified locally.`);
-if (lock.omittedOptionalAssets.length) console.warn(`${lock.omittedOptionalAssets.length} decorative bed files are absent upstream (listed in the lock); all slicing profiles are present.`);
+if (lock.omittedOptionalAssets.length) console.warn(`${lock.omittedOptionalAssets.length} optional visual assets are unavailable upstream (listed in the lock); all slicing profiles are present.`);

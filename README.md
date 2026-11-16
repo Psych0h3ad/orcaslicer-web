@@ -61,9 +61,11 @@ npm run preview
 
 ## 資産の固定とソース
 
-`scripts/pages-assets.lock.json`に取得URL・サイズ・SHA-256とソース情報を記録しています。検証済みの720資産は、このリポジトリの[固定スナップショット](https://github.com/Psych0h3ad/orcaslicer-web/releases/tag/assets-2026-11-16)にも保存しました。`npm run assets`は一致するローカルファイルを再利用し、不足があれば約40MBのスナップショットZIPを取得します。ZIP全体と各ファイルのSHA-256を検証してから展開するため、上流CDNの地域別画像変換に左右されません。
+`scripts/pages-assets.lock.json`に取得URL・サイズ・SHA-256とソース情報を記録しています。プリンター画像442枚を含む検証済みの1,162資産は、このリポジトリの[固定スナップショット](https://github.com/Psych0h3ad/orcaslicer-web/releases/tag/assets-2026-11-16-covers)にも保存しました。`npm run assets`は一致するローカルファイルを再利用し、不足があれば約58MBのスナップショットZIPを取得します。ZIP全体と各ファイルのSHA-256を検証してから展開するため、上流の配信内容の変化に左右されません。
 
 `npm run assets:verify`はネット接続なしで完全性を検証します。意図的に上流から更新するときだけ `node scripts/stage-pages-assets.mjs --update-lock` を実行し、ソース・エンジンABI・差分を確認して再テストしてください。この操作は古いsnapshot指定を外します。更新後は新しい固定スナップショットを公開し、そのURL・サイズ・SHA-256をlockの `snapshot` に記録してください。元の上流URLは可変です。公開済みスナップショットを置き換えず、新しいタグを使用します。
+
+エンジンや既存プロファイルを更新せずプリンター画像だけ追加するには、`node scripts/stage-pages-assets.mjs --add-covers` を使用します。この操作の後も新スナップショットの公開が必要です。455モデルすべての画像が固定資産または理由付きの欠損一覧に含まれることをビルド前に検査します。元の配布元にも画像がない13モデルは「画像なし」と表示します。
 
 バイナリ配布元はビルドcommitを公表していません。lockにあるソースSHAは取得時に観測した参照情報です。該当バイナリがそのSHAから作られたという保証ではありません。配布バイナリ自体の同一性はSHA-256で検証します。C++からの再ビルドは [orcaslicer-wasm](https://github.com/JoshTheDerf/orcaslicer-wasm) を参照してください。
 

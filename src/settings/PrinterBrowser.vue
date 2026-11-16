@@ -64,7 +64,10 @@ async function remove(id: string): Promise<void> { await props.presets.uninstall
 // Phones: vendor picker + one scrolling model grid; picking a model shows its variants in its place.
 const vendorItems = computed(() => vendors.value.map((v) => ({ value: v.id, label: v.name })));
 
-const hideImg = (ev: Event) => { (ev.target as HTMLElement).style.visibility = 'hidden'; };
+const failedCovers = ref(new Set<string>());
+function onCoverError(url: string | undefined): void {
+  if (url) failedCovers.value.add(url);
+}
 </script>
 
 <template>
@@ -96,7 +99,8 @@ const hideImg = (ev: Event) => { (ev.target as HTMLElement).style.visibility = '
           <div v-if="loadingModels" class="pb__muted">Loading models…</div>
           <button v-for="m in modelList" :key="m.name" type="button" class="card" :class="{ on: m.name === model }" @click="model = m.name">
             <UBadge v-if="installedCount(m)" class="card__badge" size="sm" color="primary" variant="solid" :label="String(installedCount(m))" title="Nozzle variants in your printer list" />
-            <img v-if="m.coverUrl" :src="m.coverUrl" alt="" loading="lazy" @error="hideImg" />
+            <img v-if="m.coverUrl && !failedCovers.has(m.coverUrl)" :src="m.coverUrl" alt="" loading="lazy" @error="onCoverError(m.coverUrl)" />
+            <span v-else class="card__no-image"><UIcon name="i-lucide-printer" class="size-8" aria-hidden="true" /><small>画像なし</small></span>
             <span>{{ m.name }}</span>
           </button>
           <div v-if="!loadingModels && vendor && !modelList.length" class="pb__muted">No models</div>
@@ -117,7 +121,8 @@ const hideImg = (ev: Event) => { (ev.target as HTMLElement).style.visibility = '
           <div v-if="loadingModels" class="pb__muted">Loading models…</div>
           <button v-for="m in modelList" :key="m.name" type="button" class="card" :class="{ on: m.name === model }" @click="model = m.name">
             <UBadge v-if="installedCount(m)" class="card__badge" size="sm" color="primary" variant="solid" :label="String(installedCount(m))" title="Nozzle variants in your printer list" />
-            <img v-if="m.coverUrl" :src="m.coverUrl" alt="" loading="lazy" @error="hideImg" />
+            <img v-if="m.coverUrl && !failedCovers.has(m.coverUrl)" :src="m.coverUrl" alt="" loading="lazy" @error="onCoverError(m.coverUrl)" />
+            <span v-else class="card__no-image"><UIcon name="i-lucide-printer" class="size-8" aria-hidden="true" /><small>画像なし</small></span>
             <span>{{ m.name }}</span>
           </button>
           <div v-if="!loadingModels && vendor && !modelList.length" class="pb__muted">No models</div>
@@ -155,6 +160,7 @@ const hideImg = (ev: Event) => { (ev.target as HTMLElement).style.visibility = '
 }
 .card:hover { border-color: var(--ui-border-accented); }
 .card img { width: 96px; height: 96px; object-fit: contain; }
+.card__no-image { width: 96px; height: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--ui-text-dimmed); }
 .card.on { border-color: var(--ui-primary); color: var(--ui-text-highlighted); box-shadow: inset 0 0 0 1px var(--ui-primary); }
 .card__badge { position: absolute; top: 4px; right: 4px; }
 .variant { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--ui-border); }
@@ -165,6 +171,7 @@ const hideImg = (ev: Event) => { (ev.target as HTMLElement).style.visibility = '
 .pb--phone .pb__scroll { overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
 .pb--phone .pb__grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 .pb--phone .card img { width: 72px; height: 72px; }
+.pb--phone .card__no-image { width: 72px; height: 72px; }
 .pb--phone .variant__name small { white-space: normal; overflow-wrap: anywhere; }
 .pb__muted { color: var(--ui-text-dimmed); font-size: 12px; padding: 4px; }
 </style>
