@@ -17,6 +17,7 @@ import { currentPresets } from '../../presets/store';
 import { asList, SCALAR, toNumber, valueAt } from '../../lib/configValue';
 import { activeEngine } from '../../app/state';
 import { settingWikiUrl } from '../wiki';
+import { deployment } from '../../deployment';
 // Orca 2.5 plugin-backed options (gui types plugin_picker / plugin_config): editors from src/plugins, loaded on demand.
 const PluginPicker = defineAsyncComponent(() => import('../../plugins/ui/PluginPicker.vue'));
 const PluginConfigField = defineAsyncComponent(() => import('../../plugins/ui/PluginConfigField.vue'));
@@ -187,6 +188,10 @@ const hasRange = computed(() => (props.def.min !== null && props.def.min !== und
         <UInput :model-value="mode === 'element' ? arr[elIdx] ?? '' : scalarValue" size="xs" class="min-w-0 flex-1" :ui="{ base: 'font-mono text-[11px]' }" spellcheck="false"
                 :disabled="disabled" :aria-label="label" placeholder="None" @change="(e: Event) => (mode === 'element' ? setElement(elIdx, (e.target as HTMLInputElement).value) : emit('change', (e.target as HTMLInputElement).value))" />
         <UButton size="xs" variant="outline" label="Edit…" :disabled="disabled" @click="editVolumes" />
+      </div>
+      <div v-else-if="!deployment.pythonPlugins && (def.guiType === 'plugin_picker' || def.guiType === 'plugin_config')" class="text-xs text-muted">
+        このWeb版はPythonプラグインに未対応です。
+        <UButton v-if="def.guiType === 'plugin_picker' && arr.some(Boolean)" size="xs" variant="outline" label="プラグイン指定を解除" @click="emit('change', [])" />
       </div>
       <PluginPicker v-else-if="def.guiType === 'plugin_picker'" :disabled="disabled" />
       <PluginConfigField v-else-if="def.guiType === 'plugin_config'" :disabled="disabled" />

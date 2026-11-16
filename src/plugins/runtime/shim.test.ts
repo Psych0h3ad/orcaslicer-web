@@ -7,7 +7,7 @@
  */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, sep } from 'node:path';
 import api from './python/orca-api.json';
 
 // Pyodide in Node is slow, more so beside the rest of the suite.
@@ -35,7 +35,9 @@ beforeAll(async () => {
   const { loadPyodide } = await import('pyodide');
   py = await loadPyodide({ indexURL: join(__dirname, '../../../node_modules/pyodide') + '/' });
   for (const f of pyFiles(ROOT)) {
-    const target = '/orca/runtime/' + relative(ROOT, f);
+    // The source is a native host path; Pyodide's virtual filesystem is POSIX
+    // even when the test runner is on Windows.
+    const target = '/orca/runtime/' + relative(ROOT, f).split(sep).join('/');
     py.FS.mkdirTree(target.slice(0, target.lastIndexOf('/')));
     py.FS.writeFile(target, readFileSync(f, 'utf8'));
   }

@@ -3,26 +3,21 @@ import vue from '@vitejs/plugin-vue'
 import ui from '@nuxt/ui/vite'
 import { fileURLToPath } from 'node:url'
 
-// Cross-origin isolation (SharedArrayBuffer) for the multi-threaded engine
-// build. Production sends the same two headers from Caddy for /slicer/*.
-// require-corp: every subresource is same-origin or sends CORP/CORS (Google
-// Fonts does: `Cross-Origin-Resource-Policy: cross-origin`).
-const crossOriginIsolation = {
-  'Cross-Origin-Opener-Policy': 'same-origin',
-  'Cross-Origin-Embedder-Policy': 'require-corp',
+// Match GitHub Pages locally: no COOP/COEP headers and no SharedArrayBuffer.
+// The engine has a genuine single-threaded WASM build, running in a Worker.
+// configure-pages supplies the real base path (including custom domains).
+const base = process.env.BASE_PATH ?? '/'
+if (!base.startsWith('/') || !base.endsWith('/')) {
+  throw new Error('BASE_PATH must start and end with / (for example /orcaslicer-web/)')
 }
 
-// Standalone slicer app. Built to a `/slicer/` base path so the reverse proxy
-// can serve it at cubbycad.com/slicer (mirrors the editor's `/editor/` base).
-//
-// This app runs the AGPL-3.0 slicer engines (OrcaSlicer and preFlight, a
-// PrusaSlicer fork, built to WASM; see src/engine/ and scripts/fetch-*-wasm.sh).
-// See LICENSE + README.md.
+// Unofficial GitHub Pages distribution of CubbySlicer with Orca's ST engine.
+// See LICENSE + README.md for the upstream sources and distribution scope.
 export default defineConfig({
   // Pinned: vitest run from a subdirectory would otherwise make that the root, and Nuxt UI
   // would write auto-imports.d.ts / components.d.ts and node_modules/.nuxt-ui there.
   root: fileURLToPath(new URL('.', import.meta.url)),
-  base: '/slicer/',
+  base,
   plugins: [
     vue(),
     // Nuxt UI (same setup as ../cad-project). Dark-only app: the `dark` class
@@ -84,12 +79,8 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     // Build outputs, staged engines and e2e artefacts churn during builds/tests.
     watch: { ignored: ['**/dist/**', '**/dist-*/**', '**/public/wasm/**', '**/e2e-out/**'] },
-    headers: crossOriginIsolation,
-  },
-  preview: {
-    headers: crossOriginIsolation,
   },
 })

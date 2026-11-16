@@ -1,0 +1,3630 @@
+{
+  "format": 1,
+  "baseUrl": "https://cubbycad.com/slicer/",
+  "observedAt": "2026-11-16T02:58:49.172Z",
+  "license": "AGPL-3.0-or-later",
+  "engine": {
+    "bridge": 1,
+    "build": "release",
+    "engine": "orca",
+    "version": "2.5.0"
+  },
+  "cad": {
+    "abi": 1,
+    "build": "release",
+    "module": "orca-cad",
+    "occt": "8.0.1",
+    "orca": "2.5.0",
+    "recipeVersion": 6
+  },
+  "provenance": {
+    "binaryDistributor": "https://cubbycad.com/slicer/",
+    "portRepository": "https://github.com/JoshTheDerf/orcaslicer-wasm",
+    "observedPortCommit": "873ad293b5efbedd78de7ae6cda8d40c76d958e6",
+    "observedOrcaSubmoduleCommit": "8500fcdccaa10b5099ac20d252af3a7c560046f1",
+    "sourceCommitCaveat": "The distributor version metadata does not record a build commit. These are source commits observed when the snapshot was taken, not an assertion that the binaries were built from those exact commits. Artifact SHA-256 values pin the actual distributed bytes."
+  },
+  "files": [
+    {
+      "path": "calib/cornering/SCV-V2.stl",
+      "bytes": 118484,
+      "sha256": "a400a859df7bf8441f57f3b091dfab737bfe45bcf6b248c8f9cd739bd7fbbca7"
+    },
+    {
+      "path": "calib/filament_flow/flowrate-test-pass1.3mf",
+      "bytes": 151525,
+      "sha256": "6e86280ef6dd912dc4bf8c5eb00d0b21d218f74774602eb10c73c36e5cc2aa5f"
+    },
+    {
+      "path": "calib/filament_flow/flowrate-test-pass2.3mf",
+      "bytes": 142301,
+      "sha256": "b2ac0302c36a810f9a178e1856c2989f05d283b8b98ee8f8b3b869e2829614af"
+    },
+    {
+      "path": "calib/filament_flow/Orca-LinearFlow_fine.3mf",
+      "bytes": 357844,
+      "sha256": "15f3e750122e466389932c0c4242299ef26d8a416dc4ac0673b8864960c151dd"
+    },
+    {
+      "path": "calib/filament_flow/Orca-LinearFlow.3mf",
+      "bytes": 256455,
+      "sha256": "c998359cef8c247c5c9c50ea0d07e778590be7cdaa1d21beaf84abccea7840ca"
+    },
+    {
+      "path": "calib/handy/3DBenchy.stl",
+      "bytes": 11257784,
+      "sha256": "eaa8e628c20569c138940dce971b0365711976831351050d1a158d13c3e314a5"
+    },
+    {
+      "path": "calib/handy/calicat.stl",
+      "bytes": 43884,
+      "sha256": "71ac84436afb6e50abdbe7ca641466f292d6fe8b9a51fe871a55494a5ce133d1"
+    },
+    {
+      "path": "calib/handy/ksr_fdmtest_v4.stl",
+      "bytes": 611784,
+      "sha256": "544580de1423d265388d27ee448727af7ba9272aaaf3778d8f07b05d1bf25167"
+    },
+    {
+      "path": "calib/handy/Orca_stringhell.stl",
+      "bytes": 305084,
+      "sha256": "cc7b436bf31cdc59d2055cb4de1a7c29f7bc5f99dc2feb61828b118c46e139f8"
+    },
+    {
+      "path": "calib/handy/OrcaBadge.3mf",
+      "bytes": 817091,
+      "sha256": "04573823874f90a8b46778ef35a78a210422bfef0051a53d296b3364ade56f93"
+    },
+    {
+      "path": "calib/handy/OrcaCube_v2.stl",
+      "bytes": 1590984,
+      "sha256": "ef4f8af57a086fb71b519c9754454e2d92204c9f35665817931c5ab199d70bf9"
+    },
+    {
+      "path": "calib/handy/OrcaPlug_v2.stl",
+      "bytes": 472784,
+      "sha256": "77f061fea828ecc20cd42245f3935fc952bbf4fb429718071154c23bec18b9dc"
+    },
+    {
+      "path": "calib/handy/OrcaSliced.3mf",
+      "bytes": 3170902,
+      "sha256": "b72e8c68d84d3996759ee9d9315e4eb017646614541e709a1744cb0aef90ad60"
+    },
+    {
+      "path": "calib/handy/OrcaToleranceTest.stl",
+      "bytes": 775984,
+      "sha256": "950d2381dce74494d702b3c049ab4b07b74f924d6254f87ef5d63646a518da0c"
+    },
+    {
+      "path": "calib/handy/Stanford_Bunny.stl",
+      "bytes": 2635884,
+      "sha256": "3c914830d91b4953545c0374c9a38f4f525656da8061348bc4038ca6445f862b"
+    },
+    {
+      "path": "calib/handy/Voron_Design_Cube_v7.stl",
+      "bytes": 170784,
+      "sha256": "eabc6cb67713cf5f6f4d594f2178f66bf8b5aec9c79f1e61431aeb39f250b27a"
+    },
+    {
+      "path": "calib/input_shaping/fast_tower_test.stl",
+      "bytes": 67284,
+      "sha256": "c8ae8216fc8767471a5863785c65917c016182c1b0921d1eb4e923d27d4ee314"
+    },
+    {
+      "path": "calib/input_shaping/ringing_tower.stl",
+      "bytes": 175284,
+      "sha256": "512f5b16e3cc6e510d91922a5bceec016f23a96ba1580b162f72d64cccc4e40c"
+    },
+    {
+      "path": "calib/pressure_advance/pressure_advance_test.stl",
+      "bytes": 126684,
+      "sha256": "a790192217118533ebdbda61349ade2a55bc58de9eb554d5410bc3f71380dd5c"
+    },
+    {
+      "path": "calib/pressure_advance/tower_with_seam.stl",
+      "bytes": 1084,
+      "sha256": "3bf8bcc3fe23a2b3604512b5d75f0d5540dffacc5e79bb7de632fe233049b221"
+    },
+    {
+      "path": "calib/retraction/retraction_tower.stl",
+      "bytes": 1766484,
+      "sha256": "58f1e676175f001f2dba66e8c10fe4fc1345b22c05f95179305a1830993ef9c0"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_230_190.stl",
+      "bytes": 286084,
+      "sha256": "3fa9d0ff47df7fe0e5e79536bb16404f9c5a5203d83b1f3d0e0c87fdd7490a9b"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_240_210.stl",
+      "bytes": 223584,
+      "sha256": "5122e76af4c1a07d74cc676de74a10604ce0dac7a273a865a54c20747417e94b"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_250_230.stl",
+      "bytes": 163784,
+      "sha256": "d34d6f67b8c36a9aed4010315669de2a7ced68af61a293e022d80fd9d7d045fd"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_270_230.stl",
+      "bytes": 296684,
+      "sha256": "d9b5b59c1d3025bccf4808bae733474e0c41855be4deba10c2cfe3957a9f0a6d"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_280_240.stl",
+      "bytes": 287684,
+      "sha256": "14abe97b0886b42551b40ad85b57944ba5ea6aba4c2ae849debf13b0d267c509"
+    },
+    {
+      "path": "calib/temperature_tower/belt_temp_tower_320_280.stl",
+      "bytes": 327884,
+      "sha256": "12bf860cc0cc02e2575b2a891ce8ed35f52dad0902c296626ace96a3c1a54df3"
+    },
+    {
+      "path": "calib/temperature_tower/temperature_tower.stl",
+      "bytes": 10624284,
+      "sha256": "f525f1f32ee2be513c4bf7045df67aeaa23f2ce5c7e86658cf1b6f1f4b9457ec"
+    },
+    {
+      "path": "calib/vfa/vfa.stl",
+      "bytes": 1487684,
+      "sha256": "0d8c770849184945b3d5064837d4ce5c28f3fc202bc5f360c6e3350927a8377f"
+    },
+    {
+      "path": "calib/volumetric_speed/SpeedTestStructure.stl",
+      "bytes": 709684,
+      "sha256": "22db8162ddc6b19b7830a3e8eab3b0cad20e0d3f7cfc9695114e1bc843f2e70a"
+    },
+    {
+      "path": "textures/displacement/Bark.png",
+      "bytes": 317344,
+      "sha256": "3fc1b6663f8ee87c9945963338d1bad86ab8803930703cbb9181c2a160e5721b"
+    },
+    {
+      "path": "textures/displacement/Basket Weave.png",
+      "bytes": 25083,
+      "sha256": "fc9e67bb0dc85b77d3c18602fe125a0382228bef523912ca1879fc87b928e22e"
+    },
+    {
+      "path": "textures/displacement/Bricks weathered.png",
+      "bytes": 243374,
+      "sha256": "d2120bf972d5aeb21b21b1cc7e5b2cb22d854575f3415ad463fdb72284dccd2c"
+    },
+    {
+      "path": "textures/displacement/Bricks.png",
+      "bytes": 1671,
+      "sha256": "b7234e38caedf337958bc30e9975abbf2458bf84d907cad252486c8929145325"
+    },
+    {
+      "path": "textures/displacement/Bubbles.png",
+      "bytes": 137954,
+      "sha256": "1d3e5f874ab350de4389230966f9db87f0650d3e8dcde6a612c151222fd902c1"
+    },
+    {
+      "path": "textures/displacement/Camouflage.png",
+      "bytes": 270061,
+      "sha256": "32fbb7380456ef2fc85ebc49f29c8563f9246a10f4d9600022a486224e9e85ad"
+    },
+    {
+      "path": "textures/displacement/Carbon Fibre.png",
+      "bytes": 44424,
+      "sha256": "236b3920e28f78c6475e458bed9049d4912cc46fae9c67ab41f27124a63279e1"
+    },
+    {
+      "path": "textures/displacement/Chainmail.png",
+      "bytes": 138358,
+      "sha256": "1376516035dd8a62224b6a6dc8dfae92e26f64cc5291f964c0ad2ac7f793ce8d"
+    },
+    {
+      "path": "textures/displacement/Chevron.png",
+      "bytes": 21202,
+      "sha256": "062feb726ce237202fbff61039e2b9277f2a5cd714c9a56fcce32005f20ea28a"
+    },
+    {
+      "path": "textures/displacement/Cobblestone.png",
+      "bytes": 240937,
+      "sha256": "3d709e01da539ccc18961ed67129660883bad02346f1c34deab4c95b82e705b3"
+    },
+    {
+      "path": "textures/displacement/Colour Bricks.png",
+      "bytes": 432177,
+      "sha256": "956f666eb4cd4af79079f2af8016e326b019ff6e8ca8d17c4949a2a7983a7abb"
+    },
+    {
+      "path": "textures/displacement/Cracked Earth.png",
+      "bytes": 259705,
+      "sha256": "e93fd8759f66785a3cde390161f1b39be840039e6acbd340bf759d92c3f26752"
+    },
+    {
+      "path": "textures/displacement/Diamond Plate.png",
+      "bytes": 153635,
+      "sha256": "2a7ffa3b03b81a6ebfd0bd41ca64b524da5a7ee948bc1b580df9ba8fc746301a"
+    },
+    {
+      "path": "textures/displacement/Fine Knurl.png",
+      "bytes": 29200,
+      "sha256": "817361455b0755649f18a56ddb5624108fe846718b7604eda8ebb42cf21dac75"
+    },
+    {
+      "path": "textures/displacement/Grid.png",
+      "bytes": 1634,
+      "sha256": "ad927611d81df6ebb4120effa7b6b4bb6c7a44c2d67781411b4002255480450c"
+    },
+    {
+      "path": "textures/displacement/Hammered.png",
+      "bytes": 278647,
+      "sha256": "f99e0f7dd9e2aa20a9e289394ee7f0278435d80e04fd57a20cd90174e840d58e"
+    },
+    {
+      "path": "textures/displacement/Herringbone.png",
+      "bytes": 159017,
+      "sha256": "acf52e3a940de327ca10b0828d8b84e83987345f0c6e650949a719c7aa2b13c3"
+    },
+    {
+      "path": "textures/displacement/Hex Tiles.png",
+      "bytes": 64110,
+      "sha256": "a32cd100eddc54aa7e42cc8a6fc46576e536a0d4c66951d2dedea7aaab508394"
+    },
+    {
+      "path": "textures/displacement/Hexagons.png",
+      "bytes": 7024,
+      "sha256": "b81e63727580cf91d205d769faf7450a85d5d2501dc112708c2f591eb3bb3543"
+    },
+    {
+      "path": "textures/displacement/Honeycomb.png",
+      "bytes": 29854,
+      "sha256": "622da15727eee9d06104bc29f7568bb1c8607554968ebd38f0a8e2055a83f404"
+    },
+    {
+      "path": "textures/displacement/index.json",
+      "bytes": 2665,
+      "sha256": "adfed58b4c2573f26ad5ce80a19792a3ff2c7d8cc13521735361caad0f309210"
+    },
+    {
+      "path": "textures/displacement/Knurl.png",
+      "bytes": 2581,
+      "sha256": "37de364c9e81c523c68fa8bd77a57e8c2c1029cac12ef29798af67490bce322b"
+    },
+    {
+      "path": "textures/displacement/Leather.png",
+      "bytes": 534739,
+      "sha256": "3389ef2f85564a97d00bb91f93034f2ceacc88ec26cba17aef3908645253af80"
+    },
+    {
+      "path": "textures/displacement/Mosaic Tiles.png",
+      "bytes": 25998,
+      "sha256": "c75d08576ab1762b6e84616583d5425140d6166e447431189882ad96ab29e50f"
+    },
+    {
+      "path": "textures/displacement/Noise.png",
+      "bytes": 150336,
+      "sha256": "ea2ffb15e33460e548256ddc5457b2a719a04ace913feb98513c0eac958e7d37"
+    },
+    {
+      "path": "textures/displacement/Perforated.png",
+      "bytes": 19684,
+      "sha256": "337c1b21fd1c5f402fbdd18fc0fcc3f6fc91f6a4277a6b31ceb39b7baeed9377"
+    },
+    {
+      "path": "textures/displacement/Pyramids.png",
+      "bytes": 9529,
+      "sha256": "e962950ff9646b6a5ddfd29a200c24c2ca185af11a807d1be345bc745e131885"
+    },
+    {
+      "path": "textures/displacement/Quilt.png",
+      "bytes": 3691,
+      "sha256": "70d2c65d58dd0dd2527e866c0e84d59f19413cd84d6b3042c702c54e90d0dfaf"
+    },
+    {
+      "path": "textures/displacement/Ripples.png",
+      "bytes": 232978,
+      "sha256": "15c9af5137d266bf514ead14262d7300630d0b48081181a66dea2d5f7d2ddfb5"
+    },
+    {
+      "path": "textures/displacement/Roof Tiles.png",
+      "bytes": 75446,
+      "sha256": "fd8dad418ed8e6c79dd099743bac14a3507f139b0c11093da90dc295d65cff05"
+    },
+    {
+      "path": "textures/displacement/Rope.png",
+      "bytes": 110082,
+      "sha256": "b28d559a2fa085377428e6e1e196b31ba4f9d2ff734f13df7c126e81ce6695e2"
+    },
+    {
+      "path": "textures/displacement/Sand Ripples.png",
+      "bytes": 182176,
+      "sha256": "59821fd85338a8bdbdfa39ad244103ed1ab23fbfdfe0abc01f3298b1bf615612"
+    },
+    {
+      "path": "textures/displacement/Scales.png",
+      "bytes": 40753,
+      "sha256": "2fda710d1cec019676590ee56e3038ea713c539f25522154c4c26f599ca0a315"
+    },
+    {
+      "path": "textures/displacement/Slate.png",
+      "bytes": 208005,
+      "sha256": "3bc39877ed1f1226ec7ad27069ded60aeaa2b144c45818c14aac0ce31551a99a"
+    },
+    {
+      "path": "textures/displacement/Star Tiles.png",
+      "bytes": 10935,
+      "sha256": "afbe5e40f04a7154172836fa4a8939b7d010b22bd7137c9dc1a74bba3449c916"
+    },
+    {
+      "path": "textures/displacement/Stone Wall.png",
+      "bytes": 210233,
+      "sha256": "56e3ae6eccbb7777e7a98e95718a272d4373e90b0b0913f57a6dfcd79cf4d47f"
+    },
+    {
+      "path": "textures/displacement/Studs.png",
+      "bytes": 2579,
+      "sha256": "5fc1a6de0a372b3e8ab05ce287c380d4442af30341cce5bbbcddba7e086cced8"
+    },
+    {
+      "path": "textures/displacement/Tartan.png",
+      "bytes": 147158,
+      "sha256": "a251d720149cd633d7d463f17ae2448aa3174ca55f85d79d49a6d219177cac41"
+    },
+    {
+      "path": "textures/displacement/Terrazzo.png",
+      "bytes": 241059,
+      "sha256": "b6243f8a1318ad36633612b4ae1fcc8ae0b928a56d6d67daeb9244b85f756b1d"
+    },
+    {
+      "path": "textures/displacement/Triangles.png",
+      "bytes": 31465,
+      "sha256": "a741b01ca4d898ef4bca544e9ef7c4a32bed8a0eb4eda5faf5f25f22269170cb"
+    },
+    {
+      "path": "textures/displacement/Waffle.png",
+      "bytes": 17731,
+      "sha256": "cf89f189a01aee8f104a82c35cfd897db2928d84f64bf833fd3bddbe48728083"
+    },
+    {
+      "path": "textures/displacement/Waves.png",
+      "bytes": 10630,
+      "sha256": "2d8ec0de1bc5af162f906ddb0b0cbb0f779928fe69f9c792657ae9bbd716d066"
+    },
+    {
+      "path": "textures/displacement/Weave.png",
+      "bytes": 2561,
+      "sha256": "763c0cc1004e7c2de1fd2b0f51b557ac97510664c67df77aef12849f829b7990"
+    },
+    {
+      "path": "textures/displacement/Wood Grain.png",
+      "bytes": 103929,
+      "sha256": "9dd5bf650c717a960374b53b2dd0d176d67ec6354c793e36f1b69dc8901316fa"
+    },
+    {
+      "path": "textures/displacement/Wood Planks.png",
+      "bytes": 213664,
+      "sha256": "0d22ebf21666284ca92b33d5e4ed4fc3ea8ac9c660864b9d5442c492f573c009"
+    },
+    {
+      "path": "wasm/cad/cad.mjs",
+      "bytes": 70386,
+      "sha256": "b28d5f9a5ccb9daf064de4fdbcd8f40f08bcbf1e223f192aa4bdeb3fbaf69dc2"
+    },
+    {
+      "path": "wasm/cad/cad.wasm",
+      "bytes": 21817938,
+      "sha256": "ad0c99fdb008fee32f46b45d5fb05c6a50481fee23feb4afbbbc3862aaaef9ff"
+    },
+    {
+      "path": "wasm/cad/version.json",
+      "bytes": 96,
+      "sha256": "088e340c1ae37481d4c04a8039744ce25be8d9d423c7d6e3908446978023fa8c"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Afinia.json",
+      "bytes": 32871,
+      "sha256": "45de1a69dcabb1d92b9b038ed29706bcb99e0288fa93b66b053ef8771d04fc23"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Anker.json",
+      "bytes": 54461,
+      "sha256": "9648e2a366e4ec340d268f6a27dff7bdf3df90cde73f804aad4fdd1b12496d68"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Anycubic.json",
+      "bytes": 1608766,
+      "sha256": "c1781b3cb6a102ae994a5eced8da451bbf9b0e613568a5b97e8f8411b97fbaa1"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Artillery.json",
+      "bytes": 412565,
+      "sha256": "4fb7df002dba2a6a36b1b6c16bd1cd65202a2f377b026c3fa5ab18b1dba50b64"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/BBL.json",
+      "bytes": 3242557,
+      "sha256": "ea073ae957de76af5b164233b39e93c33f0a2946dce523bd9adf9fb1b500c131"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/BenFab.json",
+      "bytes": 16404,
+      "sha256": "5ed07198906f9618435f5d27f0caa2895627238db66338c22fe1d83db0d912a4"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/BIQU.json",
+      "bytes": 28140,
+      "sha256": "d30381d14fd40fea663a83f1fe47d7ec26966e3c7e81f4ce22e2310c5b7508e7"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Blocks.json",
+      "bytes": 90072,
+      "sha256": "b5c473ef4fc5a0228fd51d2c0bb379ca30e24093ef58f0aa6010df4074fb5d19"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Chuanying.json",
+      "bytes": 49104,
+      "sha256": "13207d66e6f318e388868331d084fff52f3a3802df7f92f7f07dd810db5982b4"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Co Print.json",
+      "bytes": 27175,
+      "sha256": "1f24c17c9680aff6c2e2509e30ece453cccfc2179b70b1c1816c6174a4052be9"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/CoLiDo.json",
+      "bytes": 76593,
+      "sha256": "43e2c3a31c0e7674575742b02170cbf805f7b30d70b5c023ebd793db42961a66"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Comgrow.json",
+      "bytes": 70286,
+      "sha256": "6212a21f24cfde77ffdab5634405534581275ed46f1e92c57a74cb347c9bec5e"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/CONSTRUCT3D.json",
+      "bytes": 29056,
+      "sha256": "5798c66211a30d252910c278dbc6e14f7c186ca32936bb0e52af8956fceeb355"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Creality.json",
+      "bytes": 4478854,
+      "sha256": "7d2cf92734c42373702ed073c9d34f90ac5f30c22729675808887f135b5a3736"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Cubicon.json",
+      "bytes": 55350,
+      "sha256": "29611fb5c9c71bf78776e5af5a0ba8d979c9ccc94b7500049bc3fbe6c2d0bb42"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Custom.json",
+      "bytes": 103642,
+      "sha256": "5c0db49d1810f33d1f2a5ab7995a805897bcdae85dc7f7308b5826ae47f23fa1"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/DeltaMaker.json",
+      "bytes": 18116,
+      "sha256": "288431e9ff61cb9a63801f61d76114843c7ad4e356a25ad9ccfb4530ef661bb8"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Dremel.json",
+      "bytes": 55836,
+      "sha256": "3212279dba1c8be5fc85b3bcf99ba8db55051b0be65e5bb1e591989240adbecb"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Elegoo.json",
+      "bytes": 475759,
+      "sha256": "fd1a7f7abca9281aeeb663254347b17504c1ad84b8d8970f1a21870ef421f8e8"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Eryone.json",
+      "bytes": 124035,
+      "sha256": "7b9a6f634a9dd56860161063ef970f1f3d81761a8c7f7feaa0ba27ee3c15503c"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/FELIX Printers.json",
+      "bytes": 186320,
+      "sha256": "726ea9c61c7c4f07882a583467ca13ec0a02f61f863ad4e0e01ceb4c86656b5b"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Flashforge.json",
+      "bytes": 1080622,
+      "sha256": "369045c2bc5167b97ae349a5acc7caee7ae9b739077ac3ed897041d5b696bd2f"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/FLSun.json",
+      "bytes": 124088,
+      "sha256": "a14690cad69639d84ab10599655c5b6cbc08523b7d551b2334c87561cb5f90ab"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/FlyingBear.json",
+      "bytes": 110579,
+      "sha256": "482aa042eb7ef07a3370b2d65e25458cb725544678cb96dcd91f394ec6008eff"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Folgertech.json",
+      "bytes": 24833,
+      "sha256": "474d13054347cb59a82d2557affabfdd8b65967e6cd2f29f19eae6b46cd37fe1"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Geeetech.json",
+      "bytes": 165230,
+      "sha256": "6fe9defe7b5acd7be34cb1e476e62dca3f978b1897431bb08b48494b0385821d"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Ginger Additive.json",
+      "bytes": 32031,
+      "sha256": "2f68a87633e47e9d6c410306e8122637a70090f54abcfd7d454415eda3c7086f"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Goofoo.json",
+      "bytes": 31151,
+      "sha256": "a1bd16d15a45321c1c52717aac90b094ddfc38f9ffc402a68dcbd2047937a268"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/IdeaFormer.json",
+      "bytes": 15581,
+      "sha256": "eb8899b99a9f7a2d3140d582759a3a7e671f514f8919b717f7141fe01959c3eb"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/InfiMech.json",
+      "bytes": 136439,
+      "sha256": "0d826025a7825ddafeddc196237da20964f54186970a6806bc9e102b38414b4b"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/iQ.json",
+      "bytes": 77144,
+      "sha256": "29010951ddf26694b43039349e829394663c69852c549fa1a99c4d2bb0312ef0"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Kingroon.json",
+      "bytes": 29606,
+      "sha256": "ff53cb0486a90f0841568faaccacc4d08cc6d381eb3a52f95ca17a532e28c7a2"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/LH.json",
+      "bytes": 72147,
+      "sha256": "155c8d855234c73973280cc2e7973f5cc09a4dffe9af89adb68790d40997d1c5"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/LONGER.json",
+      "bytes": 67488,
+      "sha256": "4a46d47821cb0491bceb4376604989b7654052415406412e7f1bec39c44e231c"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Lulzbot.json",
+      "bytes": 71604,
+      "sha256": "a1818feaf184319c9fb46b526d9582993925af717be3284c9ceb50fe40c8e4bb"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/M3D.json",
+      "bytes": 24637,
+      "sha256": "ca7b01fc5a22d32c6297f25d30bad549d4abf7563271311187ec5056677ec2b2"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/MagicMaker.json",
+      "bytes": 104837,
+      "sha256": "34335c04a9b2e9ed13095300b4e0008dc07375ba32f9ecd6baa60e4f53626e04"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Mellow.json",
+      "bytes": 13743,
+      "sha256": "a79ad16e2f74b106eed561d4222071d37b0d51fdb042c31059da026ec0031360"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Meltingplot.json",
+      "bytes": 65832,
+      "sha256": "fc927125e46fe8f6242bea9ea534d46370f14e485bb7755b01796f09700868e4"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/OpenEYE.json",
+      "bytes": 44713,
+      "sha256": "1e54f1019a29021db2216e56392912b2271d54eca2923d7a71138d8fceaa42a1"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/OrcaArena.json",
+      "bytes": 85052,
+      "sha256": "12fc2737604b4f8af1b54d784142c1e58cb3a4e7cc20b93eb2c100d72827279b"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/OrcaFilamentLibrary.json",
+      "bytes": 1209399,
+      "sha256": "23d7e1c0b23643667fe374d6b20e40103afd1560da0baa9a6081688c64b072ee"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Peopoly.json",
+      "bytes": 31525,
+      "sha256": "4b386a023e5437d3d65b212f8b3a0a38717b78984b499f2fbba66645833d2f84"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Phrozen.json",
+      "bytes": 28864,
+      "sha256": "13fed0d801c570d4f3a6c7941313121dcceadcd9b5372b911cd2b686d9d9ea23"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Positron3D.json",
+      "bytes": 14488,
+      "sha256": "fc107be19edc8f8f542a59b9606b9a20d16f641d85890580cc4dbf85c30c8dc6"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Pragostroj.json",
+      "bytes": 42189,
+      "sha256": "beed503785145d3aff002318f53782e5b90e761400015ab3c0e6cc6121f03d7d"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Printcepts.json",
+      "bytes": 13745,
+      "sha256": "02822c2eaadcf7fa98f02d9282bdb5b3d55fa1b76eccf752de4b3e850ca316c3"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Prusa.json",
+      "bytes": 861155,
+      "sha256": "2a17c4ae28b2dbcbf782f450fbbe1be65c14005878f310d57ff361554c78f746"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Qidi.json",
+      "bytes": 1332407,
+      "sha256": "74ada489abab6b29804f66fcf75d98b9bb706715abd865262a2f1a7b5e5bac45"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Raise3D.json",
+      "bytes": 48069,
+      "sha256": "7b978c3558ed8ddf22fc53ad4fd09e6641e633b16a96d84955c71fe6ad415a86"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Ratrig.json",
+      "bytes": 275749,
+      "sha256": "4f57279bf8dfac86b0330507cbf1c8860583bcfc4c7e4d0efba59ad97b510587"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/re3D.json",
+      "bytes": 51093,
+      "sha256": "2cef5fdcd4f28eeeeb617b23bf88156d0df6a93c1e7e919e09606c61061c9c78"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/RH3D.json",
+      "bytes": 37937,
+      "sha256": "81f59ff23ef093765083e02afde2408402d66768bf0709ccd6a7f1f0be1fcf15"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/RolohaunDesign.json",
+      "bytes": 21067,
+      "sha256": "a65667d956b76200b00871ebf75c0f314cdba20bad40fa4de176e6e46631203b"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/SecKit.json",
+      "bytes": 28659,
+      "sha256": "df6c304785ca6613937a927f43ef0888795a958f8a52d56f32d998dd91ef3292"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/SeeMeCNC.json",
+      "bytes": 410934,
+      "sha256": "d173cd6c07903e69656fe53c7cd6e0cb93d6bcfefec2b51abd8b5c3d45056224"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Snapmaker.json",
+      "bytes": 652034,
+      "sha256": "73f099f55dfe4535c562fa0ac076c346f3a32565d16d4fd3f48add18c2e127a6"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Sovol.json",
+      "bytes": 297410,
+      "sha256": "93106c67da01cbc9e0e2626d2ffdbe1332a30615caa0355e9f85f1d75ef5be55"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Tiertime.json",
+      "bytes": 141002,
+      "sha256": "2e670a28a3b350bbdd99a04c6301d92324d1d2caa6716d919a25384467c28b9f"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Tronxy.json",
+      "bytes": 11337,
+      "sha256": "8326fe05f3f6ee86dcf8566282c347de0c6d88ac55c719c168b7cebbc757fb2f"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/TwoTrees.json",
+      "bytes": 42223,
+      "sha256": "d2ae5f225ce89bf9f1c053813347a093633adebb2be41b0572ff4fc8b719531b"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/UltiMaker.json",
+      "bytes": 38734,
+      "sha256": "c322288286590d21f4dca3385fee9035593eedb60f3bf291123b3675722d6314"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Vivedino.json",
+      "bytes": 92017,
+      "sha256": "49d7781bb019c06d887167457b48c131d3f0280d18e41606c64110707b3ecbfe"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Volumic.json",
+      "bytes": 148878,
+      "sha256": "ccf12144197ea6e4b3e1ebc48689611f7b449bbb09b4ed30b637e9b1076d7d6e"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Voron.json",
+      "bytes": 62352,
+      "sha256": "ba58720364f5d2334067dff76f4b7462d87c896e411812f7fa5e47219975fdfc"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Voxelab.json",
+      "bytes": 12585,
+      "sha256": "3afd4bf0887d16c3b8d8367047eb12a15ec4fae43da8ba013acd072ca541b409"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Vzbot.json",
+      "bytes": 44448,
+      "sha256": "9f64ca1ad46a589da5abbf45209bd7a3e8a49ccff225640d39ffe9f3969a6390"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Wanhao France.json",
+      "bytes": 145508,
+      "sha256": "ca85f61562af5e4e6b3ce0267ff5841b8fd1658ca5dbedaf5c572bd8e8cd20f4"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Wanhao.json",
+      "bytes": 32896,
+      "sha256": "a96911a17d4dbd94e495ebae687041eb7f7fbb24ae10d372d2821c27bc5201aa"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/WEMAKE3D.json",
+      "bytes": 49346,
+      "sha256": "162bc5e4a61ecda13ebf0442eeb6ed79ac39bc1757bf1632d4c08e486890d309"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/WonderMaker.json",
+      "bytes": 89683,
+      "sha256": "cf30dda87e2113a2bd3bb9baad02277ba40d7c71bf4ba58eee03dd8ba06b2502"
+    },
+    {
+      "path": "wasm/orca/profiles/_bundles/Z-Bolt.json",
+      "bytes": 109512,
+      "sha256": "8e19809d7510058c8c47a76b57b6e32630b972670c75af016a59ab073943e9a7"
+    },
+    {
+      "path": "wasm/orca/profiles/_index.json",
+      "bytes": 834,
+      "sha256": "2e5cd36ac4e781ef6dfefe2fdaa30eb59747fe69cc9f47748bdfec42d1a8a5b7"
+    },
+    {
+      "path": "wasm/orca/profiles/Afinia.json",
+      "bytes": 4524,
+      "sha256": "87cfabb271237bf352022b8652ce886be3d17c81237639a559cecbaaa3433214"
+    },
+    {
+      "path": "wasm/orca/profiles/Anker.json",
+      "bytes": 11076,
+      "sha256": "4b2fb392e41f26115781d2f800bb4b2ef6860f5932c16ccb014ce1623bbba651"
+    },
+    {
+      "path": "wasm/orca/profiles/Anker/M5-CE-bed.stl",
+      "bytes": 20684,
+      "sha256": "3506d5c53a79b7aba0f7f64021cfa1c07d2bd3830f84bbc9e22548f5a801d274"
+    },
+    {
+      "path": "wasm/orca/profiles/Anker/M5-CE-texture.svg",
+      "bytes": 1921,
+      "sha256": "8d7fd1079b0855bd54b84c14b30d6baeee5530f78253a2a23cf3fcfa83d9e7d0"
+    },
+    {
+      "path": "wasm/orca/profiles/Anker/M5C-CE-bed.stl",
+      "bytes": 20684,
+      "sha256": "bba370d035e815577fa9455128a5a6f4a1cb2e30df84408527d64cca7322dc4a"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic.json",
+      "bytes": 48366,
+      "sha256": "d0385051a5acce325f4fc052c5bb8076a9c0d6f78ca3db724ae67b07f9703297"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Max_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "cd8c7e6cf777657f4a3d36d4c5cd4d947fbd63981b941976abe8cc08e321ca9a"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Max_buildplate_texture.svg",
+      "bytes": 1747,
+      "sha256": "a66026895ce81e50f9238710778cb207afe1847b353e9d77ecccf3e077c38c82"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Neo_buildplate_model.stl",
+      "bytes": 10284,
+      "sha256": "003b8d07a6aa82784efa7b5b5b5451153959615a37b10181fee3ac859d99f822"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Neo_buildplate_texture.svg",
+      "bytes": 1696,
+      "sha256": "12d0dbdc08ca7442682937035317c037adcd858390de4700c6d2569f928a1594"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Plus_buildplate_model.stl",
+      "bytes": 9884,
+      "sha256": "e86589fb0174132d253cd1410dee4b7e71b868d154d645374927065fc00232b6"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Plus_buildplate_texture.svg",
+      "bytes": 1707,
+      "sha256": "336e1f7f24c3695ffde78c0c69203054d7529d0d21d46605595ec3d78ababdf2"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Pro_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "18f4f98e1cf735350c710c2caa8502b3fe1dca26b63a3c95ae63895381f90faf"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 2 Pro_buildplate_texture.svg",
+      "bytes": 1696,
+      "sha256": "12d0dbdc08ca7442682937035317c037adcd858390de4700c6d2569f928a1594"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3 Max_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "cd8c7e6cf777657f4a3d36d4c5cd4d947fbd63981b941976abe8cc08e321ca9a"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3 Max_buildplate_texture.svg",
+      "bytes": 5353,
+      "sha256": "947f9d11acdb18db2f0d24c91c0e0784c5c6766ed34cb4bf5b9cde95ea17fc74"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3 V2_buildplate_model.stl",
+      "bytes": 21084,
+      "sha256": "6841d3bb2f9a7f77811bfaa782a625e0a669842e4732e0acc67b6422f5f65ef8"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3 V2_buildplate_texture.svg",
+      "bytes": 19888,
+      "sha256": "474ec1c87c792c66928254c96ea4fb376a87fe0ab565bd320aaff1ac8a2518fd"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3_buildplate_model.stl",
+      "bytes": 21084,
+      "sha256": "6841d3bb2f9a7f77811bfaa782a625e0a669842e4732e0acc67b6422f5f65ef8"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra 3_buildplate_texture.svg",
+      "bytes": 7607,
+      "sha256": "c52583948c51e2147764279ce9b16f9731786ca8856c14a8fe2fc6d2cb00f144"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra Neo_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "a5c9423065fb098d77e493fa77e5109d93e85647f067033386d30d8977419be4"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra Neo_buildplate_texture.svg",
+      "bytes": 1696,
+      "sha256": "12d0dbdc08ca7442682937035317c037adcd858390de4700c6d2569f928a1594"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra S1 Max_buildplate_model.stl",
+      "bytes": 46084,
+      "sha256": "7df98a6298d517c386b0f494492484688d3bdb90321696de3a4d83bfde57f053"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra S1 Max_buildplate_texture.svg",
+      "bytes": 19837,
+      "sha256": "da7bf9505d0a1c822d423ed5530a3b0e73b296d0c3c5d4b02bc38a66ee5426ad"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra S1_buildplate_model.stl",
+      "bytes": 23284,
+      "sha256": "fb066bc1c57a95c383bd779eee086a3f802e4786f1d45baf9fa7e1e6f6386981"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra S1_buildplate_texture.svg",
+      "bytes": 7745,
+      "sha256": "fb50b5cace17c6831a74b0f633ff24283d6ca5891a84e66c0226b48008a076d0"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra X_buildplate_model.stl",
+      "bytes": 23284,
+      "sha256": "fb066bc1c57a95c383bd779eee086a3f802e4786f1d45baf9fa7e1e6f6386981"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Kobra X_buildplate_texture.svg",
+      "bytes": 11008,
+      "sha256": "468d5ba86d9aba4d129a92df01df1eaf2b9b8fce0a79aaa13e12a74390184a0b"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Predator_buildplate_model.stl",
+      "bytes": 91984,
+      "sha256": "8c1b21a5df7c0fae866efbfc0a0e088ffc50d064eff4244c8a00aa50dd45f377"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/Anycubic Predator_buildplate_texture.svg",
+      "bytes": 2062,
+      "sha256": "c1dc941c45f8993c2554f470a9fd010eb487a1056b89cf13a922def4dc816484"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_4maxpro_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "3941b1c594916fe8db4f1bc6a00ca779a1c06443b6457d05e047cd32742515eb"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_4maxpro_buildplate_texture.svg",
+      "bytes": 1688,
+      "sha256": "404016a1e750e5070b272124378d89303dc1b1e11ce8bfb257be3cf3aca65895"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_4maxpro2_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "8c1f28d46df041dace074d82e44dd849e50cafd427e57482c59f04be6e5b645d"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_4maxpro2_buildplate_texture.svg",
+      "bytes": 1688,
+      "sha256": "1b5947329c7e36c15d3b6babf016cb7c48aaa5e559d1d72e04efbc16891e8049"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_chiron_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "33ad31c371072ee9967db91093ecbf0eafe4c563aa30dee50e9bb24368d80939"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_chiron_buildplate_texture.svg",
+      "bytes": 1748,
+      "sha256": "13efc8829611e408f9b8f3693aea34ba8444ffcc6867943f10cd9ca407707d1f"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_i3megas_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "afcdd17080e8a61960857c2dfe8d59e6375c5a8904d4c241426681dbdccc98b1"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_i3megas_buildplate_texture.svg",
+      "bytes": 1697,
+      "sha256": "660eb73e08bb0e9ed5bb05acf29fcbc6daa3f314cb8093ca6a8ef5dd6c2b5c41"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobra_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "a5c9423065fb098d77e493fa77e5109d93e85647f067033386d30d8977419be4"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobra_buildplate_texture.svg",
+      "bytes": 1696,
+      "sha256": "12d0dbdc08ca7442682937035317c037adcd858390de4700c6d2569f928a1594"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobra2_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "a5c9423065fb098d77e493fa77e5109d93e85647f067033386d30d8977419be4"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobra2_buildplate_texture.svg",
+      "bytes": 1696,
+      "sha256": "12d0dbdc08ca7442682937035317c037adcd858390de4700c6d2569f928a1594"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobramax_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "91537cea4c523ee7011f27fddcf4d2a920daef97af2452b3c14d0469b0626bd1"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobramax_buildplate_texture.svg",
+      "bytes": 1702,
+      "sha256": "db2857c29851315026a144309769a0f5c902ab21718ca1b5340332c60f0b04bb"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobraplus_buildplate_model.stl",
+      "bytes": 9884,
+      "sha256": "454c06b2d936cf2e9cce9fed20a7182459c81bdfa79ba5a61cfc009f6dcb021b"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_kobraplus_buildplate_texture.svg",
+      "bytes": 1704,
+      "sha256": "1d1ebf6b7c1d4d67aed831338c5a1d4e81ee5ccde350b23b73630c25dce01dab"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_vyper_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "d30a42af6a641879ceb4d09276201d81fffef691b00e2b2f591f9a0e2f118aa2"
+    },
+    {
+      "path": "wasm/orca/profiles/Anycubic/anycubic_vyper_buildplate_texture.svg",
+      "bytes": 1708,
+      "sha256": "5a43923a2b06b84f4a74c7e0fd14941d90af1c7adf150662a4fed6f7c7bfddd3"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery.json",
+      "bytes": 20806,
+      "sha256": "608c3d9ddbfd1336cf36acd30163a41d1b13e31d19fb8573d1b05179467ac646"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_genius_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "29b8a64128158366407d1edb64c02b97dbdac79feba8c46976831dce2227f823"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_genius_buildplate_texture.svg",
+      "bytes": 1194,
+      "sha256": "fc58a84612cf5f5fe1beccd2ec66924eb67aeb3aee957d1b8a85541bfe6ada7b"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_geniuspro_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "29b8a64128158366407d1edb64c02b97dbdac79feba8c46976831dce2227f823"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_geniuspro_buildplate_texture.svg",
+      "bytes": 1194,
+      "sha256": "fc58a84612cf5f5fe1beccd2ec66924eb67aeb3aee957d1b8a85541bfe6ada7b"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_hornet_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "29b8a64128158366407d1edb64c02b97dbdac79feba8c46976831dce2227f823"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_hornet_buildplate_texture.svg",
+      "bytes": 1194,
+      "sha256": "5a3ff4def7b32ab1a87e4a1f5f030eb48381f04d2704b1dc0c226176448eba66"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_m1_pro_buildplate_model.stl",
+      "bytes": 73384,
+      "sha256": "22494d6d130a4c0e14e74de2d4cfe1afd1caec27fe54fe64d06c63b73274fd41"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_m1_pro_buildplate_texture.svg",
+      "bytes": 5267,
+      "sha256": "ce9197ebd4bf175e85471a2e3ccc0c693ee9d0a42a2556b74bb67311d6157a0e"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx1_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "5bfd8dfe55a1650936cd4cc46bd9ed48193413eb336a937ee6b67199299808d5"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx1_buildplate_texture.svg",
+      "bytes": 1260,
+      "sha256": "eb23f4227eafe29cff0c2dae134b154b2c64d343ae177d88366f586408e54eae"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx2_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "5bfd8dfe55a1650936cd4cc46bd9ed48193413eb336a937ee6b67199299808d5"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx2_buildplate_texture.svg",
+      "bytes": 1260,
+      "sha256": "eb23f4227eafe29cff0c2dae134b154b2c64d343ae177d88366f586408e54eae"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx3plus_buildplate_model.stl",
+      "bytes": 66284,
+      "sha256": "85c07cf7aeec134834463f1b5f84547bab324349f849c3551b18a0a07d1fd04c"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx3pro_buildplate_model.stl",
+      "bytes": 66684,
+      "sha256": "933954038f73b7d77bf8caa3b7aa8e3b08c07c2fe93b30c23dfa1e3cabbd53b2"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx4plus_buildplate_model.stl",
+      "bytes": 65084,
+      "sha256": "2278ea38fadcc005665e1278ada2409c47678fb1639111f421f72e90249f0468"
+    },
+    {
+      "path": "wasm/orca/profiles/Artillery/artillery_sidewinderx4pro_buildplate_model.stl",
+      "bytes": 67284,
+      "sha256": "c8fa6b2d1d65ef8c28f51f613e35285ea773e12525478b7a0ff93c21a0c67465"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL.json",
+      "bytes": 289094,
+      "sha256": "56539337bf38c682708d07a8c78540134bb2f7933ed071be3d4786d4bf1ceea4"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-A1M.stl",
+      "bytes": 23084,
+      "sha256": "767068c74e9d3e9f19b7637f8eb00f55d521287346578ab9108151fa94394a4d"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-H2C.stl",
+      "bytes": 23484,
+      "sha256": "4a09370cbbd9a88565658913f3633ac7f12fc3ffa9a97ebd8026e48602e7b75c"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-H2D.stl",
+      "bytes": 28684,
+      "sha256": "77080ef12ff53b75c74f6d724cf50da948a3588116e1cfbc00b8df56455c1ba7"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-logo.svg",
+      "bytes": 5725,
+      "sha256": "0646f3aea7db04954f73e6232d2a52a4f9431bd8b4ed80e54bfc24dd23c65ec6"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-O1S.stl",
+      "bytes": 28684,
+      "sha256": "e53358ab1e9496b8c232f9a16632c3946cb450962fc955f45316da8f9bca3761"
+    },
+    {
+      "path": "wasm/orca/profiles/BBL/bbl-3dp-X1.stl",
+      "bytes": 27084,
+      "sha256": "c5ace90c28e5bd99bafb6469fc950c9bf5c7e2071fa1a609a86f4d07652017e4"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab.json",
+      "bytes": 3785,
+      "sha256": "3451ad635bb6e4898be8e2a1b3ab7e8b076db82791aa07c925276e043d729966"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/benfab_450_buildplate_model.stl",
+      "bytes": 7284,
+      "sha256": "200f407fa06e153e557cdbe8d8ae987aa23cff69e7488c0c12ed767c73fc1bd7"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/benfab_450_buildplate_texture.svg",
+      "bytes": 1148,
+      "sha256": "2e7024c485492a0f9d60fd056c104caabc15f2c0e30c1e8a88e5cca8e340f4e4"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/process/fdm_process_benfab_04020.json",
+      "bytes": 552,
+      "sha256": "2e5cb439e92d47a99965b593cdc62bd09a2446710867b40b00503037c6172aa7"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/process/fdm_process_benfab_06030.json",
+      "bytes": 850,
+      "sha256": "2f8aa6d9fd3229b7c7595f8de4f118bd952db027ee708d9375dcc60925370af6"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/process/fdm_process_benfab_08040.json",
+      "bytes": 885,
+      "sha256": "56d827ef87cf25bf6591b40d0e8532d27dcf9c3f282c2f07a5dceefc9d3bac35"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/process/fdm_process_benfab_10050.json",
+      "bytes": 914,
+      "sha256": "e08d2630ee29e6227f8d90588cfd85ca29cfc936368dbd1bc6443f18a2090ea0"
+    },
+    {
+      "path": "wasm/orca/profiles/BenFab/process/fdm_process_benfab_common.json",
+      "bytes": 3331,
+      "sha256": "73ef97ce3de1039a7d67ba1b75dd5e211a46b720b1393595c882caf8ac9de198"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU.json",
+      "bytes": 2820,
+      "sha256": "fe8b58aa39342b36c81775e737d9a144f9873e640832a569b3ab6f1567576d10"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_B1_buildplate_model.stl",
+      "bytes": 6284,
+      "sha256": "0bc1c9b22787f32442c74829dc0f67baa866a6d212f1601d10b238a088429505"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_B1_buildplate_texture.svg",
+      "bytes": 6164,
+      "sha256": "2b1a1966ace74a5ddf71a4bd44397b6c5fb6b72ea2d56f6870bca8cc543d4c4b"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_BX_buildplate_model.stl",
+      "bytes": 6284,
+      "sha256": "9a657f32f904218aa3338e7d61dcac45faaf75f7b6868afa683e0cdcfe49f9dc"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_BX_buildplate_texture.svg",
+      "bytes": 6099,
+      "sha256": "9fc0855f62fbc41b6abf22ee5f4b65ab6de7c749ef55cf3224b9b387294fa522"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_Hurakan_buildplate_model.stl",
+      "bytes": 6284,
+      "sha256": "9b68462e423ebaf3553bebf26dff64222fc14d96e8d1c14c6105e0237141561b"
+    },
+    {
+      "path": "wasm/orca/profiles/BIQU/BIQU_Hurakan_buildplate_texture.svg",
+      "bytes": 9986,
+      "sha256": "cd08ec2eac5d59be43355a48ec27e33dd8ab8594fbb13d370cb63add668d5efb"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks.json",
+      "bytes": 12623,
+      "sha256": "68d4f47db3eda2e418ab232022b6358bca3db5f7916a4c4d109d2ae2d220a39b"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/PRO S100 HotBed model.stl",
+      "bytes": 330484,
+      "sha256": "d6145d09509d6a73409e1a5bf8e5f99a946398cf6ec8fc8a3e4e7da997a320d0"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/PRO S100 HotBed texture.svg",
+      "bytes": 6318,
+      "sha256": "f88c6a9a6e2f07c5bbc61b70b32caa62712aa119b2798d1cb89d298f2ecdadbe"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/RD50 V2 HotBed model.stl",
+      "bytes": 357334,
+      "sha256": "1ec1f67778d234a68d6791e35b7b29487a7893aa1e520321cab9fb20524a5fc1"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/RD50 V2 HotBed texture.svg",
+      "bytes": 5468,
+      "sha256": "5cedf9765daa24cad779cb83cf25a719596ba72dd7b4654570db1c435b66714c"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/RF50 HotBed model.stl",
+      "bytes": 216284,
+      "sha256": "abf8f6465075adb6b08af0cc35f8ed42d43c4a52bfba7673720dbc36f9e6857e"
+    },
+    {
+      "path": "wasm/orca/profiles/Blocks/RF50 HotBed texture.svg",
+      "bytes": 5913,
+      "sha256": "e12af3f5a465aa1bbf5b0a4cf81c06b237303016f4a7eb763cb5369d71fd7450"
+    },
+    {
+      "path": "wasm/orca/profiles/Chuanying.json",
+      "bytes": 3966,
+      "sha256": "4fabc5446ddaab97fcec77550de5bf92bdba9e50ef5f5078404355352f8f114c"
+    },
+    {
+      "path": "wasm/orca/profiles/Chuanying/chuanying_x1_buildplate_model.STL",
+      "bytes": 38484,
+      "sha256": "5eacaca3cf5a662a17ad90a0b53bd9dffa40177b828d6615d343b3919686a369"
+    },
+    {
+      "path": "wasm/orca/profiles/Chuanying/chuanying_x1_buildplate_texture.svg",
+      "bytes": 9425,
+      "sha256": "7d501633b7023eaf89c384c7c176d85590d000670b369cf4d43404d34ca74586"
+    },
+    {
+      "path": "wasm/orca/profiles/Co Print.json",
+      "bytes": 2027,
+      "sha256": "2ffbe46b36211052990e64574dbbeb2a6750b4cfe3cd7a3ed8379efe7731c004"
+    },
+    {
+      "path": "wasm/orca/profiles/Co Print/Co_Print_ChromaSet_buildplate_texture.svg",
+      "bytes": 3923,
+      "sha256": "41e21144382fdbff3b6cefa7c9fd34ec77b9a85134eeedc689d5a46d0a98734e"
+    },
+    {
+      "path": "wasm/orca/profiles/CoLiDo.json",
+      "bytes": 6913,
+      "sha256": "df4c117f3db1cefd815a11c8f0787c8fc4ba1ac7e49276048d0a9d3d7c4a9f84"
+    },
+    {
+      "path": "wasm/orca/profiles/Comgrow.json",
+      "bytes": 3826,
+      "sha256": "e765b2a1042b4e696125bf8e3136fadea7c7b1e0c87ce65f7a61eb105c87efab"
+    },
+    {
+      "path": "wasm/orca/profiles/Comgrow/comgrow_t300_buildplate_model.stl",
+      "bytes": 18284,
+      "sha256": "e4e3e54e8ecef6bd05fdc8b5f8d02358b661c746ff86bd5aad68ed833da99905"
+    },
+    {
+      "path": "wasm/orca/profiles/Comgrow/comgrow_t300_buildplate_texture.svg",
+      "bytes": 11077,
+      "sha256": "99d8a2906f015050bf38516827b7680385de6ace5f0c5e8683570a57adf934cd"
+    },
+    {
+      "path": "wasm/orca/profiles/Comgrow/comgrow_t500_buildplate_model.stl",
+      "bytes": 46884,
+      "sha256": "6bafb6ffa54433a99944b84444cfeacb3ce854fa1320a40c53fb2ad150716930"
+    },
+    {
+      "path": "wasm/orca/profiles/Comgrow/comgrow_t500_buildplate_texture.svg",
+      "bytes": 11404,
+      "sha256": "c8165348d1d100250da21b315e3d1a029e97927e27e9ae98c991afe128abdeaf"
+    },
+    {
+      "path": "wasm/orca/profiles/CONSTRUCT3D.json",
+      "bytes": 2219,
+      "sha256": "d3dba5d5c4d7a6af1eedbfa7c6bbc843792ce812f86510ae0917998c992ae408"
+    },
+    {
+      "path": "wasm/orca/profiles/CONSTRUCT3D/construct_1_buildplate_model.stl",
+      "bytes": 138984,
+      "sha256": "63e82d45ffc0b1217785fe690135c25951c291ab121db58b4727dac1f2428d37"
+    },
+    {
+      "path": "wasm/orca/profiles/CONSTRUCT3D/construct_1_xl_buildplate_model.stl",
+      "bytes": 139884,
+      "sha256": "6d6c2f4f907a5d191d3de0b32c459eda02ed5504375901ab16144b66e0d06d9f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality.json",
+      "bytes": 158426,
+      "sha256": "179409e6b7b0c44e2b140e1bc7cd60219fe216186421aa68bd98ead8095e7893"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10max_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "d99979d6d8213ad8d9e89c391d4a6ff2e0ec82bfbfdbfe79cb95428aee0e6508"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10max_buildplate_texture.svg",
+      "bytes": 1969,
+      "sha256": "3e15ccf2bd89e1afa5c69e9ab081a5b742cf289f0ec7433d61b7ae7b69a45f7f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10se_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10se_buildplate_texture.svg",
+      "bytes": 3345,
+      "sha256": "877b4b28f7b1f367d4508e835cd3947cba1e63ba8460a50a71cf3bc77fe41d17"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10v2_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "395b4f26bf20bf8abd7d52e4f173e882058e3d6066bfa9f5f3233fc8b114dfe6"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10v2_buildplate_texture.svg",
+      "bytes": 1782,
+      "sha256": "f0df6f93e92ac5395931ecc87f0aa8afffb5493655e97f1bee0223c5ec72317b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10v3_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "395b4f26bf20bf8abd7d52e4f173e882058e3d6066bfa9f5f3233fc8b114dfe6"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr10v3_buildplate_texture.svg",
+      "bytes": 1782,
+      "sha256": "f0df6f93e92ac5395931ecc87f0aa8afffb5493655e97f1bee0223c5ec72317b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr6max_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "0df9360e7481487d69f4a4c9f7800923172b8083da6e4aae1425f04597e50d87"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr6max_buildplate_texture.svg",
+      "bytes": 1961,
+      "sha256": "1c0a095fbd5b2cfbcbc01d226d53161391f8d59c06ce577802a64cc69946a7c4"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr6se_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "8bd15af3b9984eeb971a4bbd2d139d9d92cd33ecb1867978cc3e0fc25c51e393"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_cr6se_buildplate_texture.svg",
+      "bytes": 1761,
+      "sha256": "aaedcb96411b1b8b5357fa4f8478de002b47271344507257679437640fcaf454"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_crm4_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "9a686e15af503c1006b8aa238e1860e02af42ad06a890abb9c47630770f3e606"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_crm4_buildplate_texture.svg",
+      "bytes": 3397,
+      "sha256": "03961d7c872c1aa1e19cd6feea5a773c380740b5cc93f56d6fdfb64227b9c741"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender2pro_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "48c2a0f8d06570896dc8ef55da98ca0370e1bcecbcb0a0f7c75fbb76accf730b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender2pro_buildplate_texture.svg",
+      "bytes": 1725,
+      "sha256": "044849897a1ea51f69d47b3a5c04621ef3285d1f2e5077724d3a5ee198c8b091"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1_buildplate_model.stl",
+      "bytes": 21684,
+      "sha256": "2a5409cf817f496861b4df30b1f7225f03e5b44286f962cd252ea7744bfc426f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1_buildplate_texture.svg",
+      "bytes": 2994,
+      "sha256": "b730b909d8c0de11f220725b887a3f07a7a2a13e482f2e5750a076020b5183e1"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1plus_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "6ce9bc24428c85d44f4c1a09aa241a8105dd2c2c37e9eace466196211a4be43b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1plus_buildplate_texture.svg",
+      "bytes": 2995,
+      "sha256": "2fd37dde0c97bab13c21b026f4d45a1cf7147a0912c8c1753f972814e0f701b4"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1pro_buildplate_model.stl",
+      "bytes": 21684,
+      "sha256": "2a5409cf817f496861b4df30b1f7225f03e5b44286f962cd252ea7744bfc426f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3s1pro_buildplate_texture.svg",
+      "bytes": 2994,
+      "sha256": "b730b909d8c0de11f220725b887a3f07a7a2a13e482f2e5750a076020b5183e1"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v2_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "1036d15dc7a88d043b2b522a0b5bb2e58c61e7ea4ad9b833ba0c411c93cbf0c9"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v2_buildplate_texture.svg",
+      "bytes": 1734,
+      "sha256": "d14dff995ed7fb19b8c2da03955be7ba105284c4e8c66109edaaf8d06cff6cb3"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v2neo_buildplate_model.stl",
+      "bytes": 21684,
+      "sha256": "2a5409cf817f496861b4df30b1f7225f03e5b44286f962cd252ea7744bfc426f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v2neo_buildplate_texture.svg",
+      "bytes": 2994,
+      "sha256": "b730b909d8c0de11f220725b887a3f07a7a2a13e482f2e5750a076020b5183e1"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3_buildplate_texture.svg",
+      "bytes": 3345,
+      "sha256": "877b4b28f7b1f367d4508e835cd3947cba1e63ba8460a50a71cf3bc77fe41d17"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3ke_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3ke_buildplate_texture.svg",
+      "bytes": 3345,
+      "sha256": "877b4b28f7b1f367d4508e835cd3947cba1e63ba8460a50a71cf3bc77fe41d17"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3plus_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "2a9cf3477465db5c06eec8c6fec375a8d65cc68a573614b90558566aa7a60937"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3plus_buildplate_texture.svg",
+      "bytes": 3346,
+      "sha256": "e7ce00aad9f4eabdc48452c9c3890806f7f144b4b939b4c86f8340fa9c0b1209"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3se_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v3se_buildplate_texture.svg",
+      "bytes": 3345,
+      "sha256": "877b4b28f7b1f367d4508e835cd3947cba1e63ba8460a50a71cf3bc77fe41d17"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v4_buildplate_model.stl",
+      "bytes": 19684,
+      "sha256": "7688676aa7cd289e8dd03c2d5a234195885e9b92894e8f675446d7f8ea490c6c"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender3v4_buildplate_texture.svg",
+      "bytes": 2888,
+      "sha256": "460d7441038c6b65d99f6de12e859054f1f0ddc5593f950fdeb069857da13d00"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "573f585ce86bc86ba2794f6253484a3276fefb1ff0012f9d2075c6b5b1795cd7"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5_buildplate_texture.svg",
+      "bytes": 1734,
+      "sha256": "d14dff995ed7fb19b8c2da03955be7ba105284c4e8c66109edaaf8d06cff6cb3"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5max_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "fe0c1979f291f3a8fb6d0c05d58c1573310eadd4d73b0be31ad19ab10573e752"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5max_buildplate_texture.svg",
+      "bytes": 3910,
+      "sha256": "79f66b3d8377a5e3d12c2954d6e180e6149c8cce68a61f0fae4a342459ca5d1b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5plus_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "85e0237ba9c9955cfa275992e83d3281be94db0213fea0ecfb963a40aeba8392"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5plus_buildplate_texture.svg",
+      "bytes": 1867,
+      "sha256": "315312bfaec0b9039a29bbacc86c0e7a23db6c2f9886fc552f96db2a388762ec"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5pro_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "573f585ce86bc86ba2794f6253484a3276fefb1ff0012f9d2075c6b5b1795cd7"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5pro_buildplate_texture.svg",
+      "bytes": 1734,
+      "sha256": "d14dff995ed7fb19b8c2da03955be7ba105284c4e8c66109edaaf8d06cff6cb3"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5s_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "573f585ce86bc86ba2794f6253484a3276fefb1ff0012f9d2075c6b5b1795cd7"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5s_buildplate_texture.svg",
+      "bytes": 1734,
+      "sha256": "d14dff995ed7fb19b8c2da03955be7ba105284c4e8c66109edaaf8d06cff6cb3"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5s1_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender5s1_buildplate_texture.svg",
+      "bytes": 2994,
+      "sha256": "b730b909d8c0de11f220725b887a3f07a7a2a13e482f2e5750a076020b5183e1"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender6_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "0955a7e81b4b0c67e36910a1ec359ca4a11309ebd88f5e31d30ca9b47646fa43"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_ender6_buildplate_texture.svg",
+      "bytes": 1737,
+      "sha256": "4a805aed98a353eec8475174f7c0ec2e2bc61cd4369137bbd8873ace37c6f313"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_hi_buildplate_model.stl",
+      "bytes": 19684,
+      "sha256": "018450b49f578caaac7ac422fb6e178ef12b755810f18e53ca049942d82e592c"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_hi_buildplate_texture.svg",
+      "bytes": 2035,
+      "sha256": "1f371fb3fc012a4b504c6cdfec77b3a8bb261ea9400930500b6612e62d1b331f"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "8c2311a33d9149b9f761cc94a8ebcc47778c72cd7fed1d6f8227dd2c79e4df85"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1_buildplate_texture.svg",
+      "bytes": 3275,
+      "sha256": "f255be8549370c6af40e1b4bb5af934f6095f1dee02490c65fa91fd8391ade35"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1c_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1c_buildplate_texture.svg",
+      "bytes": 3275,
+      "sha256": "f255be8549370c6af40e1b4bb5af934f6095f1dee02490c65fa91fd8391ade35"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1max_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "ab1db0ab21675202f648f0f8c8985e23756fa8c65d3db687408185497ed40aab"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1max_buildplate_texture.svg",
+      "bytes": 3277,
+      "sha256": "c5ecc7db3ee0f9d74a4b2192d92f072b0ea000c45878ed44aab9f12fa7ab7e22"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1se_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "18bf5dee87eb9b2fd55e5c2d98c84d99d1dafff53f8509a2834ad11615eb366b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k1se_buildplate_texture.svg",
+      "bytes": 3275,
+      "sha256": "f255be8549370c6af40e1b4bb5af934f6095f1dee02490c65fa91fd8391ade35"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2_buildplate_model.stl",
+      "bytes": 19684,
+      "sha256": "ca16fe6991aa528294899a000b78679c0dba8348476634f3141a2d2a7216ec95"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2_buildplate_texture.svg",
+      "bytes": 2888,
+      "sha256": "460d7441038c6b65d99f6de12e859054f1f0ddc5593f950fdeb069857da13d00"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2plus_buildplate_model.stl",
+      "bytes": 21684,
+      "sha256": "3597e105cd468ff3c5e6544eccde0edb3835be9339624188b27d1118c9b947bc"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2plus_buildplate_texture.svg",
+      "bytes": 3022,
+      "sha256": "88c583d2a5c73bd1c904c352f93e97bac9db8e8a3f6fd8afb5db6801dd17a6c9"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2pro_buildplate_model.stl",
+      "bytes": 19684,
+      "sha256": "0b060073843ac73ca2e77dfe6d5728af46cb9d1fdb7b0a44bc137ee10cbc5368"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_k2pro_buildplate_texture.svg",
+      "bytes": 2888,
+      "sha256": "24c110d40d89a9b7470cacbafda36e645b6a564cece9b9cc7ff94f6117f29f71"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_sermoond3_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "183de574bcf55379fb9a063f2d9bab8f2c910b9f41ea83fef1eb238d652b3fe9"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_sermoond3_buildplate_texture.svg",
+      "bytes": 1725,
+      "sha256": "044849897a1ea51f69d47b3a5c04621ef3285d1f2e5077724d3a5ee198c8b091"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_sermoonv1_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "48c2a0f8d06570896dc8ef55da98ca0370e1bcecbcb0a0f7c75fbb76accf730b"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_sermoonv1_buildplate_texture.svg",
+      "bytes": 1725,
+      "sha256": "044849897a1ea51f69d47b3a5c04621ef3285d1f2e5077724d3a5ee198c8b091"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_SPARKX_buildplate_model.stl",
+      "bytes": 15384,
+      "sha256": "6a8042a8633924b63c129c88940418907c2b86b0e30ca18271d248d3e1b395a6"
+    },
+    {
+      "path": "wasm/orca/profiles/Creality/creality_SPARKX_buildplate_texture.svg",
+      "bytes": 2888,
+      "sha256": "460d7441038c6b65d99f6de12e859054f1f0ddc5593f950fdeb069857da13d00"
+    },
+    {
+      "path": "wasm/orca/profiles/Cubicon.json",
+      "bytes": 6961,
+      "sha256": "c9685d8c0c54dbd2ac05c54e1f4179aee1b5332a36c5fd48537654c439746f34"
+    },
+    {
+      "path": "wasm/orca/profiles/Cubicon/Cubicon xCeler-I_bed_texture.svg",
+      "bytes": 3145,
+      "sha256": "4442b2077ca1d0bf886062c316eb967833098cb5acd611f22361fac1c455a390"
+    },
+    {
+      "path": "wasm/orca/profiles/Custom.json",
+      "bytes": 8243,
+      "sha256": "a90f0a87578a6360734b2226e79edf771910e877afc020458f772801ad1dc6f4"
+    },
+    {
+      "path": "wasm/orca/profiles/Custom/Custom_350_bed.stl",
+      "bytes": 5484,
+      "sha256": "edc78e7ecd65d94fc821e5e4ab37b26454cf8ebb8ceae128efd31d470603df32"
+    },
+    {
+      "path": "wasm/orca/profiles/Custom/orcaslicer_bed_texture.svg",
+      "bytes": 4736,
+      "sha256": "093d33cee2003307456a7b7b18f4a7522f4b9a68ef80256218dd0997079860fd"
+    },
+    {
+      "path": "wasm/orca/profiles/DeltaMaker.json",
+      "bytes": 2236,
+      "sha256": "0bc472568b0d4536426fa9378a49ac7b66b839a0aea93fc90668bfb9d96973d5"
+    },
+    {
+      "path": "wasm/orca/profiles/DeltaMaker/deltamaker_2_buildplate_model.stl",
+      "bytes": 1084,
+      "sha256": "f5836e56a119ef603455ff7b934cc018af5e2e9a4e238f810be009c5b8e46a82"
+    },
+    {
+      "path": "wasm/orca/profiles/DeltaMaker/deltamaker_2_buildplate_texture.svg",
+      "bytes": 13547,
+      "sha256": "b9d62236d9194a0c50c5e85beff935af761554e1c5f3de1bbbc0eac195c3df67"
+    },
+    {
+      "path": "wasm/orca/profiles/Dremel.json",
+      "bytes": 3144,
+      "sha256": "61461d42285f91b6121952784433ca6c2436daf32f63917a5b6c05c03bd5dbbd"
+    },
+    {
+      "path": "wasm/orca/profiles/Dremel/dremel_3d20_buildplate_model.stl",
+      "bytes": 684,
+      "sha256": "fb09489d954e64841e7b0755fa1eda6a29cbddd2df4392396451468d8a9e9dce"
+    },
+    {
+      "path": "wasm/orca/profiles/Dremel/dremel_3d40_3d45_buildplate_model.stl",
+      "bytes": 684,
+      "sha256": "595673976e78084a666edf4047a514e5bb0885721074bd44ab4b7d79f7f6744d"
+    },
+    {
+      "path": "wasm/orca/profiles/Dremel/dremel_3d45.stl",
+      "bytes": 63484,
+      "sha256": "30e0cdddb17bc2731cd967a60ddb9e251015082b71c012efe948a1599f941c84"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo.json",
+      "bytes": 77470,
+      "sha256": "37514219e1f3811a4a2f5483458cb264df07ccee10c6e26126420df88972de4d"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_centuri_buildplate_model.stl",
+      "bytes": 63784,
+      "sha256": "43ceba5f2ce7d0a5b898fd85e0ed4fffd65ae68f533c8c2368b073a730564f68"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_centuri_buildplate_texture.svg",
+      "bytes": 7472,
+      "sha256": "16b7b44ad366e7013baf721c06ad02957a7ce598c5da8345a6a7ee836080f947"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_centuri_carbon_buildplate_model.stl",
+      "bytes": 63784,
+      "sha256": "43ceba5f2ce7d0a5b898fd85e0ed4fffd65ae68f533c8c2368b073a730564f68"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_centuri_carbon_buildplate_texture.png",
+      "bytes": 11199,
+      "sha256": "ae4c623d377c4f07967d4f7e5d3e7983cfae7a0e1637d45b9d9f2f910642cf0d"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_centuri_carbon_buildplate_texture.svg",
+      "bytes": 7472,
+      "sha256": "16b7b44ad366e7013baf721c06ad02957a7ce598c5da8345a6a7ee836080f947"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "ea5dabf47fdee0a8954de51ca466e0a36c607893879b2cabf2f25f524fa155a6"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune_pro_buildplate_model.stl",
+      "bytes": 11199,
+      "sha256": "442f159ef880c8527df2eef2624b712e021914b21b4e53bd01059dfb38685a4c"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2_buildplate_texture.svg",
+      "bytes": 3040,
+      "sha256": "473fe07cfef6f516059c83a13745b9de3d917dd83ba26db6ea90bf673ec6ba17"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2d_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2d_buildplate_texture.svg",
+      "bytes": 3040,
+      "sha256": "473fe07cfef6f516059c83a13745b9de3d917dd83ba26db6ea90bf673ec6ba17"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2s_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune2s_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "7e8c2e0d966a7fd44ac58d043eaf55ba7af56ddd77ba269f391a53f0c7f63fc2"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "7e8c2e0d966a7fd44ac58d043eaf55ba7af56ddd77ba269f391a53f0c7f63fc2"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3max_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "95d3f575c6b961a3b2df58c5683354ce597559af44fb7c94a4b1799d52d7fa86"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3max_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "ffee1e76dd56890065b1114264bda9bfb8edc76244e29c2ef4b77f665d8a0fd5"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3plus_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "0fab0e9b34e976dcb6d6e76dc1a2747e5ab8ffb7024235420a513bc5019f1d8d"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3plus_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "2346a9b2a5210c8dbbe38caf5cd197b701eccd696a7817d8ead6cc6a1bcdc4fd"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3pro_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune3pro_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "98ebf520001f58e0cda3e9976542571de91d1411ccc471c509efa29ca33c651b"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4max_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "95d3f575c6b961a3b2df58c5683354ce597559af44fb7c94a4b1799d52d7fa86"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4max_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "ffee1e76dd56890065b1114264bda9bfb8edc76244e29c2ef4b77f665d8a0fd5"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4plus_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "0fab0e9b34e976dcb6d6e76dc1a2747e5ab8ffb7024235420a513bc5019f1d8d"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4plus_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "2346a9b2a5210c8dbbe38caf5cd197b701eccd696a7817d8ead6cc6a1bcdc4fd"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4pro_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptune4pro_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "8fff826a8a0f632cdf0f8ad1aeb8c22e019bee45cb85ff5d82b1d3476878a50d"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptunex_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "317b54c8f095d39fc3f661bf126a79acd1b54674c83d3777630d2cdeae589db8"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_neptunex_buildplate_texture.svg",
+      "bytes": 1202,
+      "sha256": "7e8c2e0d966a7fd44ac58d043eaf55ba7af56ddd77ba269f391a53f0c7f63fc2"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_orangestorm_giga_buildplate_model.stl",
+      "bytes": 28084,
+      "sha256": "08d3677d473b5ebe191951ea0319866a1793c217b3ce230c185b43f7cde36266"
+    },
+    {
+      "path": "wasm/orca/profiles/Elegoo/elegoo_orangestorm_giga_buildplate_texture.svg",
+      "bytes": 12073,
+      "sha256": "435dfc39f43039f32279c71863f4b6a3e362a79b3c004cfca3afe1041f44307c"
+    },
+    {
+      "path": "wasm/orca/profiles/Eryone.json",
+      "bytes": 21235,
+      "sha256": "d4c71e3169596dfa9468b5046fac66d19fbf8e08cf37bca380df3d3fc2f3e07b"
+    },
+    {
+      "path": "wasm/orca/profiles/Eryone/Eryone ER20_texture.svg",
+      "bytes": 3916,
+      "sha256": "b7bed376c3594440c678d24e3dec6643b4910e6fcc135c51520dc81fcfa9150b"
+    },
+    {
+      "path": "wasm/orca/profiles/Eryone/eryone_er20_buildplate_model.stl",
+      "bytes": 23684,
+      "sha256": "0e1356257cc32a03293360fd8f8b3803ab19ccbcfbb79946e0eaf236bd1cf9f5"
+    },
+    {
+      "path": "wasm/orca/profiles/Eryone/Thinker_texture.svg",
+      "bytes": 3139,
+      "sha256": "1c7cc9e70c1d1c762c32f254628c2851bb0ced6030928f629c21e7d93b468cf1"
+    },
+    {
+      "path": "wasm/orca/profiles/Eryone/X400_bed.stl",
+      "bytes": 9484,
+      "sha256": "56c7d14be2bf91e47fcb6a96d4c2cac19258d12f8b52db498df05ee662937ef2"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers.json",
+      "bytes": 24545,
+      "sha256": "b7a92ff25470e6a5b9c4afeba3a56f3e07bfd987843c553a76254634b11cb66e"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX Food Series build plate texture.svg",
+      "bytes": 4799,
+      "sha256": "4c05f2ea3f83b0a0416d893817e92b7c468e842fb6517e560d33354cc081e613"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX Pro L Series build plate texture.svg",
+      "bytes": 4800,
+      "sha256": "971a89819ec8fb932a9aafc2469d0b64f232eacf2ec9f50d45bccbf76d19c9eb"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX Pro Series build plate texture.svg",
+      "bytes": 4799,
+      "sha256": "1833764856151a78ce8a869b12cb5713e7dacfd57f891be1c3f2a1cc3edf6b00"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX Pro XL Series build plate.svg",
+      "bytes": 4800,
+      "sha256": "ec6b080194a59850b5ee4eb457f5af080ab7686f0e954e21d59df996f40a4502"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX Tec 4 Series build plate.svg",
+      "bytes": 4799,
+      "sha256": "b05cf1fc83860eb779136422d90f157623af5d08d149fcad8e9e3ae4ae2bd8f4"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX_Food_Series_Buildplate.stl",
+      "bytes": 1658584,
+      "sha256": "2e2b95f137a48534ac32a251fbf427ff3e77014c35035f990bea7d546b41fc7a"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX_Pro_L_Series_Buildplate.stl",
+      "bytes": 28284,
+      "sha256": "684137730e6076d25fc0fd192326842169a2bbaeb32f8724c96bcaed38d98640"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX_Pro_Series_Buildplate.stl",
+      "bytes": 1759684,
+      "sha256": "66c3b921595f32cfaf26231141bac4270f4350917ec4d456f72533bf8f38ffcb"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX_Pro_XL_Series_Buildplate.stl",
+      "bytes": 28284,
+      "sha256": "9792f601e8c8bc62d683403e038c2cee4d782fbc9d0d0888d678b555b4f63582"
+    },
+    {
+      "path": "wasm/orca/profiles/FELIX Printers/FELIX_Tec_Series_Buildplate.stl",
+      "bytes": 2952984,
+      "sha256": "7a9251cdcbee9da713399196905dd48d70ee38d8b87b10f76a5efcd0483b5eba"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge.json",
+      "bytes": 99615,
+      "sha256": "d99c3f83bc7b3a75b140c430c7564e52e049db246a5d30a4ef35d65d4c8a1f79"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_ad5x_buildplate_texture.svg",
+      "bytes": 17854,
+      "sha256": "b38790f85f14578288ba9874617820d41c8d13ce6cb2b20ca1987712aa44cef7"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_adventurer3_buildplate_texture.svg",
+      "bytes": 11426,
+      "sha256": "5906ca17240f0df920b6cf7896d2af0c503d1a516bfac34e1f8ab5f8fd2c142b"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_adventurer3_series_buildplate_model.stl",
+      "bytes": 27084,
+      "sha256": "6e03da83ad4888dde4354bb9e1da5286d31850a49d79f31e400a9882611b284f"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_adventurer5m_buildplate_texture.svg",
+      "bytes": 11596,
+      "sha256": "d4705c118ce342639c0914fcd2842bbe2ac607aa77eabf9dbe593e35d33d8945"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_adventurer5m_series_buildplate_model.STL",
+      "bytes": 38484,
+      "sha256": "5eacaca3cf5a662a17ad90a0b53bd9dffa40177b828d6615d343b3919686a369"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_adventurer5mpro_buildplate_texture.svg",
+      "bytes": 11594,
+      "sha256": "d000c7fbcd644f71e19e7bcb486908cd086f61d888bb32d670054c61461140e0"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_artemis_buildplate_model.stl",
+      "bytes": 5984,
+      "sha256": "f6d7c061c4de1e790b9be150cd60cf742848ed91ccd28dd8d0dc2858fa82f733"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_artemis_buildplate_texture.svg",
+      "bytes": 11572,
+      "sha256": "76b3e7b1cfa6fb168748aab003b03fb4fdba7f14cbdfea0a3c72522b7c1ca7e0"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_c5_buildplate_model.stl",
+      "bytes": 11884,
+      "sha256": "be00834f87b8ee30c547500e29bd6d36cdc857f6c1c983874ba0fdfb95875e0d"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_c5_buildplate_texture.svg",
+      "bytes": 17851,
+      "sha256": "1596c8f70d7cb393d56b731e53027545cda848ba718709e138a6b67fe1b66ea0"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g2s_buildplate_model.stl",
+      "bytes": 89134,
+      "sha256": "17b09a9b78abc2e486dad3b073cb88101e66411a76f6bdf7f4bef630e01aa1b6"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g2s_buildplate_texture.svg",
+      "bytes": 18492,
+      "sha256": "5a366f6c6d351bf987d11fb87265823fd67643278dff458dd79828d428cbd77d"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g3u_buildplate_model.stl",
+      "bytes": 89984,
+      "sha256": "670021e2b9362169e3ac8ef18057a191e06bea3f0e5cdecf35477d117f4e26db"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g3u_buildplate_texture.svg",
+      "bytes": 18534,
+      "sha256": "5631628bc2c629df8ef445e4aa0cb8ff2ee823edf870af90145001e776c1c9d0"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g4pro_buildplate_model.stl",
+      "bytes": 44484,
+      "sha256": "1b8ca3b0597bcf797e3b0b7b247203eda77ec734f98c124175505d87eb498f74"
+    },
+    {
+      "path": "wasm/orca/profiles/Flashforge/flashforge_g4pro_buildplate_texture.svg",
+      "bytes": 12703,
+      "sha256": "046aadfad451a4603700114026b5757eab25a30c97e42947e28e2bf8f8b364f3"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun.json",
+      "bytes": 7312,
+      "sha256": "b5b3e577674b1a69d770be4a5820eec6cf4c98c930726d7ccda249aa349b37bb"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_q5_buildplate_model.stl",
+      "bytes": 20884,
+      "sha256": "67c0267321325c123b5658329c5d090dce26894b3e5dbaf12dc6d80e6f3f8f8a"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_q5_buildplate_texture.svg",
+      "bytes": 2486,
+      "sha256": "2c8a4f5ffa20e88cd133b8e9b86160ba8a40e0c91cbcbad77728e29dfdd2ce5a"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_qqspro_buildplate_model.stl",
+      "bytes": 20884,
+      "sha256": "62048a8cbe63bf0ee28c8f69c43702c6b9a27cb7146ae9f488e8926125d59dd3"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_qqspro_buildplate_texture.svg",
+      "bytes": 2507,
+      "sha256": "f7a5ad092b65764aff5176d6917f9b0b6db660f76af3d4a0d07285af1e56a072"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_s1_buildplate_model.stl",
+      "bytes": 42284,
+      "sha256": "2f53e950b0008e8657b7c1193fa4d74e8e12ed4910f969190deb3be66dc5db83"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/FLSun_S1_buildplate_texture.svg",
+      "bytes": 1405,
+      "sha256": "b21813a0b0e9ee8e3354a17998a6378fbfbb02c1979253898afe283c0d81a6ac"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_SR_buildplate_model.stl",
+      "bytes": 78084,
+      "sha256": "b71a6b974368c1bfe55f6688a52ca59e2d16c244965fa44f3983b540b4bd8a66"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_SR_buildplate_texture.svg",
+      "bytes": 2503,
+      "sha256": "b58a4c7f4dd42684b9c9be84a7878c8de29fe9625136dc20bb8aa29da83af60e"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_T1_buildplate_model.stl",
+      "bytes": 41284,
+      "sha256": "1fd6b6bb290a54f091e4c9cab78872c5d15db4c3d64b2b37934763b57da3133f"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/FLSun_T1_buildplate_texture.svg",
+      "bytes": 1290,
+      "sha256": "05c7c88bb45f5245167df5e52cb72d97e3b6e2868cf3286220e214e2d3c96d4d"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_v400_buildplate_model.stl",
+      "bytes": 37284,
+      "sha256": "841bca59e98838fef32fe48581f4fdf13ca0d0630163f307b945a74d97bbbc60"
+    },
+    {
+      "path": "wasm/orca/profiles/FLSun/flsun_v400_buildplate_texture.svg",
+      "bytes": 2496,
+      "sha256": "51be9d432443782db53c2a8e748a9e12a538427eef47216192b2e7191b0749c2"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear.json",
+      "bytes": 10212,
+      "sha256": "b2d27e1ccf6f688f9f4c11a2c3b50415d171f7752bf5cc4d5515acd96f8736b2"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Ghost 6-bed.stl",
+      "bytes": 2184,
+      "sha256": "61c79900e86b053587af613dac69bcb9725496c7494b40d3d1c0861165a405ba"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Ghost 6-texture.png",
+      "bytes": 22683,
+      "sha256": "c8a897ad5a46f8e8440135c350b5ac0a55cc986954728d99771137bca0129c86"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Ghost7-bed.stl",
+      "bytes": 20084,
+      "sha256": "ab7669d6699b96add94c3d311865dddf271de0648bed6952b2c2cb556e2f136f"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Ghost7-texture.png",
+      "bytes": 23167,
+      "sha256": "f68fd489917521728e6cfbbe93ae3f747b97977b85dcbb385c43d29bfa61066c"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Reborn3-bed.stl",
+      "bytes": 15484,
+      "sha256": "31ee2b66a8f0b69c64c0c1ca950326aa2634a83c35b14fda66990d5ab5c4ca35"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear Reborn3-texture.png",
+      "bytes": 24808,
+      "sha256": "dfb65629d1122f16892b8a42a208e5723582f372073424ace30eb71db1c98b76"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear S1-bed.stl",
+      "bytes": 13484,
+      "sha256": "4e8b04f3adcb7839a42023743bc0ea12c7828f625230e441e20f12d095e4f77c"
+    },
+    {
+      "path": "wasm/orca/profiles/FlyingBear/FlyingBear S1-texture.png",
+      "bytes": 24808,
+      "sha256": "dfb65629d1122f16892b8a42a208e5723582f372073424ace30eb71db1c98b76"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech.json",
+      "bytes": 2893,
+      "sha256": "17a96ac17fb1ff212cb1da2eb86afb4fbae0f314b0be50e53b77cc1e4edf4e40"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_FT5_buildplate_model.stl",
+      "bytes": 52084,
+      "sha256": "acb7844b9dcbe8c76c904b1f044bf9499888e3cfc6af439843f911b130a85cdf"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_FT5_buildplate_texture.png",
+      "bytes": 13869,
+      "sha256": "90b82e3f0e184f1141c5c108ed223ed66f9de3402bbb95bf8d7a400bfdf932ad"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_FT6_buildplate_model.stl",
+      "bytes": 59284,
+      "sha256": "a931b0e4bd58c7f5827245ae90357efce2216bcd0d2d047535e8fe2705adfdea"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_FT6_buildplate_texture.png",
+      "bytes": 10436,
+      "sha256": "30454181bb8c62e360afff7e7479b6708b44261ecfa9c7bb022ff9cf99a14874"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_i3_buildplate_model.stl",
+      "bytes": 25084,
+      "sha256": "67b7290ca2248ef6ae6c6ab9d9a67ee04c9515021355a5bed263360971d313df"
+    },
+    {
+      "path": "wasm/orca/profiles/Folgertech/Folgertech_i3_buildplate_texture.png",
+      "bytes": 13869,
+      "sha256": "90b82e3f0e184f1141c5c108ed223ed66f9de3402bbb95bf8d7a400bfdf932ad"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech.json",
+      "bytes": 17679,
+      "sha256": "c867a96c203761a10d8df7ffc0daef76f1e81f12c79f7eec7ed4aa216b5b4598"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/105x105.stl",
+      "bytes": 92084,
+      "sha256": "a661c79bd9b99d11143956930a89caba1b4538c16467b2bd8a10a6c012ad8145"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/220x220.stl",
+      "bytes": 684,
+      "sha256": "727442d5cfdfd0f7d17d1b51626ba985279b5229fc5e9a57268adf24242a0e82"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/250x250.stl",
+      "bytes": 684,
+      "sha256": "111ca94698000df74a9aa1c95ef6343c193d0fb903995e14808863055fcb400c"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/255x255.stl",
+      "bytes": 684,
+      "sha256": "e5581e69ccf87c22cf1688e1d1fd9d82d5ee14c1abaa642bccd7f750a411cda3"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/320x320.stl",
+      "bytes": 684,
+      "sha256": "eb8c8c92b7b13a1e2de750e32e30074f7d7b22dc9cb5a3452360cdf615bfdcb3"
+    },
+    {
+      "path": "wasm/orca/profiles/Geeetech/Geeetech_buildplate_texture.svg",
+      "bytes": 1429,
+      "sha256": "4da0f83edae10a71fcd6a1c12b42043e82737cace008a67ab2291b646639fd19"
+    },
+    {
+      "path": "wasm/orca/profiles/Ginger Additive.json",
+      "bytes": 1646,
+      "sha256": "8b9426bb945845fcd4fc72ad13f7511051dd4f38fcbfa12ae3b1370c3e4de114"
+    },
+    {
+      "path": "wasm/orca/profiles/Ginger Additive/Ginger_G1.stl",
+      "bytes": 2284,
+      "sha256": "12f6b9c271610ec16bf7366746262754842e93ad65726563baf1d6ab00571b19"
+    },
+    {
+      "path": "wasm/orca/profiles/Ginger Additive/Ginger_One_texture.svg",
+      "bytes": 12482,
+      "sha256": "fdf66d8cfcc444953a2f425dd0afe6d3902544c81163cb4a48efd660746c4803"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo.json",
+      "bytes": 2073,
+      "sha256": "ef091ef4f30ec5609533a93f6c8e8a5a61bb0a0eec8b7845887918933c353aad"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-GP1-texture.svg",
+      "bytes": 373,
+      "sha256": "bf9c7937c3c2d8b8322d468e48d088d05c22ec90e8e3ebf1ad1bcf8d94255020"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-GP1.stl",
+      "bytes": 42284,
+      "sha256": "eae9edf62fd26990932459712950e77d15d19b380259861fcfe700f4edf58776"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-TurboM-texture.svg",
+      "bytes": 353,
+      "sha256": "b052ca798f7a95bc1b8c9b3ae98346367fd015e870bb61b4eb97983b38a95781"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-TurboM.stl",
+      "bytes": 11084,
+      "sha256": "ae67dc4bc88064895829f0575f54e95dfdb71ba3e163b2043a0942bbe89bf760"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-Velo+-texture.svg",
+      "bytes": 376,
+      "sha256": "2976adfcae0d02d0e1ea696eaf3de9798d6d1acf31bbd54b2061fd8b5bdf3551"
+    },
+    {
+      "path": "wasm/orca/profiles/Goofoo/Goofoo-Velo+.stl",
+      "bytes": 12084,
+      "sha256": "7f6ae20f3ac996612da3ef5103e6c6248ff2a163cbc58bb7f316fd96698e4a74"
+    },
+    {
+      "path": "wasm/orca/profiles/IdeaFormer.json",
+      "bytes": 1588,
+      "sha256": "1ddc573a520954265a4299ca81d69365bb27d2618a14f1fb395bba0ddc767e54"
+    },
+    {
+      "path": "wasm/orca/profiles/InfiMech.json",
+      "bytes": 12647,
+      "sha256": "a0cd7ec7e9b100dacc10eb6e510c0ce6442c9b2fad44349ef7b4ff92b3a1a8d9"
+    },
+    {
+      "path": "wasm/orca/profiles/InfiMech/InfiMech EX-bed.stl",
+      "bytes": 20084,
+      "sha256": "032eef9961acc38762381fcf20ed7bf9dd77a480b1e0764adb28cac9a887f650"
+    },
+    {
+      "path": "wasm/orca/profiles/InfiMech/InfiMech EX-texture.svg",
+      "bytes": 2650,
+      "sha256": "1175e4fc963055e691476aa12062e2b30609f9c2e032e32ea317019ad392606c"
+    },
+    {
+      "path": "wasm/orca/profiles/InfiMech/InfiMech TX-bed.stl",
+      "bytes": 19984,
+      "sha256": "58b7acf3858d22502c5c8f016681408a4231f67fffb99bfe83877371e0c3c727"
+    },
+    {
+      "path": "wasm/orca/profiles/InfiMech/InfiMech TX-texture.svg",
+      "bytes": 2576,
+      "sha256": "cc0dd26576bdca4484f36c3bf0287927f8a1d8b1cbbf91a939f4b304cba4ae3d"
+    },
+    {
+      "path": "wasm/orca/profiles/iQ.json",
+      "bytes": 3901,
+      "sha256": "c0ca74c2304ae92f306880add2a7eb9eab4e9fb24cfd46c6fb7815a35d0684e6"
+    },
+    {
+      "path": "wasm/orca/profiles/iQ/TiQ2_texture.svg",
+      "bytes": 2964,
+      "sha256": "c688ff91168a2b73ae02eb060c11e42ac2f907b334473df8c010e296c7bb42e4"
+    },
+    {
+      "path": "wasm/orca/profiles/iQ/TiQ2.stl",
+      "bytes": 684,
+      "sha256": "431453a6885615ae92b7ae2f7a9f050d54ace74369adbcd5001c729b824a41f7"
+    },
+    {
+      "path": "wasm/orca/profiles/iQ/TiQ8_texture.svg",
+      "bytes": 3220,
+      "sha256": "cbc840bad49fecc4a94d8727c20d3cc673708c98195ccb2047e51aedee448129"
+    },
+    {
+      "path": "wasm/orca/profiles/iQ/TiQ8.stl",
+      "bytes": 684,
+      "sha256": "6399c872f53b07709aeb71c1bec7eac9a7532d95e614744c28308bb82ace419c"
+    },
+    {
+      "path": "wasm/orca/profiles/Kingroon.json",
+      "bytes": 2515,
+      "sha256": "5adf190da9bb064eac3c97304eea0bc615ff4a4b30d0c3420b81c364f860098c"
+    },
+    {
+      "path": "wasm/orca/profiles/Kingroon/Kingroon_buildplate.svg",
+      "bytes": 9701,
+      "sha256": "cdc001c2b4010ff606e324208c7d8f790ffc2268e704c59e9621edd86e1eaef8"
+    },
+    {
+      "path": "wasm/orca/profiles/Kingroon/klp1_bed.stl",
+      "bytes": 14984,
+      "sha256": "6c076f0ff0317004ca2415a43a194821a2ed0e1f3a17d9e9b464767955fbdf58"
+    },
+    {
+      "path": "wasm/orca/profiles/Kingroon/kp3s_bed.stl",
+      "bytes": 44184,
+      "sha256": "aae76a1e676837ac63d76a52e08bfa5511ca82127cf9078385b337a69122404a"
+    },
+    {
+      "path": "wasm/orca/profiles/Kingroon/mini_bed.stl",
+      "bytes": 14984,
+      "sha256": "38d146c25e0e6a1f030bbdc7fa9bebe042e6cdd7ce2de38409f6d510cf37a59c"
+    },
+    {
+      "path": "wasm/orca/profiles/LH.json",
+      "bytes": 3541,
+      "sha256": "e2347fcc0b58d64788d60e2ee931b58779aab191b6a2c793d2e0c2f0f14315d3"
+    },
+    {
+      "path": "wasm/orca/profiles/LH/LH_Stinger_buildplate_model.stl",
+      "bytes": 81084,
+      "sha256": "66b2a7b30007a4793440621725d7d2ccfef93f02c20f916f4b65339126374d2f"
+    },
+    {
+      "path": "wasm/orca/profiles/LH/LH_Stinger_buildplate_texture.svg",
+      "bytes": 4117,
+      "sha256": "196f9c18cf731e47c1e7b567917bef83eccca5d13b50c3d238f6d2a738960046"
+    },
+    {
+      "path": "wasm/orca/profiles/LH/LH_Stinger_MMU_buildplate_texture.svg",
+      "bytes": 4580,
+      "sha256": "0d8c7ea5114917a799a5f1a34b7a81b379b35786f5cf094956f915804af81ebd"
+    },
+    {
+      "path": "wasm/orca/profiles/LONGER.json",
+      "bytes": 8895,
+      "sha256": "aa661f73895cfe5f6c401f2addc7ea9596d6bfcbbdb7ba7daffa2f0579edfb0d"
+    },
+    {
+      "path": "wasm/orca/profiles/LONGER/longer_lk10_buildplate_model.stl",
+      "bytes": 16684,
+      "sha256": "4909b04095d4849df785f760aa00f6c389c9e7df3c5f1bd5988796d3ecccfc8d"
+    },
+    {
+      "path": "wasm/orca/profiles/LONGER/longer_lk10_buildplate_texture.svg",
+      "bytes": 2134,
+      "sha256": "ad3a0c44e956a9ad0b86f6bbbb45962985c24424fb7e4b2ba70d06de0365ae88"
+    },
+    {
+      "path": "wasm/orca/profiles/LONGER/longer_lk10plus_buildplate_model.stl",
+      "bytes": 16684,
+      "sha256": "d004a3c97bed8afde86dc1b151e2c4c01c15614b005e1f5d76f19df995de0e25"
+    },
+    {
+      "path": "wasm/orca/profiles/LONGER/longer_lk10plus_buildplate_texture.svg",
+      "bytes": 2134,
+      "sha256": "f38d1259a9df50b20190fe9c69ff58d4e16519b5cef2aee8e1ebaa2d81e3a2c8"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot.json",
+      "bytes": 3397,
+      "sha256": "6e75dfc558d3282fc325306a61ca5e24704d28869ff44b92873686a0426c20a1"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot/lulzbot_logo.svg",
+      "bytes": 19865,
+      "sha256": "2ad68fb322804f7e1e3d39cb737ecc98f8f6b9319dc764458e9a5f5be8e18144"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot/taz_4_or_5_build_plate.stl",
+      "bytes": 142284,
+      "sha256": "d68960026800e9fb4192486ccabbbab19558d64723bf4d0c10609e21c389bbc6"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot/taz_6_build_plate.stl",
+      "bytes": 318184,
+      "sha256": "d1c35f62d33df63120f5b133b5a820bf6b9ce799843d553249e83191ea9b932f"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot/taz_pro_dual_build_plate.stl",
+      "bytes": 306184,
+      "sha256": "4f4acc401c8d7fba623f9e832b28d51aafe19665db49466a2e9be80577feb02f"
+    },
+    {
+      "path": "wasm/orca/profiles/Lulzbot/Taz_Pro_Dual_printbed.svg",
+      "bytes": 22477,
+      "sha256": "660f93c5dff22315065df7bfbc6f7adac6ea2c4f171de544cb541c6a06467f1c"
+    },
+    {
+      "path": "wasm/orca/profiles/M3D.json",
+      "bytes": 2187,
+      "sha256": "fbf7def7295bc19a6b1742bc8baa3529b71a86463ca9ae82aae6d1d451e3d503"
+    },
+    {
+      "path": "wasm/orca/profiles/M3D/m3d_enabler_D7500_bed_texture.svg",
+      "bytes": 4439,
+      "sha256": "c6b943d5bf6d67ad1a02a6197740278dfac065d79cc1d3b87d4c1cdadd051751"
+    },
+    {
+      "path": "wasm/orca/profiles/M3D/m3d_enabler_D8500_bed_model.stl",
+      "bytes": 11684,
+      "sha256": "3a3e5ee5057aa6b439b77c8c2a552372bca72db33bc9fb83583d65b3a8e74cf8"
+    },
+    {
+      "path": "wasm/orca/profiles/M3D/m3d_enabler_D8500_bed_texture.svg",
+      "bytes": 4439,
+      "sha256": "e4db31683424338e7b31cc3b1629f690d9e50153902d96732e682f72b0bd3aab"
+    },
+    {
+      "path": "wasm/orca/profiles/MagicMaker.json",
+      "bytes": 4191,
+      "sha256": "326c9dc64dfc25c8e5dd8002af59f8377a7ff1fca18cf26d7c9ef42d4d9560aa"
+    },
+    {
+      "path": "wasm/orca/profiles/MagicMaker/125_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "46eb33f72a4d0bc99e2426f119765876b3224275b425c17ec6612ada991110c1"
+    },
+    {
+      "path": "wasm/orca/profiles/MagicMaker/220210_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "6fc15804dc47bd9df93ccde53ac4ee232b4951ad3c7b7b24c10e27c6a9c6dc7d"
+    },
+    {
+      "path": "wasm/orca/profiles/MagicMaker/310_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "a99796e40ad6bc8c8474a1bad81ff7e03539c98aae801d0cc00a0da17d4b0b00"
+    },
+    {
+      "path": "wasm/orca/profiles/MagicMaker/MM_buildplate_texture.svg",
+      "bytes": 4655,
+      "sha256": "2e13794b8303e2cf802fdf0a9e9c80d5cef6c698a59863536d1b2f4ec859ef30"
+    },
+    {
+      "path": "wasm/orca/profiles/Mellow.json",
+      "bytes": 1791,
+      "sha256": "c5a4fb6627b319d2c78dd801ea04405fbcec716584e0b64faf00e6507c4d6cdb"
+    },
+    {
+      "path": "wasm/orca/profiles/Mellow/M1_bed_model.stl",
+      "bytes": 3884,
+      "sha256": "3976377df2fab6defe5f7833756a425ca65e33a73244dbf2b9bb8cbcfb0c4671"
+    },
+    {
+      "path": "wasm/orca/profiles/Mellow/mellow_bed_texture.svg",
+      "bytes": 11634,
+      "sha256": "75120de237f945b68f571e472590e6cd0886266ac5b1f8ef38dd8b4e4382edff"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot.json",
+      "bytes": 12620,
+      "sha256": "d95a946983c00ee2b2c8e47a2735981b59b849e055e7e6c3cb12e551030f2605"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/chx350-printbed.stl",
+      "bytes": 10334,
+      "sha256": "7508a92da9e1b1c744226d522c45a213852ee226f8e6ee1515da10a28b212e3c"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/chx350-texture.svg",
+      "bytes": 16262,
+      "sha256": "30c238286eaac186f4e32fbc581cefbf574b5bc16431d838c861ba984f85e492"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl-133-texture.svg",
+      "bytes": 6209,
+      "sha256": "8f982885a8c54e744e205d38f3fe60acf4717b9abbfdcd803da711b6da6aaff0"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl-136-texture.svg",
+      "bytes": 6126,
+      "sha256": "6f64ce96412aeafa158fcf17c4b4dcd98ca4a114c2d061de7ba65b7c91bde6d2"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl-308-texture.svg",
+      "bytes": 6649,
+      "sha256": "2f595e34ab7495009e24cdc4d4ad608bff7f01c1f19a07d67d237c5b1db5d9bd"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl-480-texture.svg",
+      "bytes": 6209,
+      "sha256": "fefd1b03c527116e0fa064041ae0dfc9aaca0547761d1150d54ba552322976b0"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl133-printbed.stl",
+      "bytes": 10334,
+      "sha256": "e8af8e8d77fcb1ac0078feb3812f84361941dc9db1a1823a1191f006fc033da3"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl136-printbed.stl",
+      "bytes": 10334,
+      "sha256": "199191cacbbf746b6dad5993d176688f406a6ab9a01a21236509fa812ae03083"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl308-printbed.stl",
+      "bytes": 10334,
+      "sha256": "199191cacbbf746b6dad5993d176688f406a6ab9a01a21236509fa812ae03083"
+    },
+    {
+      "path": "wasm/orca/profiles/Meltingplot/mbl480-printbed.stl",
+      "bytes": 10334,
+      "sha256": "199191cacbbf746b6dad5993d176688f406a6ab9a01a21236509fa812ae03083"
+    },
+    {
+      "path": "wasm/orca/profiles/OpenEYE.json",
+      "bytes": 6116,
+      "sha256": "c82d99e19a421178bb95e1a9d6082a49917059d1c710ecf4fefb50800f16f1ad"
+    },
+    {
+      "path": "wasm/orca/profiles/OpenEYE/Plate.stl",
+      "bytes": 42784,
+      "sha256": "602b163d183bc13d3af6065d5386ddfb4a64dcbc902af66905dff9be6e55d5e1"
+    },
+    {
+      "path": "wasm/orca/profiles/OrcaArena.json",
+      "bytes": 16756,
+      "sha256": "db3b91df149a1d8f60398f82fa66900cf3b7f7237e0edecc0d45c589d43c1fb7"
+    },
+    {
+      "path": "wasm/orca/profiles/OrcaFilamentLibrary.json",
+      "bytes": 167643,
+      "sha256": "e6cebd75c406251308c9ac786fece00471e49b26d20921419780e2e1afb1f5b0"
+    },
+    {
+      "path": "wasm/orca/profiles/Peopoly.json",
+      "bytes": 3961,
+      "sha256": "fc8a53ba45eb39d777c49053f8ce1a2503406f59b36ecd195a3c3e5fcc2ca281"
+    },
+    {
+      "path": "wasm/orca/profiles/Peopoly/magnetox_model_texture.svg",
+      "bytes": 7459,
+      "sha256": "d8c9d87ca804107cd94e7a4d738d2746b61d87ad7e09d3fde275af65ddbd6041"
+    },
+    {
+      "path": "wasm/orca/profiles/Peopoly/magnetox_model.stl",
+      "bytes": 19484,
+      "sha256": "c0af9f1c9a9749745532b9818d0408f1b54230a0f009af96cc5d07aa20025cfd"
+    },
+    {
+      "path": "wasm/orca/profiles/Phrozen.json",
+      "bytes": 1628,
+      "sha256": "333ff5a37d8fa41f1ca4a101f5b2ee8d61b3ad63d2a1aa112a86c222524459ed"
+    },
+    {
+      "path": "wasm/orca/profiles/Phrozen/Phrozen Arco_buildplate_model.stl",
+      "bytes": 11084,
+      "sha256": "b8099ded3635c4103eb7d9dc9c69fb4264594205b9badf0c949e472b38b818ca"
+    },
+    {
+      "path": "wasm/orca/profiles/Phrozen/Phrozen Arco_buildplate_texture.svg",
+      "bytes": 8315,
+      "sha256": "1920c504242a7d76bd3f5c5c83e66ab0611d60ed06d2486bef11012841484a2c"
+    },
+    {
+      "path": "wasm/orca/profiles/Positron3D.json",
+      "bytes": 2120,
+      "sha256": "f640ed09ecf173d343f7aea3bd6b9eda875106442aa06442a0b09d468658dac6"
+    },
+    {
+      "path": "wasm/orca/profiles/Positron3D/ThePositron_bed_model.stl",
+      "bytes": 25084,
+      "sha256": "d0ad5ba891546ebcc95c153491eb2b967fe812c606ceff138aa9b624bbea58b9"
+    },
+    {
+      "path": "wasm/orca/profiles/Positron3D/ThePositron_bed_texture.svg",
+      "bytes": 7889,
+      "sha256": "d016318d42eefa6f52d7c5e485b486d3b1f70c38cf7e45ab68ba1f8e76664a29"
+    },
+    {
+      "path": "wasm/orca/profiles/Pragostroj.json",
+      "bytes": 4898,
+      "sha256": "8a3646ad4fd2026ca4161ce56345c2b53c25be4d59416afe519eff8e4aa2cf93"
+    },
+    {
+      "path": "wasm/orca/profiles/Printcepts.json",
+      "bytes": 1193,
+      "sha256": "937755f30d0464c96142fe1f91756f8e490a40c3713c4905e28ad908c11d651b"
+    },
+    {
+      "path": "wasm/orca/profiles/Printcepts/BabyBelt Pro_bed_texture.svg",
+      "bytes": 4645,
+      "sha256": "60126a3b6197075be9a0cbab37e4885526e105f685fdb427e4318107e459b5c5"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa.json",
+      "bytes": 91277,
+      "sha256": "fb00054e980ea0981f4fa48db361ac9af150a4768c58ce6bc7f7cc2062f5570a"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreone_bed.stl",
+      "bytes": 22684,
+      "sha256": "137d0aa3bab5ee29d7e5436604d1c306f1a6341903508749bd91d67d28e0268f"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreone_indx.stl",
+      "bytes": 22684,
+      "sha256": "2f87b62d68cbb7d03128a754d0b702e551729600354e5fc14542ddc07642f113"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreone_indx.svg",
+      "bytes": 4786,
+      "sha256": "f722c8543a9f903552c6f7edc562c11ad6b44c5680cba3ef0b3b8a87f026f2cc"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreone.svg",
+      "bytes": 2911,
+      "sha256": "5b694714424c495e904f4af3a465bee328182ad756533ab0585a7ba1803ac8f9"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreonel_bed.stl",
+      "bytes": 63284,
+      "sha256": "48a07b4ec7edbccce5c99f663317cabb688a0e04af945c8ae600259554d43294"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/coreonel.svg",
+      "bytes": 3112,
+      "sha256": "05cff41c516c39186d78d9924ea57489673be3cef53baad0b12a73de9c5ca58e"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mini_bed.stl",
+      "bytes": 25384,
+      "sha256": "437121bf276bdb06fe477d795fdf7f84281c6c8fbe03ef14f48b118edae15077"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mini.svg",
+      "bytes": 3043,
+      "sha256": "714ae96fd77a630babab7cff06cb4df33394424f32060bd41d0a8089d3202082"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/miniis_bed.stl",
+      "bytes": 25384,
+      "sha256": "437121bf276bdb06fe477d795fdf7f84281c6c8fbe03ef14f48b118edae15077"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/miniis.svg",
+      "bytes": 3043,
+      "sha256": "714ae96fd77a630babab7cff06cb4df33394424f32060bd41d0a8089d3202082"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk3_bed.stl",
+      "bytes": 30384,
+      "sha256": "b81022311447245fee0a2ef60f756a103e23ff3badae0b4fd4ab1a5fcd1d811b"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk3.5_bed.stl",
+      "bytes": 30384,
+      "sha256": "b81022311447245fee0a2ef60f756a103e23ff3badae0b4fd4ab1a5fcd1d811b"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk3.5.svg",
+      "bytes": 6706,
+      "sha256": "7cb781e94e18a103abedf9d85ac551ee1fc383cfb22ebaaa88b6612cd3a40b92"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk3.svg",
+      "bytes": 6839,
+      "sha256": "bd7124f7b2ca29c10acdf4d0eef9fafc097070de3d9f87752405b5d5716abee7"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk4_bed.stl",
+      "bytes": 22684,
+      "sha256": "1a1f7067ea1a57825a6dbf75f55b378ab714711b3fe13d0c2f0d11e1c453da2f"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk4is.svg",
+      "bytes": 6109,
+      "sha256": "083f51ec967102c15986b17fdec637304062eac6167155ddbee88515d6d9f4bc"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/mk4s.svg",
+      "bytes": 6497,
+      "sha256": "e02f09f157d1cfbce55620397f346cf7baef786e9eb813575dfca466bbf2a698"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/Prusa XL_bed.stl",
+      "bytes": 15884,
+      "sha256": "bf9705b3689c7e2ab783bd515e5f2fcafe168e3b07790be742c2da252c01b3a1"
+    },
+    {
+      "path": "wasm/orca/profiles/Prusa/Prusa XL.svg",
+      "bytes": 2919,
+      "sha256": "dfb369db3d4109d20d23f9f8c70bf34eca09b74924e4b65932acc42d157758f7"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi.json",
+      "bytes": 261554,
+      "sha256": "7fd77f1d285254aec248e6a8f5f11be0dd9fb005e2716663b05dc7fa3705934f"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_Q1Pro_buildplate_model.stl",
+      "bytes": 11884,
+      "sha256": "5cf8204af540babc8d8c8debe929e9f3033170bead837c2d79972c62ce5e1f4d"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_Q1Pro_buildplate_texture.svg",
+      "bytes": 3702,
+      "sha256": "21608f942e731fa457a794c177a34afc7312138a343495c83b69437039c6d069"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_q2_buildplate_model.stl",
+      "bytes": 17884,
+      "sha256": "62106c12be5d7f627a1d17fb47721741d1c4a1c8cd56fb77690a6e66b76d521e"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_q2_buildplate_texture.svg",
+      "bytes": 3081,
+      "sha256": "ab543258737f9e108d59619ea72f0e9f44287128b84de7bebbdeadf513811492"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_q2c_buildplate_model.stl",
+      "bytes": 17884,
+      "sha256": "5d148ab9a9d9bfad06175043c718d9e42a45cbf6a90ee6c20d4d7b8335228687"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_q2c_buildplate_texture.svg",
+      "bytes": 3313,
+      "sha256": "c8a61a5491e8f1eb959d851f97c2a96861590c6ae88af7126074e37d5f7d67af"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xcfpro_buildplate_model.stl",
+      "bytes": 8784,
+      "sha256": "02efb246e10872c63a087cf1e7a45695d7e18726db900c38307c7cbc2947ffc6"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xcfpro_buildplate_texture.svg",
+      "bytes": 3963,
+      "sha256": "2aea3ceb11c315db33fb3536369eec8654cbbcbe33d9f413328430cd3f4ceff0"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax_buildplate_model.stl",
+      "bytes": 8784,
+      "sha256": "02efb246e10872c63a087cf1e7a45695d7e18726db900c38307c7cbc2947ffc6"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax_buildplate_texture.svg",
+      "bytes": 3963,
+      "sha256": "2aea3ceb11c315db33fb3536369eec8654cbbcbe33d9f413328430cd3f4ceff0"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax3_buildplate_model.stl",
+      "bytes": 24784,
+      "sha256": "b3b8e72e9f77cc8203ab4b88c4ed9724340b40b66b43846090bd57dbedce322b"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax3_buildplate_texture.svg",
+      "bytes": 3954,
+      "sha256": "6b1bee1e39ee37f92544c3de5800f3ef03294e04085bdab4c60400d86ce8a7c8"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax4_buildplate_model.stl",
+      "bytes": 23184,
+      "sha256": "34705e3c9fe8c0cc957c1e72a2b4ed5948a96f154251cd452f260c24b6012b90"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xmax4_buildplate_texture.svg",
+      "bytes": 2963,
+      "sha256": "d66f6c2fb4082c2a8a21eb4aba3005950c416fab37a8a54b4b8629f1c5fa4b5d"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus_buildplate_model.stl",
+      "bytes": 8784,
+      "sha256": "14af65a77c86f4defe0c3c257c6d076249804174ba9e3b10db9388b969fafe1e"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus_buildplate_texture.svg",
+      "bytes": 3987,
+      "sha256": "619e332e28af49088539d03d628b4b8c6fb7b217f2189722d7328e2d219d0a27"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus3_buildplate_model.stl",
+      "bytes": 22684,
+      "sha256": "6ead8d7e3cd155f99bc8e851e8c5a782f224f44daca260df5e4bdf2e07845419"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus3_buildplate_texture.svg",
+      "bytes": 4261,
+      "sha256": "70f82d2e55ff585998a54fc93ea0c194a7d7368aa913d7b9b227e98ae1643cbd"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus4_buildplate_model.stl",
+      "bytes": 20284,
+      "sha256": "850ac9056766f24d7839ff522e036fdc5c28bbacd0e8d021f3626747d28c0743"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus4_buildplate_texture.svg",
+      "bytes": 3871,
+      "sha256": "817d9015322f741ac6d9a68eba303a89744da54b4191301752004ed8dad85476"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus5_buildplate_model.stl",
+      "bytes": 24484,
+      "sha256": "55a15e084a1a5bf94bb5b658ebad8dbf7095b0fd2cf00c5d6459ecbd8e14ddc0"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xplus5_buildplate_texture.svg",
+      "bytes": 3358,
+      "sha256": "5e8f0eb3ec79bd4b9a6e45fc5617f0922435f38f80a8874fbf95025d99cb13a6"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xsmart3_buildplate_model.stl",
+      "bytes": 21284,
+      "sha256": "5d8051f7778847877d81b17fb08c225d7d8c6374987a7b66311fb9a4b3ec5291"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xsmart3_buildplate_texture.svg",
+      "bytes": 3949,
+      "sha256": "6010b00be00cbb72a5238b87f32713c386759c31e61c1b9710d2e83d67c9b0e6"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xsmart5_buildplate_model.stl",
+      "bytes": 45784,
+      "sha256": "71dfd84fdb6050bc376ef6b3a0baa917382d86a64996ca0c5c872bc7dc320a5b"
+    },
+    {
+      "path": "wasm/orca/profiles/Qidi/qidi_xsmart5_buildplate_texture.svg",
+      "bytes": 23435,
+      "sha256": "399bf1a3080a64e9976c7ddb7c0ea2d526b3a8335ef18bf92eae5f5254771466"
+    },
+    {
+      "path": "wasm/orca/profiles/Raise3D.json",
+      "bytes": 1968,
+      "sha256": "0370a2cc3b8e87214a419a18e3f87e5a288d21c9f2f7764f2ae4d1378a39ae23"
+    },
+    {
+      "path": "wasm/orca/profiles/Raise3D/raise3d_pro3_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "f9327663dc5caf020f8697471e162f681f425a58c3366f66bc6f7635f829fb4a"
+    },
+    {
+      "path": "wasm/orca/profiles/Raise3D/raise3d_pro3_buildplate_texture.svg",
+      "bytes": 3083,
+      "sha256": "885f3883ab4bd140e8127b55ad8a2d06c431c15b560950d78e167db9eaef2843"
+    },
+    {
+      "path": "wasm/orca/profiles/Raise3D/raise3d_pro3plus_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "f9327663dc5caf020f8697471e162f681f425a58c3366f66bc6f7635f829fb4a"
+    },
+    {
+      "path": "wasm/orca/profiles/Raise3D/raise3d_pro3plus_buildplate_texture.svg",
+      "bytes": 3083,
+      "sha256": "885f3883ab4bd140e8127b55ad8a2d06c431c15b560950d78e167db9eaef2843"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig.json",
+      "bytes": 19181,
+      "sha256": "0ec810cf94b5a649e8675b50c9b580c66650a8de7206d48680271c1e1f430433"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig_logo_copy_mode.svg",
+      "bytes": 2357,
+      "sha256": "ad45010f0483749b1d0527dbd2c4a63bfbfebb312abfb6997492ef9095700606"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig_logo_mirror_mode.svg",
+      "bytes": 3340,
+      "sha256": "4b42399aca7efd89c237473e8ec6a7483adb70426833cadd9d4be80a427b45be"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig_logo.svg",
+      "bytes": 1103,
+      "sha256": "1c56292adcf15b27bbe091f5fb1b1daa4fd1e2925b8a69699135a96222147136"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcast-bed.stl",
+      "bytes": 122484,
+      "sha256": "92427d0cb4924b410bf9e86cd36badbdcff7903439950c0bb3a4727b2adc0643"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-200.stl",
+      "bytes": 122484,
+      "sha256": "c8035fdbcfef954ffbd288165391a7b236d8e3b5c65cb4e9a42f9edc43995bab"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-300-clone-mode.stl",
+      "bytes": 70084,
+      "sha256": "c4313313372fd08581850a67a12b91e565a64be68cf0fa8d3730fe326ddba904"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-300.stl",
+      "bytes": 122484,
+      "sha256": "92427d0cb4924b410bf9e86cd36badbdcff7903439950c0bb3a4727b2adc0643"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-400-clone-mode.stl",
+      "bytes": 70784,
+      "sha256": "bcde654da4660ab5c43eb8ecc6491568636babfc76373e5d213bf44a981937db"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-400.stl",
+      "bytes": 122484,
+      "sha256": "60e4240ff04dcc8a46e96443a50f5db2d16a45205a003ef634628647b99d64ab"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-500-clone-mode.stl",
+      "bytes": 70084,
+      "sha256": "f1a6b81793d396885a5423cbd35281b79b05e52ebc7e87da3f7b041c0ceb6deb"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vcore-bed-500.stl",
+      "bytes": 122484,
+      "sha256": "7d08ddb26a161e9e6ed396d3ee7a7820101fc3cd26af2e3830ebdf5c84bafeb1"
+    },
+    {
+      "path": "wasm/orca/profiles/Ratrig/ratrig-vminion-bed.stl",
+      "bytes": 22884,
+      "sha256": "1372e3fe660f0c88b35da7f78e261daf2ef4052a579b5b7cd9cdcd7515e14c82"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D.json",
+      "bytes": 4655,
+      "sha256": "78470243c181bb354564b9c6e9facd322adc0ad8d820dca887f0bf546bf303ab"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D Gigabot 4 XLT_buildplate_texture.svg",
+      "bytes": 5127,
+      "sha256": "7594c96a99d01274765fcf6852b97572c69db81cac9f45058fef007d69ccf378"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D Gigabot 4_buildplate_texture.svg",
+      "bytes": 5127,
+      "sha256": "9f8d4ab7f774a0f13f73c392c12de3979dba8204a954faafacea6001be7a1c26"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D GigabotX 2 XLT_buildplate_texture.svg",
+      "bytes": 5725,
+      "sha256": "08c2e2ef6c3ab3f0e6a11a83721d026e1d8592de473dfa619c91c1991dcc05e0"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D GigabotX 2_buildplate_texture.svg",
+      "bytes": 5726,
+      "sha256": "1f62e62296fb29f748430b8a1a7397a19aab353dabec127fc45d7dd12a8620df"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D Terabot 4_buildplate_texture.svg",
+      "bytes": 5413,
+      "sha256": "da47caa4c2541712bf02d47f006e1811c2fe3c3d71653979ff733e55abf86cc2"
+    },
+    {
+      "path": "wasm/orca/profiles/re3D/re3D TerabotX 2_buildplate_texture.svg",
+      "bytes": 6006,
+      "sha256": "895e13dffa621f7bd61c3e3eef0b9a4974b745e20a9be69741c92caa4ee99454"
+    },
+    {
+      "path": "wasm/orca/profiles/RH3D.json",
+      "bytes": 6599,
+      "sha256": "2094f78a00676c5dc63067df068aa65d121b25a8a7feef4b0e9979ada4b4da96"
+    },
+    {
+      "path": "wasm/orca/profiles/RH3D/E3NG-bed-texture.svg",
+      "bytes": 1064,
+      "sha256": "e4d2e3c6115b124fca823bf8b3792da2e1c499bc6e939d1685e17480af7803b8"
+    },
+    {
+      "path": "wasm/orca/profiles/RH3D/E3NG-bed.stl",
+      "bytes": 214984,
+      "sha256": "3740eb4b0782b6d38a060153076c08f9171e59586c935bd107f1a40c03320de4"
+    },
+    {
+      "path": "wasm/orca/profiles/RH3D/VIRTU-bed-texture.svg",
+      "bytes": 1674,
+      "sha256": "0eb30667126b556c2e810ccf8ff2e3d01969526600a8de67a599deaa73f59771"
+    },
+    {
+      "path": "wasm/orca/profiles/RH3D/VIRTU-bed.stl",
+      "bytes": 289634,
+      "sha256": "1b3544a0b658a71e24c9a010287854744e7914dd7c43cb6eca3f4b5fd028eb78"
+    },
+    {
+      "path": "wasm/orca/profiles/RolohaunDesign.json",
+      "bytes": 3281,
+      "sha256": "090122884250cfeb7db0323f4176cb34ddfa773f40d5aa31dc56d1b1beadf9ef"
+    },
+    {
+      "path": "wasm/orca/profiles/RolohaunDesign/bedtexture-rook-green-120.svg",
+      "bytes": 2667,
+      "sha256": "6e7a2959290b0a16bc7ee0e13fab0bda2295bc8619449cbac726999077f5b9b4"
+    },
+    {
+      "path": "wasm/orca/profiles/SecKit.json",
+      "bytes": 3380,
+      "sha256": "661e5ebda8ee26004ff13f1ab596b431b3a5313c95de95cb6ad7dd647a1d494a"
+    },
+    {
+      "path": "wasm/orca/profiles/SecKit/seckit_logo.svg",
+      "bytes": 752,
+      "sha256": "31931ad3e761a75c4c917fca595bc49a1476389a62e72aa69e02e7ca76f1cc5e"
+    },
+    {
+      "path": "wasm/orca/profiles/SecKit/SK-Go3_Bed.stl",
+      "bytes": 29184,
+      "sha256": "324a7aeec962b8bcbcd0900f1f46b393da9128c17ef9a5a477388070d2544162"
+    },
+    {
+      "path": "wasm/orca/profiles/SecKit/SK-Tank_Bed.stl",
+      "bytes": 29184,
+      "sha256": "3a49ed508bafe6ae7be1e45afb97591b96100ef872097b9fea8b70440e9b0b02"
+    },
+    {
+      "path": "wasm/orca/profiles/SeeMeCNC.json",
+      "bytes": 23540,
+      "sha256": "3e26133bd065b79931b13b14efc996e70280e6dd4ef5e607097a0067a2e2c220"
+    },
+    {
+      "path": "wasm/orca/profiles/SeeMeCNC/SeeMeCNC_Buildplate_Model_500.STL",
+      "bytes": 60084,
+      "sha256": "0be2f12b80c275eabe43749a9b76a6ee738b690b923d748e2369146bfc706b71"
+    },
+    {
+      "path": "wasm/orca/profiles/SeeMeCNC/SeeMeCNC_Buildplate_Model.STL",
+      "bytes": 60084,
+      "sha256": "3ada07ac19282b32097f32653b8795b934f9a4177a95e6f5b027159f9b06bd82"
+    },
+    {
+      "path": "wasm/orca/profiles/SeeMeCNC/SeeMeCNC_Buildplate_texture.png",
+      "bytes": 9085,
+      "sha256": "9f9905e93dcb417726701feccdff3897c450afc1bd6fafa70146aa0370fb140b"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker.json",
+      "bytes": 71751,
+      "sha256": "e5f13daa63e627289a84bd75ae356b255271efad913e8c479ee831c5409c5358"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A250 Dual_texture.svg",
+      "bytes": 7454,
+      "sha256": "f451ccced16df6599d0a5fdb8ac88919938ff74c903a922b70f7eedf8446edb9"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A250_bed.stl",
+      "bytes": 21184,
+      "sha256": "50e502585d0a9c46cc6639ff04be458023efffa6ddc8e8cdcb7e81c6dfd68ade"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A250_texture.svg",
+      "bytes": 6555,
+      "sha256": "35238439502f1d515df166dde25c97277c9f9cedf9eabaf8b07c54459757dd26"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A350 Dual_texture.svg",
+      "bytes": 7785,
+      "sha256": "e456fbc9807ca091062e2a1199fde5d9d51ee5ac26bc688befcb9a29a199c6c3"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A350_bed.stl",
+      "bytes": 21084,
+      "sha256": "322eadfdfa273eab83a36cc4dd460ab7953481ca337643a0156eb2776b7f84c1"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker A350_texture.svg",
+      "bytes": 6921,
+      "sha256": "88c583ccec48128cba0443f207919812908d1509c0a16aa08a8298c15faea8d5"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker Artisan_bed.stl",
+      "bytes": 7884,
+      "sha256": "8374513a45bcb1799f06c16d7dd36857909f7d96ecb567c830897596d4c25986"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker Artisan_texture.svg",
+      "bytes": 4481,
+      "sha256": "659a3ceff65d25047c29189c2147a055a9e31ec42150aed80109a2186c159ed8"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker J1_bed.stl",
+      "bytes": 50884,
+      "sha256": "be40007d0ccb19b948e6c0f6ca589b8f432da73e015c9cddcb76900c98f7d541"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker J1_texture.svg",
+      "bytes": 4301,
+      "sha256": "c3d3a7f8016e0d3d7c68bb801bf902f5d0b33c20f81d82f6f1f652b60e6e4b19"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker U1_bed.stl",
+      "bytes": 40484,
+      "sha256": "f459b763c0c62b84a56aa1f3e5886f021e63852b16a7d02428428b6296693ad2"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker U1_bed.svg",
+      "bytes": 11199,
+      "sha256": "5a38e89afc3c776ec8d4691f68a3597c4e4324948a7bb847df3a4276438ee956"
+    },
+    {
+      "path": "wasm/orca/profiles/Snapmaker/Snapmaker U1_texture.svg",
+      "bytes": 2556,
+      "sha256": "6de31bdcc480ced687bed4b886fcfba2f4a71d8e8a4c193859955f108031d48b"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol.json",
+      "bytes": 14976,
+      "sha256": "ce30bc381102905d4e86fd113b4a591cbd3bc17f19a9b10c6e36daf78f0fed8c"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv01pro_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "3f815061d22556f4ac75146c9cf4b9d796ce4c9edeb0e5dc191e550e3470ad47"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv01pro_buildplate_texture.svg",
+      "bytes": 2383,
+      "sha256": "61e554e40124ab96fbe79bfb89169612c0ba680574f9e447bcaa11fe32d61eae"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv02_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "3f815061d22556f4ac75146c9cf4b9d796ce4c9edeb0e5dc191e550e3470ad47"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv02_buildplate_texture.svg",
+      "bytes": 2383,
+      "sha256": "61e554e40124ab96fbe79bfb89169612c0ba680574f9e447bcaa11fe32d61eae"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv05_buildplate_model.stl",
+      "bytes": 10684,
+      "sha256": "6b8275e38d390124023a1110b4c40b48fb5529c2e14b25ee402293cac52b5acb"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv05_buildplate_texture.svg",
+      "bytes": 1891,
+      "sha256": "ac8cebae2e1a89b12ec61b61d38e045ed11b90ca2dfca87d10351bd8f30f9205"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06_ace_buildplate_model.stl",
+      "bytes": 30884,
+      "sha256": "f0fb70e4904eaa7e78b3903aa6a5552e41319249fa05eb8010d8fedffc78a76b"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06_ace_buildplate_texture.svg",
+      "bytes": 4050,
+      "sha256": "b0bb4b05ea6b4f0fac3925666125bbf42097b5b27e2ca969db8183d6c9e70bca"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06_buildplate_model.stl",
+      "bytes": 10684,
+      "sha256": "6b8275e38d390124023a1110b4c40b48fb5529c2e14b25ee402293cac52b5acb"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06_buildplate_texture.svg",
+      "bytes": 1891,
+      "sha256": "ac8cebae2e1a89b12ec61b61d38e045ed11b90ca2dfca87d10351bd8f30f9205"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06plus_ace_buildplate_model.stl",
+      "bytes": 35284,
+      "sha256": "0ef1cb0541d7874a0b3b8e057c4e2e4a0f3375766d71aaf88765b8ab6af0059c"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06plus_ace_buildplate_texture.svg",
+      "bytes": 4211,
+      "sha256": "378902c571727c7273584b775b4ac7f8199d49c25c1a19f2088a8d6f51241f23"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06plus_buildplate_model.stl",
+      "bytes": 12584,
+      "sha256": "b2cafe1f4f817bc37d5e7e3466dacdb1e5e9761f1267f672dc240520ece5b11d"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv06plus_buildplate_texture.svg",
+      "bytes": 1896,
+      "sha256": "2939373e24c621e1fc897d9808ea47c1c57abc6b4b72b846854afa17623b63ef"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv07_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "8c2311a33d9149b9f761cc94a8ebcc47778c72cd7fed1d6f8227dd2c79e4df85"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv07_buildplate_texture.svg",
+      "bytes": 2394,
+      "sha256": "55a163138cb0b885c807b1c478d3b39053468dfec9fc313eefd2502445962c8e"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv07plus_buildplate_model.stl",
+      "bytes": 42784,
+      "sha256": "c8cda4a0f1b249a251698fb29f62feac0916c18c40ff846440bca3a3db347a33"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv07plus_buildplate_texture.svg",
+      "bytes": 2483,
+      "sha256": "9bb90eb5803548206ce419cce6f13be0c85acaf1c8b9f03e8d3a50408d3dd9f2"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv08_buildplate_model.stl",
+      "bytes": 13484,
+      "sha256": "e57b8c9b360df3640da5a76da71fac72cdd21a2defb598ac192c5bc16f9ef74e"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv08_buildplate_texture.svg",
+      "bytes": 4254,
+      "sha256": "ab325f992e2b3d2286081d71a1598b33c0b1f11517235afaf23c7dcc521113a3"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv08_max_buildplate_model.stl",
+      "bytes": 38984,
+      "sha256": "3ab672f930b2758da556da8b1ee6b2ab066ac741ef6b154e9455a5c4eebd761c"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_sv08_max_buildplate_texture.svg",
+      "bytes": 4520,
+      "sha256": "cb5938ff20d7d6688d07f846c3c7b64c9f1028f92c93f54410fc11813b20cdbc"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_zero_buildplate_model.stl",
+      "bytes": 19484,
+      "sha256": "92c4ab905c1b74b264108883c86541357dcdaa476bfab3ab9b0aac18bddf5cc2"
+    },
+    {
+      "path": "wasm/orca/profiles/Sovol/sovol_zero_buildplate_texture.svg",
+      "bytes": 3964,
+      "sha256": "e753881e69679d7799803011b5a2d131d8d618815ce015565b733930092b98a4"
+    },
+    {
+      "path": "wasm/orca/profiles/Tiertime.json",
+      "bytes": 19618,
+      "sha256": "3dd3b1193c2a0e9775d22b1df83d368681ffb3935c3fe814c6ea03cb31d35830"
+    },
+    {
+      "path": "wasm/orca/profiles/Tronxy.json",
+      "bytes": 1317,
+      "sha256": "fe288d1e637c39054b173ad3908e0a870aa07fc90f987a5ef0aa650357f82831"
+    },
+    {
+      "path": "wasm/orca/profiles/Tronxy/tronxy_logo.svg",
+      "bytes": 1348,
+      "sha256": "f794a313ec998aa33ffbc2228c55ea65529f6eeacf3a1f14adaa72f2cbcacb64"
+    },
+    {
+      "path": "wasm/orca/profiles/TwoTrees.json",
+      "bytes": 2587,
+      "sha256": "256747aa176a9f2a84afbcbfba95f4d5649fe38dfa5b0d8b9633900f5ed46b5e"
+    },
+    {
+      "path": "wasm/orca/profiles/TwoTrees/SP-5_bed.stl",
+      "bytes": 11084,
+      "sha256": "37648c15e651ef170f961df664e7a18c47bcde6474f28ad5703e7d0d89ecdb64"
+    },
+    {
+      "path": "wasm/orca/profiles/TwoTrees/SP-5_texture.svg",
+      "bytes": 3063,
+      "sha256": "b03d44e1552b9d67510a96fbcd1a65ecee0bf8e851eae4f777ea51dd95500dd3"
+    },
+    {
+      "path": "wasm/orca/profiles/TwoTrees/TwoTrees SK1_buildplate_model.stl",
+      "bytes": 19484,
+      "sha256": "9dbe205d0abd768648afc7427fa1504f4bf92b582b4e6a9bbf4e05dc6bd81bad"
+    },
+    {
+      "path": "wasm/orca/profiles/TwoTrees/TwoTrees SK1_buildplate_texture.svg",
+      "bytes": 3063,
+      "sha256": "b03d44e1552b9d67510a96fbcd1a65ecee0bf8e851eae4f777ea51dd95500dd3"
+    },
+    {
+      "path": "wasm/orca/profiles/UltiMaker.json",
+      "bytes": 7631,
+      "sha256": "0546b258640b2e2e28eb2d21cab4480e9342663cb0adc0baaeaa3d7e7d1bd129"
+    },
+    {
+      "path": "wasm/orca/profiles/UltiMaker/ultimaker_2_buildplate_model.stl",
+      "bytes": 12284,
+      "sha256": "150f403248433ab8c17f7a788583f1636d0d14ecb4ad279b69829bc09468dc9b"
+    },
+    {
+      "path": "wasm/orca/profiles/UltiMaker/ultimaker_2_buildplate_texture.svg",
+      "bytes": 3195,
+      "sha256": "268d831e71f935eef84a5b6f04ace7409a2002e2f9b688950e15f2a45d63fac0"
+    },
+    {
+      "path": "wasm/orca/profiles/UltiMaker/ultimaker_s5_buildplate_model.stl",
+      "bytes": 62684,
+      "sha256": "f5b15a333fdea8972d53d74c926ea4f96a77cff23b32ba6bad1c19ce3dfbf7a6"
+    },
+    {
+      "path": "wasm/orca/profiles/UltiMaker/ultimaker_s5_buildplate_texture.svg",
+      "bytes": 3195,
+      "sha256": "cde3e27e740208870aff9e194e6da88ccb39a04c6e2c6b8aacaffff44891efda"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino.json",
+      "bytes": 5573,
+      "sha256": "22146c20c766874e69a2acd2a77ca376d749596f63ab078444c9bb241e732bed"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino/OrcaSlicer-Troodon2-Bed-Texture.png",
+      "bytes": 11742,
+      "sha256": "fc3660341dd9e994587ae4b489f9c645cd55ec00e8c3e9827dc4889513b7ff67"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino/Xplorer_bed_texture_dualgantry.svg",
+      "bytes": 8087,
+      "sha256": "e3121ca31859e9faab2141c0f7bec35fa65fc647883b1227104c9faeb6da3f3a"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino/Xplorer_bed_texture_idex.svg",
+      "bytes": 8148,
+      "sha256": "547bcb5936071256e70d95b75c3dda5a3022ba90b99c254638a19cab191cd28c"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino/Xplorer_bed_texture_iqex.svg",
+      "bytes": 20034,
+      "sha256": "efa72dd5fa9a063642fee9556a5cfb3e086c5c113bd4343d53f3d03eb3e29e96"
+    },
+    {
+      "path": "wasm/orca/profiles/Vivedino/Xplorer_buildplate_model.stl",
+      "bytes": 500084,
+      "sha256": "3de0a1836c4844bffd699a849081743e82551b0dcc07a5bd677c14d7fcd420da"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic.json",
+      "bytes": 17640,
+      "sha256": "6adbe3aa17ef70db1c38d66d545e8924caa41d14831aaa1ad63ad911055e8e12"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/EXO42_bed.STL",
+      "bytes": 40884,
+      "sha256": "d9cdcd79805f8ca33675d777c43b705a0284ff7a38e0ed34ff47223a7fc88abb"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/EXO65_bed.STL",
+      "bytes": 60384,
+      "sha256": "ba8356a031ddbc09eb550d505f1a92953f1eea1eadfd89acc837d7ebfc9d8f47"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/SH65_bed.STL",
+      "bytes": 32984,
+      "sha256": "789d7c26d01ed00b67daca17dde35668b2da0e17cf3fb5cc39482b1685a9dd40"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/VS20_bed.STL",
+      "bytes": 92784,
+      "sha256": "9701de4859d9a7092f88b994c85308b54df86ae3018061e2a0e0036ae664bdf1"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/VS30PRO_bed.STL",
+      "bytes": 92784,
+      "sha256": "72283365809f514daf307c6225554a1c006c8bab37244a6da015dae88bcd1a47"
+    },
+    {
+      "path": "wasm/orca/profiles/Volumic/VS30U_bed.STL",
+      "bytes": 124884,
+      "sha256": "a636ec808d7ef11bb7fcfb1fccba42ad57786c441d7e6aede14deed184074399"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron.json",
+      "bytes": 13676,
+      "sha256": "fdb25c9cd99f60770b7111df9843dbec8cab60e3f56a7c49b6f3cfb7aef85dee"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/Voron_120_build_plate.stl",
+      "bytes": 16984,
+      "sha256": "bceb17f5dcf275a626a1bbed592aca3b1ab8ca66c509addbf60fa42a49d704ad"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/Voron_250_build_plate.stl",
+      "bytes": 16984,
+      "sha256": "a19519c335a279aefb08c34542f62d22029eb64a2c26782d7e606a9cd6f3a3a6"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/Voron_300_build_plate.stl",
+      "bytes": 16984,
+      "sha256": "fc1b71ed3f16b68e41c04cd0cd614d78e847be15b9feaf02b79245776ba1ead4"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/Voron_350_build_plate.stl",
+      "bytes": 16984,
+      "sha256": "8ac5668d586a0e85b0229fb8f3d0d13686781fab96072059ac6b959d31e750a6"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/voron_logo.svg",
+      "bytes": 3062,
+      "sha256": "5434dff9f4a4e97e514a60dfc156d591e977779ed4ef189ce9ee280b40636a68"
+    },
+    {
+      "path": "wasm/orca/profiles/Voron/voron_switchwire_logo.svg",
+      "bytes": 3091,
+      "sha256": "71b15461aba4d8d1fcb39fc19706abaabeaff5d34673fc3408ca05e030874b9e"
+    },
+    {
+      "path": "wasm/orca/profiles/Voxelab.json",
+      "bytes": 842,
+      "sha256": "9af111f55f5956fde1c7c7628b0c55fa70a8e962e8f71c31d741c6dca9f85554"
+    },
+    {
+      "path": "wasm/orca/profiles/Voxelab/voxelab_aquilax2_buildplate_model.stl",
+      "bytes": 5484,
+      "sha256": "05313fbcade16d3b8646088086771c09b34bec950a73552b10a6b7a4824b7746"
+    },
+    {
+      "path": "wasm/orca/profiles/Voxelab/voxelab_aquilax2_buildplate_texture.svg",
+      "bytes": 2117,
+      "sha256": "d87a6e42aa7f86553e05968521a2e8f94d50e3bb567d43215e345c3534988f8f"
+    },
+    {
+      "path": "wasm/orca/profiles/Vzbot.json",
+      "bytes": 5575,
+      "sha256": "f03a2aeeb5b346984cfd8799c7434ac6769d0f4aa4c5a92ae2769f9b4e0aeadb"
+    },
+    {
+      "path": "wasm/orca/profiles/Vzbot/Vz235SlicerBedModel-cnc.stl",
+      "bytes": 379684,
+      "sha256": "22ef1b6d7c3919e51d495b86e3db811c99b7ee53b8c933e13605d989660ad785"
+    },
+    {
+      "path": "wasm/orca/profiles/Vzbot/Vz330SlicerBedModel-cnc.stl",
+      "bytes": 406984,
+      "sha256": "a036657131e9a414f4e11a18182a0aaa6386ffec5a891dfa61fd2c264b1edadb"
+    },
+    {
+      "path": "wasm/orca/profiles/Vzbot/VzBot_PS_bed_235.svg",
+      "bytes": 3932,
+      "sha256": "b5b557b3fd1a61d7795758dc9de985830fa67236390332bed59506e1e984da93"
+    },
+    {
+      "path": "wasm/orca/profiles/Vzbot/VzBot_PS_bed_330.svg",
+      "bytes": 4106,
+      "sha256": "1be7b9eb42602568a38e4f449bf38e98d886c911b80356fb33b659d06939cdc6"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao France.json",
+      "bytes": 7826,
+      "sha256": "72ff29eb1b37a3d337ee9c0a10dbaa0c6ab6fbbef3ae56a311d83bc25caf6a47"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao France/D12_texture.png",
+      "bytes": 58678,
+      "sha256": "727ad47c923c12c2a126e9dea720a51a1e0a5e4175f88a69a568e48fa28c437d"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao France/Wanhao_D12-230_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "c2d5c6918febd57d70b944b8640ecded35fb05d6268042950cf584c0d2434220"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao France/Wanhao_D12-300_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "cb3976894fc25de4df41368426fa6879d8636a3717f216c87c97d8d5dde794b0"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao France/Wanhao_D12-500_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "6d27a9a2a08732d7bad7dbfd03e0f425a806e7b6a54108f8d19c907f251f7961"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao.json",
+      "bytes": 4832,
+      "sha256": "1a806dd71d155dead52b591eb50cbd11e924363dcc4e687ef28bd780b11a5c88"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao/Wanhao_D12-300_buildplate_model.stl",
+      "bytes": 7884,
+      "sha256": "8f77ec03b80fe37407b380d461bc626826404fb4bbd0f2c7e8d138f55f38b4de"
+    },
+    {
+      "path": "wasm/orca/profiles/Wanhao/Wanhao_D12-300_buildplate_texture.svg",
+      "bytes": 13148,
+      "sha256": "b1e9f3d61d0a304bbc5700f7a05afd64211018a07feafe767b9f27cfc06c8d29"
+    },
+    {
+      "path": "wasm/orca/profiles/WEMAKE3D.json",
+      "bytes": 7732,
+      "sha256": "7269547d1593c3a4aa1099743e4a33172762465dcfb1a1e5b91b26538ba27d49"
+    },
+    {
+      "path": "wasm/orca/profiles/WEMAKE3D/WEMAKE3D PhoenixProV1_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "b39ba6e562396cb8f7234d5f44db691fd1f986df48f006b620823dd29ca79220"
+    },
+    {
+      "path": "wasm/orca/profiles/WEMAKE3D/WEMAKE3D PhoenixProV1_buildplate_texture.svg",
+      "bytes": 6355,
+      "sha256": "1477bb0b30a7b28adb72685638a7507c23ec2d66b873db5b76fc868e84ea86d0"
+    },
+    {
+      "path": "wasm/orca/profiles/WEMAKE3D/WEMAKE3D TinyBotV1_buildplate_model.stl",
+      "bytes": 8684,
+      "sha256": "70a68927022f7782ed8f092912b88f98c673e99fff9279c08a8b01a3511e3cd0"
+    },
+    {
+      "path": "wasm/orca/profiles/WEMAKE3D/WEMAKE3D TinyBotV1_buildplate_texture.svg",
+      "bytes": 6115,
+      "sha256": "e12e86c19f036dc741e97a9c520b464df1793e819ace3b25f75e29afb039c8c2"
+    },
+    {
+      "path": "wasm/orca/profiles/WonderMaker.json",
+      "bytes": 13586,
+      "sha256": "7b184f66b50ae12083d9cc9f5623599e9e88bd10d61aa702f33b1b61dfdbd055"
+    },
+    {
+      "path": "wasm/orca/profiles/WonderMaker/wm_buildplate_model.stl",
+      "bytes": 15784,
+      "sha256": "601e6b494fa4ab15dacd5330d9f7aabf09e3f990ba6790b2a6f723bae10821b1"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt.json",
+      "bytes": 16976,
+      "sha256": "410b606ccd0896de50343f6cdec0a262399d838ee89e43aa46764767d927fab9"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_buildplate_texture.svg",
+      "bytes": 961,
+      "sha256": "3be24e2cfa280d80c3678a6460e8dd3f495a48029ee5901840bde8864b2f0d52"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_S1000_buildplate_model.stl",
+      "bytes": 11199,
+      "sha256": "c1e10198c889600bafbac9675300a87cf4c7f1ea97ccb2b31de8aaddf3be069f"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_S300_buildplate_model.stl",
+      "bytes": 66084,
+      "sha256": "2e2b9f8dcdc8072e0a3c244509bea514593fabae3912e9f681fecee68dea28a3"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_S400_buildplate_model.stl",
+      "bytes": 115484,
+      "sha256": "fcfb0b627e2f6c54a199ae55f4d5b464e8fed58a42a15a69c1102dc627634f6c"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_S600_buildplate_model.stl",
+      "bytes": 216684,
+      "sha256": "4a4c187a91faffebcfb358166da72884a06ddfe76f51c937ebe07b6952447eb7"
+    },
+    {
+      "path": "wasm/orca/profiles/Z-Bolt/Z-Bolt_S800_buildplate_model.stl",
+      "bytes": 21884,
+      "sha256": "4d524200d37c6c8db1d10ccbf5807141e61d8aad7a401cc488461566d9bd9d08"
+    },
+    {
+      "path": "wasm/orca/schema.json",
+      "bytes": 413279,
+      "sha256": "1581bd39c1c60cb45c1ec4009c10677b494ccc69df57be9f48cc6f1a102d05d1"
+    },
+    {
+      "path": "wasm/orca/slicer.data",
+      "bytes": 297219,
+      "sha256": "88c64342a54942f41fe1f7f27930357d40a096903984d2d3baf170b12bf18502"
+    },
+    {
+      "path": "wasm/orca/slicer.mjs",
+      "bytes": 79511,
+      "sha256": "1635012e95aa0cb77360c98119c9ad783bb22d766fd97cfe26fa91a87cc4ba15"
+    },
+    {
+      "path": "wasm/orca/slicer.wasm",
+      "bytes": 15423006,
+      "sha256": "09eab80bc42ed90422f4182958b7840c985220791e24f12b8cabcf843f0709f2"
+    },
+    {
+      "path": "wasm/orca/version.json",
+      "bytes": 64,
+      "sha256": "4ceb0021277e9018bd11d0f266dfeaa68836ddfff5fcfe52c9bc7fa860f491f9"
+    }
+  ],
+  "omittedOptionalAssets": []
+}

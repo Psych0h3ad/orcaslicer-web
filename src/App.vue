@@ -9,7 +9,9 @@
  *    object manipulation panel (bottom-left) and notifications (bottom-right).
  */
 import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { activeEngine } from './app/state';
+import { activeEngine, resolvedConfig } from './app/state';
+import { deployment, unsupportedPipelineProblems } from './deployment';
+import { addConfigProblemSource } from './settings/validate';
 import { startPresets } from './presets/store';
 import { watchPlateBedTypes } from './app/plateBedTypes';
 import { useToast } from '@nuxt/ui/composables';
@@ -72,6 +74,7 @@ const slicer = useSliceController();
 bindSliceController(slicer);
 useActionSystem(slicer);
 onBeforeUnmount(installSliceNotices(slicer));
+onBeforeUnmount(addConfigProblemSource(() => unsupportedPipelineProblems(resolvedConfig.value)));
 
 // ---- responsive ----
 const mq = typeof matchMedia !== 'undefined' ? matchMedia('(max-width: 1100px)') : null;
@@ -150,7 +153,7 @@ startPresets();
 onBeforeUnmount(watchPlateBedTypes());
 
 // Tabs are told apart by their project (each tab keeps its own plate).
-const baseTitle = document.title;
+const baseTitle = deployment.title;
 watch([projectName, () => objects.value.length], ([name, n]) => {
   document.title = n || name !== 'Untitled project' ? `${name} — ${baseTitle}` : baseTitle;
 }, { immediate: true });
@@ -162,7 +165,7 @@ watch(activeEngine, (e) => { document.documentElement.dataset.engine = e; }, { i
 let stopHandoff: (() => void) | null = null;
 onMounted(async () => {
   const q = new URLSearchParams(location.search);
-  const cloudLink = q.has('workspace') && q.has('path');
+  const cloudLink = deployment.cloud && q.has('workspace') && q.has('path');
   const handoff = q.has('model') || q.has('handoff') || !!window.opener || cloudLink;
   if (!handoff) {
     const n = await restoreAutosave();
@@ -173,7 +176,7 @@ onMounted(async () => {
   // ?workspace=&path= opens a CubbyCAD file; ?cloud=open|save reopens the files dialog after SSO sign-in.
   if (cloudLink) void openCloudDeepLink();
   const back = q.get('cloud');
-  if (back === 'open' || back === 'save') {
+  if (deployment.cloud && (back === 'open' || back === 'save')) {
     const u = new URL(location.href); u.searchParams.delete('cloud'); history.replaceState(history.state, '', u);
     if (back === 'open') cloudDialog.value = { mode: 'open' }; else cloudSaveAsDialog();
   }
@@ -250,9 +253,9 @@ onBeforeUnmount(() => stopHandoff?.());
       <SettingsHost />
       <PlateSettingsDialog />
       <PrintHostDialogs />
-      <BridgeDialogs />
+      <BridgeDialogs v-if="deployment.bridge" />
       <DialogsHost />
-      <CloudDialog />
+      <CloudDialog v-if="deployment.cloud" />
       <LocalFolderDialog />
       <CommandPalette />
       <DropOverlay />

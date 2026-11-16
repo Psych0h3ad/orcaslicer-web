@@ -1,57 +1,79 @@
-<p align="center"><img src="docs/logo.svg" width="120" alt="CubbySlicer logo"></p>
+# OrcaSlicer Web · CubbySlicer
 
-# CubbySlicer
+iPadやPCのブラウザでモデルを開き、**OrcaSlicerの実際のスライスエンジンをWebAssemblyで端末内実行**する非公式Webアプリです。[CubbySlicer](https://github.com/JoshTheDerf/cubbyslicer)をベースにGitHub Pages向けに構成しました。デスクトップ版の公式Web版ではありません。
 
-A browser slicer built on OrcaSlicer and preFlight compiled to WebAssembly, live at [cubbycad.com/slicer](https://cubbycad.com/slicer).
+**公開URL: https://psych0h3ad.github.io/orcaslicer-web/**
 
-It's the companion slicer for the [CubbyCAD editor](https://cubbycad.com/editor), a browser-based 3D CAD editor with CSG modeling, a 3D sketcher, a modifier stack and SDF sculpting. File ▸ Open Slicer in the editor sends the current model here.
+STL・OBJ・STEP・3MFの読込、プリンター／フィラメント／プロセス設定、モデル配置・加工、スライス、ツールパスプレビュー、G-code保存、3MFプロジェクトの保存に対応します。OrcaSlicer 2.5.0 / bridge ABI 1のシングルスレッドビルドをWeb Workerで実行します。スライス用サーバーやAPIキーは不要です。
 
-![Prepare view](docs/screenshots/prepare.png)
+## iPadで使う
 
-The UI follows OrcaSlicer: plates, parts and modifiers, painting (support, seam, colour, fuzzy skin), cut with connectors, variable layer height, height ranges, calibration, print host upload, and Orca's full profile library. Projects save as OrcaSlicer-compatible 3MF (desktop Orca and Bambu Studio open them as projects), locally or to CubbyCAD workspaces, and Orca / Bambu project 3MFs open here with their plates, parts, painting and settings.
+1. 最新のiPadOSのSafariで公開URLを開きます。初回はプリンタープロファイルを設定します。
+2. **モデルを開く · Import** から「ファイル」にあるSTLなどを選択します。
+3. 左上のサイドバーボタンから、実際に使うプリンター・ノズル・材料・印刷設定を選びます。
+4. **Slice plate** を押し、Previewで印刷経路を確認します。
+5. **Export G-code** で保存します。3MFはFileメニューから保存できます。
 
-From OrcaSlicer 2.5:
+1本指で視点を回転、2本指でズーム・移動。共有メニューの「ホーム画面に追加」も利用できます。iPadOS実機での検証はまだ行っていません。まず小さいモデルで確認してください。詳しくはアプリ内の「使い方・iPadガイド」を参照してください。
 
-- Mixed filaments: blend two or three filaments, or run a gradient between two over the height (with an optional custom curve). Translucent and multi-colour filament colours show in swatches and in the preview.
-- Nozzle flow types and extruder variants (Standard / High Flow, dual nozzles, nozzle racks): pick each nozzle's flow type in the sidebar and edit per-nozzle values with the switch at the top of a settings page.
-- Settings grey out or hide as in Orca, with the reason.
-- Calibration: auto-scale for nozzle, VFA auto-adjust to the filament's max volumetric speed, belt-printer models.
-- Speed Dial: Space opens the command palette; pin up to 10 commands there and run them with Alt+1–9 and Alt+0.
-- Toolhead collision volumes, align / distribute, and precise seam modifiers (added, typed and saved in projects; the engine doesn't apply them yet).
-- Filament sync from Moonraker printers (AFC / Happy Hare lanes), and UltiMaker print hosts.
-- OrcaSlicer 2.5 Python plugins (File ▸ Plugins), unmodified, run in the browser with Pyodide: scripts in the command palette, slicing-pipeline hooks, G-code post-processing and plugin pages as their own tabs. Install only plugins you trust; see the user guide for what a browser can't do.
+## この配布版の範囲
 
-| | |
-|---|---|
-| ![Preview](docs/screenshots/preview.png) | ![Colour painting](docs/screenshots/paint-color.png) |
-| ![Cut](docs/screenshots/cut.png) | ![Mixed filament gradient](docs/screenshots/mixed-preview.png) |
+- モデルとG-codeはブラウザ内で処理します。モデルを外部スライスサーバーへ送信しません。
+- エンジン・プロファイル・CAD・校正用モデル・テクスチャは同じPagesサイトから配信します。初回表示にはネット接続が必要です。オフライン動作は保証しません。
+- GitHub Pagesの通常ヘッダーで動かすため、SharedArrayBuffer・COOP/COEP・Service Workerを必要としないST版を使用します。大きなモデルは端末のメモリ制限を受けます。
+- CubbyCADクラウド、AI/MCP接続、Pythonプラグイン、preFlightエンジンはこの配布版では使用できません。Python処理付きプロジェクトは説明を表示してスライスを停止します。
+- プリンターへの直接送信は機種やCORS・HTTPSの条件に依存します。G-codeを保存して渡す方法が基本です。デスクトップ版の全機能との完全互換を保証するものではありません。
 
-## Engines
+## ローカルで起動
 
-| Engine | Version | Port | Upstream |
-|---|---|---|---|
-| OrcaSlicer | 2.5.0 | [orcaslicer-wasm](https://github.com/JoshTheDerf/orcaslicer-wasm) | [SoftFever/OrcaSlicer](https://github.com/SoftFever/OrcaSlicer) |
-| preFlight | 1.3.0 | [preFlight-wasm](https://github.com/JoshTheDerf/preFlight-wasm) | [oozebot/preFlight](https://github.com/oozebot/preFlight) |
-
-preFlight uses Orca's printer profiles, converted when loaded. The Full Spectrum engine is gone: OrcaSlicer 2.5 mixes colours itself (mixed filaments).
-
-## Quick start
+Node.js 24 と Git が必要です。PowerShellでも同じコマンドを使用できます。
 
 ```sh
-npm install
-npm run dev      # http://localhost:5173/slicer/
-npm test
-npm run build    # dist/ (base /slicer/)
+npm ci
+npm run assets
+npm run dev
 ```
 
-Engine builds go in `public/wasm/<engine>/` (not committed). See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+表示されたlocalhost URLを開きます。公開サイトと同じくクロスオリジン分離ヘッダーを付けません。別端末からの閲覧用にPCのポートを自動公開する設定にはしていません。
 
-## Docs
+```sh
+npm test
+npm run test:engine
+npm run build
+npm run preview
+```
 
-- [User guide](docs/USER-GUIDE.md)
-- [Development](docs/DEVELOPMENT.md)
-- [Engine contract](docs/ENGINE-CONTRACT.md)
+`test:engine`はモックを使わず、実際のプリセット・STL読込・パッキング・Orca WASMで20mm立方体をスライスします。G-code／レポートは `e2e-out/engine-smoke/` に保存し、不正なメッシュ参照が構造化エラーで拒否されることも検証します。
 
-## License
+## GitHub Pages
 
-AGPL-3.0-or-later ([LICENSE](LICENSE)), same as the engines. That's also why the slicer is separate from the CubbyCAD editor.
+リポジトリの **Settings → Pages → Build and deployment → Source: GitHub Actions** を選択します。`main`へのpush、またはActionsの手動実行で [pages.yml](.github/workflows/pages.yml) が公開します。
+
+ワークフローは依存関係インストール、固定資産の検証付き取得、テスト、実エンジンスライス、型検査、ビルド、Pagesデプロイの順に実行します。`actions/configure-pages`の実URLからbase pathを取得するため、リポジトリ名変更・ユーザーサイト・カスタムドメインにも追従します。
+
+サブパスのローカルビルド例（PowerShell）:
+
+```powershell
+$env:BASE_PATH = '/orcaslicer-web/'
+npm run build
+npm run preview
+```
+
+## 資産の固定とソース
+
+`scripts/pages-assets.lock.json`に取得URL・サイズ・SHA-256とソース情報を記録しています。`npm run assets`は一致するローカルファイルを再利用し、欠落分だけ取得します。配布元の内容が変わった場合はハッシュエラーで停止します。
+
+`npm run assets:verify`はネット接続なしで完全性を検証します。意図的に更新するときだけ `node scripts/stage-pages-assets.mjs --update-lock` を実行し、ソース・エンジンABI・差分を確認して再テストしてください。元の配布URLは可変なので、将来の再ビルドには上流の更新に合わせた再検証が必要になる場合があります。
+
+バイナリ配布元はビルドcommitを公表していません。lockにあるソースSHAは取得時に観測した参照情報です。該当バイナリがそのSHAから作られたという保証ではありません。配布バイナリ自体の同一性はSHA-256で検証します。C++からの再ビルドは [orcaslicer-wasm](https://github.com/JoshTheDerf/orcaslicer-wasm) を参照してください。
+
+ビルド時にこのフロントエンドの `source.zip` とライセンスを生成し、アプリのヘルプからダウンロードできます。依存パッケージはlockfileから取得し、エンジンの別ソースはprovenanceに記載しています。
+
+## クレジット
+
+- [CubbySlicer](https://github.com/JoshTheDerf/cubbyslicer) — Web UIとブラウザ統合。ベースcommit: `bdf0007bda4d5bc0fe56b34df1e8fb7fdcf234b5`。[元のREADME](docs/UPSTREAM-README.md)
+- [OrcaSlicer](https://github.com/OrcaSlicer/OrcaSlicer) — スライスエンジン・プロファイル・校正用モデル。
+- [orcaslicer-wasm](https://github.com/JoshTheDerf/orcaslicer-wasm) — OrcaSlicerのWebAssembly移植。
+- [cubby-shared](https://github.com/JoshTheDerf/cubby-shared) — 共有モデリング・UI部品。依存commitはpackage-lock.jsonに固定。
+
+[AGPL-3.0-or-later](LICENSE)。各依存物・モデル・プロファイルの権利表示も引き続き適用されます。

@@ -27,6 +27,7 @@ import { settingsActions } from '../../settings/actions';
 import { printhostActions } from '../../printhost/actions';
 import { bridgeActions } from '../../bridge/actions';
 import { pluginsActions } from '../../plugins/actions';
+import { unavailableAction } from '../../deployment';
 
 export function buildActions(): Action[] {
   return [
@@ -66,5 +67,8 @@ export function builtinActions(): Action[] {
     ...printhostActions,
     ...bridgeActions,
     ...pluginsActions,
-  ];
+  ].map((a): Action => {
+    const reason = unavailableAction(a.id);
+    return reason ? { ...a, hidden: true, paletteHidden: true, binding: undefined, when: () => false, description: reason } : a;
+  });
 }

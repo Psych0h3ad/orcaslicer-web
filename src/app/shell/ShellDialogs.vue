@@ -13,6 +13,7 @@ import { preferences } from '../preferences';
 import AppDialog from '../../ui/AppDialog.vue';
 import { PRIMITIVE_LABELS } from '../../project/primitives';
 import { PART_TYPE_LABELS } from '../../project/types';
+import { deployment, helpUrl } from '../../deployment';
 
 interface Row { label: string; keys: string[]; note?: string }
 
@@ -106,7 +107,7 @@ function addPrimitive(): void {
   primitiveSizeDialog.answer([...prim.size]);
 }
 
-const sourceUrl = (import.meta.env.VITE_SOURCE_URL as string | undefined) || '';
+const sourceUrl = (import.meta.env.VITE_SOURCE_URL as string | undefined) || `${import.meta.env.BASE_URL}source.zip`;
 const version = (import.meta.env.VITE_APP_VERSION as string | undefined) || '';
 </script>
 
@@ -131,19 +132,21 @@ const version = (import.meta.env.VITE_APP_VERSION as string | undefined) || '';
     </div>
   </AppDialog>
 
-  <AppDialog v-model:open="dialogs.about" title="CubbySlicer source and licence" size="lg">
+  <AppDialog v-model:open="dialogs.about" :title="deployment.title" size="lg">
     <div class="about text-sm">
+      <p>非公式のブラウザ向け配布版です。モデルのスライスは端末内で行います。</p>
+      <p><ULink :href="helpUrl" target="_blank" rel="noopener" class="text-info">使い方・iPadガイド・対応範囲</ULink></p>
       <p>
         CubbySlicer is free software under the GNU Affero General Public License v3.0 or later.
         Because it runs over a network, you are entitled to its complete corresponding source.
       </p>
       <p v-if="sourceUrl">Source for this build: <ULink :href="sourceUrl" target="_blank" rel="noopener" class="text-info">{{ sourceUrl }}</ULink></p>
       <p v-else>Source for this build is available from the operator of this site on request.</p>
-      <h3>Bundled slicing engines (AGPL-3.0)</h3>
+      <p>Web UI: <ULink href="https://github.com/JoshTheDerf/cubbyslicer" target="_blank" rel="noopener" class="text-info">CubbySlicer</ULink> by JoshTheDerf and contributors.</p>
+      <h3>OrcaSlicer engine (AGPL-3.0)</h3>
       <ul>
         <li><ULink href="https://github.com/SoftFever/OrcaSlicer" target="_blank" rel="noopener" class="text-info">OrcaSlicer</ULink></li>
-        <li><ULink href="https://github.com/oozebot/preFlight" target="_blank" rel="noopener" class="text-info">preFlight</ULink>, derived from
-          <ULink href="https://github.com/prusa3d/PrusaSlicer" target="_blank" rel="noopener" class="text-info">PrusaSlicer</ULink></li>
+        <li>WebAssembly port: <ULink href="https://github.com/JoshTheDerf/orcaslicer-wasm" target="_blank" rel="noopener" class="text-info">JoshTheDerf/orcaslicer-wasm</ULink></li>
       </ul>
       <p v-if="version" class="about__meta">Version {{ version }}</p>
     </div>

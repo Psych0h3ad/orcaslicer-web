@@ -18,3 +18,8 @@ public/pyodide/
 
 # Orca texture displacement library (scripts/stage-textures.mjs).
 public/textures/
+
+# Generated downloadable frontend source (created for every build).
+public/source.zip
+public/LICENSE.txt
+*.tsbuildinfo

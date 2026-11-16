@@ -8,6 +8,7 @@ import { ORDER_ITEMS } from '../families/plate';
 import { HANDY_MODEL_IDS } from '../families/calibration';
 import { SNAP_OPTIONS } from '@cubby/shared/snap';
 import { paletteShapes } from '../../../cad/shapes';
+import { deployment } from '../../../deployment';
 
 /** CubbyCAD's built-in shapes, added as new objects. */
 const ADD_SHAPE_MENU = { label: 'Add shape', icon: 'i-lucide-shapes', children: paletteShapes().map((s) => `cad.add.${s.id}`) };
@@ -21,11 +22,11 @@ export const FILE_MENU: MenuLayout = {
   groups: [
     ['file.new', 'file.open', 'file.save', 'file.save-as'],
     [{ label: 'Local folders', icon: 'i-lucide-folder-tree', children: ['local.folders', 'local.save-folder', 'local.export-gcode', 'local.export-3mf'] },
-      { label: 'CubbyCAD', icon: 'i-lucide-cloud', children: ['cloud.open', 'cloud.save', 'cloud.save-as', 'cloud.export-gcode', 'cloud.export-3mf', 'cloud.copy-link'] }],
+      ...(deployment.cloud ? [{ label: 'CubbyCAD', icon: 'i-lucide-cloud', children: ['cloud.open', 'cloud.save', 'cloud.save-as', 'cloud.export-gcode', 'cloud.export-3mf', 'cloud.copy-link'] }] : [])],
     ['file.import'],
     ['export.plate-3mf', 'export.plate-stl', 'export.selection-stl', 'export.cubby', 'slice.export-sliced-file', 'slice.export-all-sliced-file', 'slice.export-gcode', 'slice.export-all-gcode'],
     ['presets.export-bundle'],
-    ['plugins.open'],
+    ...(deployment.pythonPlugins ? [['plugins.open']] : []),
     ['app.preferences'],
   ],
 };
@@ -121,9 +122,9 @@ export const CALIBRATION_MENU: MenuLayout = {
 
 export const HELP_MENU: MenuLayout = {
   groups: [
-    ['settings.setup'],
+    ['help.guide', 'settings.setup'],
     ['help.palette', 'help.shortcuts'],
-    ['claude.connect', 'claude.disconnect'],
+    ...(deployment.bridge ? [['claude.connect', 'claude.disconnect']] : []),
     ['help.about'],
   ],
 };

@@ -4,9 +4,9 @@ import {
 } from './capabilities';
 
 describe('engine capabilities', () => {
-  it('lists the engines with one entry each', () => {
-    expect(ENGINES).toEqual(['orca', 'preflight']);
-    expect(Object.keys(ENGINE_CAPS)).toEqual(ENGINES);
+  it('offers only deployed engines while preserving internal capability metadata', () => {
+    expect(ENGINES).toEqual(['orca']);
+    expect(Object.keys(ENGINE_CAPS)).toEqual(['orca', 'preflight']);
     expect(ENGINE_LABELS).toEqual({ orca: 'OrcaSlicer', preflight: 'preFlight' });
   });
 
@@ -21,7 +21,7 @@ describe('engine capabilities', () => {
 
   it('maps stored engine ids: known ones as is, retired ones to the default engine', () => {
     expect(toEngineId('orca')).toBe('orca');
-    expect(toEngineId('preflight')).toBe('preflight');
+    expect(toEngineId('preflight')).toBe(DEFAULT_ENGINE);
     // The Full Spectrum fork was removed (Orca 2.5 mixes natively): its stored id opens Orca.
     expect(toEngineId('fullspectrum')).toBe(DEFAULT_ENGINE);
     expect(DEFAULT_ENGINE).toBe('orca');

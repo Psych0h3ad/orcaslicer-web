@@ -22,6 +22,7 @@ import PreferencesDialog from './PreferencesDialog.vue';
 import ArrangeOptionsDialog from './ArrangeOptionsDialog.vue';
 import { installAutoFlush } from './flush/flushStore';
 import { defineAsyncComponent } from 'vue';
+import { deployment } from '../deployment';
 // OrcaSlicer Python plugins: dialog, plugin windows, prompts; loads enabled plugins at startup.
 const PluginsHost = defineAsyncComponent(() => import('../plugins/ui/PluginsHost.vue'));
 
@@ -51,7 +52,7 @@ onBeforeUnmount(() => { stopKbd(); stopFlush(); });
   <CollisionVolumesDialog />
   <PreferencesDialog />
   <ArrangeOptionsDialog />
-  <PluginsHost />
+  <PluginsHost v-if="deployment.pythonPlugins" />
 </template>
 
 <style>

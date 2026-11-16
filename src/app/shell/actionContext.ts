@@ -31,6 +31,7 @@ import type { SliceControllerLike } from './external';
 import { sidebarOpen, toggleSidebar, ui } from './uiState';
 import { preferences } from '../preferences';
 import { anyDialogOpen, openDialog } from '../../dialogs/state';
+import { deployment } from '../../deployment';
 
 /** Focus is on nothing in particular (body / viewport canvas) and no page text is selected. */
 function focusIdle(): boolean {
@@ -55,7 +56,7 @@ export function createAppContext(slicer: SliceControllerLike | null): AppContext
     // Ctrl+S (Orca Save project): back to the CubbyCAD / local file it came from, else Save as
     // (native dialog where the File System Access API exists, else a download).
     saveProject: () => {
-      if (cloud.location) void saveToCloudLocation();
+      if (deployment.cloud && cloud.location) void saveToCloudLocation();
       else if (local.location) void saveLocal();
       else if (fsAccessSupported) void saveLocalAs();
       else cmd.saveProject();

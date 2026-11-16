@@ -202,7 +202,7 @@ describe('stored state naming the removed Full Spectrum engine', () => {
   it('turns a Full Spectrum default-engine preference into Orca', () => {
     expect(sanitizePreferences({ defaultEngine: 'fullspectrum' }).defaultEngine).toBe('orca');
     expect(sanitizePreferences({ defaultEngine: 'last' }).defaultEngine).toBe('last');
-    expect(sanitizePreferences({ defaultEngine: 'preflight' }).defaultEngine).toBe('preflight');
+    expect(sanitizePreferences({ defaultEngine: 'preflight' }).defaultEngine).toBe('orca');
     expect(sanitizePreferences({ defaultEngine: 7 }).defaultEngine).toBe('last');
   });
 });

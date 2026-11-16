@@ -18,6 +18,7 @@ import { cloudOpenDialog } from '../../cloud/commands';
 import BridgeChip from '../../bridge/BridgeChip.vue';
 import { activePluginPage, pluginPages } from '../../plugins/state';
 import { preferences } from '../preferences';
+import { deployment, helpUrl } from '../../deployment';
 
 /** Plugin page tabs shown before the rest go into "More" (Orca's "Visible plugin pages"). */
 const VISIBLE_PAGES = 3;
@@ -65,9 +66,9 @@ function onName(e: Event) {
         <UButton :icon="sidebarOpen() ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'" color="neutral" variant="ghost" size="sm"
                  :aria-label="sidebarOpen() ? 'Hide sidebar' : 'Show sidebar'" :aria-pressed="sidebarOpen()" @click="run('view.panel.sidebar')" />
       </UTooltip>
-      <div v-if="!phone" class="brand" aria-label="CubbySlicer">
+      <div v-if="!phone" class="brand" :aria-label="`${deployment.title}（非公式）`" :title="`${deployment.title}（非公式）`">
         <BrandMark class="brand__mark" />
-        <span class="brand__name">CubbySlicer</span>
+        <span class="brand__name">OrcaSlicer Web <small>· CubbySlicer / 非公式</small></span>
       </div>
       <MenuBar :collapsed="compact" />
       <USeparator v-if="!phone" orientation="vertical" class="h-5 mx-1" />
@@ -101,7 +102,7 @@ function onName(e: Event) {
     </div>
 
     <div class="top__right">
-      <UTooltip v-if="cloud.location && !phone" :text="cloudDirty ? `${cloudLabel} (unsaved changes)` : `Saved in CubbyCAD: ${cloudLabel}`" :kbds="cloudDirty ? bindingTokensOf('file.save') : undefined">
+      <UTooltip v-if="deployment.cloud && cloud.location && !phone" :text="cloudDirty ? `${cloudLabel} (unsaved changes)` : `Saved in CubbyCAD: ${cloudLabel}`" :kbds="cloudDirty ? bindingTokensOf('file.save') : undefined">
         <UButton :icon="cloudDirty ? 'i-lucide-cloud-alert' : 'i-lucide-cloud-check'" color="neutral" variant="ghost" size="sm"
                  :class="{ 'top__cloud--dirty': cloudDirty }" :aria-label="cloudDirty ? 'Unsaved changes: save to CubbyCAD' : 'Open from CubbyCAD'"
                  @click="cloudDirty ? run('file.save') : cloudOpenDialog()" />
@@ -113,7 +114,10 @@ function onName(e: Event) {
       </UTooltip>
       <input v-if="!phone" class="top__name" :value="projectName" aria-label="Project name" :title="`${projectName} (click to rename)`" spellcheck="false" maxlength="80"
              @change="onName" @keydown.enter="($event.target as HTMLInputElement).blur()" />
-      <BridgeChip />
+      <BridgeChip v-if="deployment.bridge" />
+      <UTooltip text="使い方・iPadガイド">
+        <UButton :href="helpUrl" target="_blank" rel="noopener" icon="i-lucide-circle-help" color="neutral" variant="ghost" size="sm" aria-label="使い方・iPadガイド" />
+      </UTooltip>
       <UTooltip v-if="!phone" text="Search commands" :kbds="bindingTokensOf('help.palette')">
         <UButton icon="i-lucide-search" color="neutral" variant="ghost" size="sm" aria-label="Search commands" @click="run('help.palette')" />
       </UTooltip>
@@ -138,6 +142,7 @@ function onName(e: Event) {
 .brand { display: flex; align-items: center; gap: 8px; padding: 0 8px 0 2px; color: var(--fg-0); }
 .brand__mark { width: 20px; height: 20px; flex: none; }
 .brand__name { font: 600 var(--fs-lg) / 1 var(--font); letter-spacing: -0.01em; white-space: nowrap; }
+.brand__name small { font-size: var(--fs-xs); color: var(--fg-2); }
 .top__name {
   /* The one flexible item on the right: it gives way first, so the slice / print controls never spill off the page. */
   flex: 0 1 160px; width: 160px; min-width: 60px; height: 26px; padding: 0 8px;

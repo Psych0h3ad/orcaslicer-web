@@ -3,6 +3,7 @@
  * Code asks for a capability (`engineCaps(e).tools`) instead of comparing ids.
  */
 import type { EngineId } from './types';
+import { deployment } from '../deployment';
 
 export interface EngineCaps {
   label: string;
@@ -52,12 +53,12 @@ export const ENGINE_CAPS: Readonly<Record<EngineId, EngineCaps>> = {
 };
 
 /** Engines in menu order. */
-export const ENGINES = Object.keys(ENGINE_CAPS) as EngineId[];
+export const ENGINES: EngineId[] = [...deployment.engines];
 
 export function engineCaps(e: EngineId): EngineCaps { return ENGINE_CAPS[e]; }
 
 export const ENGINE_LABELS: Readonly<Record<EngineId, string>> =
-  Object.fromEntries(ENGINES.map((e) => [e, ENGINE_CAPS[e].label])) as Record<EngineId, string>;
+  Object.fromEntries(Object.entries(ENGINE_CAPS).map(([e, caps]) => [e, caps.label])) as Record<EngineId, string>;
 
 /** The engine new users start on, and the one stored state naming an engine this build doesn't have falls back to. */
 export const DEFAULT_ENGINE: EngineId = 'orca';
@@ -69,7 +70,7 @@ export const DEFAULT_ENGINE: EngineId = 'orca';
  */
 export function toEngineId(v: unknown): EngineId | null {
   if (typeof v !== 'string' || !v) return null;
-  return v in ENGINE_CAPS ? (v as EngineId) : DEFAULT_ENGINE;
+  return ENGINES.includes(v as EngineId) ? (v as EngineId) : DEFAULT_ENGINE;
 }
 
 /**

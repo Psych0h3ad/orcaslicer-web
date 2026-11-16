@@ -139,11 +139,9 @@ export function thumbnailInsertOffset(gcode: Uint8Array, engine: EngineId): numb
   const head = dec.decode(gcode.subarray(0, Math.min(gcode.length, 256 * 1024)));
   const at = (charIdx: number) => enc.encode(head.slice(0, charIdx)).length;
   if (orcaWriter(engine)) {
-    const end = head.indexOf('; HEADER_BLOCK_END\n');
-    if (end >= 0) {
-      let i = end + '; HEADER_BLOCK_END\n'.length;
-      if (head[i] === '\n') i++;
-      return at(i);
+    const end = /^; HEADER_BLOCK_END\r?\n/m.exec(head);
+    if (end) {
+      return at(skipBlankLine(head, end.index + end[0].length));
     }
     const ext = lineStart(head, '; external perimeters extrusion width');
     if (ext >= 0) return at(ext);
@@ -154,12 +152,16 @@ export function thumbnailInsertOffset(gcode: Uint8Array, engine: EngineId): numb
   if (gen >= 0) {
     const nl = head.indexOf('\n', gen);
     if (nl >= 0) {
-      let i = nl + 1;
-      if (head[i] === '\n') i++;
-      return at(i);
+      return at(skipBlankLine(head, nl + 1));
     }
   }
   return 0;
+}
+
+/** Keep source byte offsets: consume its LF or CRLF blank line without rewriting it. */
+function skipBlankLine(text: string, start: number): number {
+  if (text.startsWith('\r\n', start)) return start + 2;
+  return text[start] === '\n' ? start + 1 : start;
 }
 
 function lineStart(text: string, prefix: string): number {
@@ -189,9 +191,9 @@ export function spliceThumbnails(gcode: Uint8Array, blocks: string, engine: Engi
 /** Thumbnails read back out of G-code (tests / debugging). */
 export function extractGcodeThumbnails(text: string): Array<{ tag: string; width: number; height: number; base64: string }> {
   const out: Array<{ tag: string; width: number; height: number; base64: string }> = [];
-  const re = /^; (thumbnail(?:_JPG|_QOI)?) begin (\d+)x(\d+) (\d+)\n([\s\S]*?)^; \1 end$/gm;
+  const re = /^; (thumbnail(?:_JPG|_QOI)?) begin (\d+)x(\d+) (\d+)\r?\n([\s\S]*?)^; \1 end\r?$/gm;
   for (let m = re.exec(text); m; m = re.exec(text)) {
-    const b64 = m[5].split('\n').map((l) => l.replace(/^; ?/, '')).join('');
+    const b64 = m[5].split(/\r?\n/).map((l) => l.replace(/^; ?/, '')).join('');
     out.push({ tag: m[1], width: +m[2], height: +m[3], base64: b64 });
   }
   return out;

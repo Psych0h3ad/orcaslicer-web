@@ -105,9 +105,9 @@ describe('Orca 2.3 WASM fixture', () => {
     expect(sum).toBeCloseTo(p.stats.estimatedTimeSec, 0);
     const bytes = enc.encode(orca23);
     const i = segsOf(p, Feature.InnerWall)[0];
-    const lineText = new TextDecoder().decode(bytes.subarray(p.byteOffset[i], bytes.indexOf(10, p.byteOffset[i])));
+    const lineText = new TextDecoder().decode(bytes.subarray(p.byteOffset[i], bytes.indexOf(10, p.byteOffset[i]))).replace(/\r$/, '');
     expect(lineText).toBe('G1 X3.971 Y7.271 E.01147');
-    expect(orca23.split('\n')[p.lineNo[i]]).toBe(lineText);
+    expect(orca23.split(/\r?\n/)[p.lineNo[i]]).toBe(lineText);
     let monotonic = true;
     for (let s = 1; s < p.segmentCount; s++) if (p.lineNo[s] < p.lineNo[s - 1]) monotonic = false;
     expect(monotonic).toBe(true);
@@ -273,11 +273,14 @@ describe('edge cases', () => {
     const p = parse('\u0000ÿ\r\n;;;\nG\nG1\nM\nX1\nG1 X- Y. Z\néè G1 X5');
     expect(p.segmentCount).toBe(0);
   });
-  it('CRLF line endings and line numbers/checksums', () => {
-    const p = parse('N1 G1 X10 Y0 F600*57\r\nN2 G1 X20 E1*33\r\n');
+  it.each(['\n', '\r\n'])('line endings %j preserve line numbers, byte offsets and checksums', (newline) => {
+    const lines = ['N1 G1 X10 Y0 F600*57', 'N2 G1 X20 E1*33'];
+    const p = parse(lines.join(newline) + newline);
     expect(p.segmentCount).toBe(2);
     expect(segEnd(p, 1)[0]).toBe(20);
     expect(p.feature[1]).toBe(Feature.Other);
+    expect(Array.from(p.lineNo)).toEqual([0, 1]);
+    expect(Array.from(p.byteOffset)).toEqual([0, lines[0].length + newline.length]);
   });
   it('G92 X resets without drawing', () => {
     const p = gcode('G1 X10 F600', 'G92 X0', 'G1 X5');

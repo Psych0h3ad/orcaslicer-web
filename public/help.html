@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101714">
+  <title>使い方・iPadガイド — OrcaSlicer Web</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:dark;font:16px/1.9 system-ui,-apple-system,sans-serif;background:#101714;color:#e4ece7}
+    *{box-sizing:border-box}body{margin:0}main{max-width:880px;margin:auto;padding:48px max(24px,env(safe-area-inset-right)) 64px max(24px,env(safe-area-inset-left))}
+    a{color:#81e6b0;text-underline-offset:4px}a:focus-visible{outline:2px solid #81e6b0;outline-offset:5px}.back{display:inline-block;padding:10px 0}.eyebrow{color:#81e6b0;font-size:13px;letter-spacing:.12em;margin:24px 0 10px}h1{font-size:clamp(28px,5vw,42px);line-height:1.4;letter-spacing:-.03em;margin:0 0 20px}h2{font-size:21px;margin:40px 0 12px}p{margin:10px 0 18px;color:#bdcdc3}strong{color:#f2f7f4}ol{list-style:none;padding:0;counter-reset:step;display:grid;gap:12px}li{background:#19251f;border:1px solid #2a3e32;border-radius:12px;padding:20px 22px;counter-increment:step}li h2{margin:0 0 8px;font-size:18px}li h2:before{content:counter(step,decimal-leading-zero);color:#81e6b0;margin-right:14px;font:500 15px monospace}li p{margin:0}.meta{font-size:14px;color:#91a89a}footer{margin-top:48px;padding-top:24px;border-top:1px solid #2a3e32;font-size:14px}.links{display:flex;flex-wrap:wrap;gap:12px 24px}details{border-top:1px solid #2a3e32;padding:16px 0}summary{cursor:pointer;font-weight:600;min-height:32px}details p{margin:10px 0} @media(max-width:500px){main{padding-top:20px}li{padding:16px}h1{font-size:29px}}
+  </style>
+</head>
+<body><main>
+  <a class="back" href="./">← スライサーを開く</a>
+  <p class="eyebrow">ORCASLICER WEB · CUBBYSLICER</p>
+  <h1>iPadでも、モデルから<br>G-codeまで。</h1>
+  <p>OrcaSlicerのスライスエンジンを、この端末のブラウザで動かします。アカウントやスライス用サーバーは不要です。CubbySlicerをもとにした<strong>非公式Web版</strong>です。</p>
+  <ol>
+    <li><h2>モデルを開く</h2><p>「<strong>モデルを開く · Import</strong>」を押し、iPadの「ファイル」からSTL・OBJ・STEP・3MFを選びます。以前保存した3MFプロジェクトはFile → Openから開けます。</p></li>
+    <li><h2>プリンターと材料を選ぶ</h2><p>左上のサイドバーボタンを押して設定を開きます。Printerで実機とノズル径、Filamentで材料、Processで印刷条件を選びます。初回のセットアップでも選択できます。</p></li>
+    <li><h2>スライスして確認</h2><p>右上の「<strong>Slice plate</strong>」を押します。完了したらPreviewで印刷経路を確認してください。レイヤースライダーで内部やサポートも確認できます。</p></li>
+    <li><h2>G-codeを保存</h2><p>「<strong>Export G-code</strong>」からダウンロードします。Safariのダウンロード一覧と「ファイル」から取得できます。編集可能な状態はFile → Save projectで3MFに保存します。</p></li>
+  </ol>
+  <h2>タッチ操作</h2>
+  <p>1本指で視点を回転、2本指でズーム・移動できます。モデルをタップすると選択できます。プリンター設定やオブジェクト一覧は、左上のサイドバーボタンから開きます。Safariの共有メニューから「ホーム画面に追加」すると、次回から開きやすくなります。</p>
+  <h2>対応範囲とトラブルシュート</h2>
+  <details open><summary>iPadでの動作とモデルの大きさ</summary><p>最新のiPadOSとSafariを推奨します。WebAssemblyとWebGLが必要です。この配布版の実エンジンスライスは検証していますが、iPad実機での動作はまだ確認していません。まず小さいモデルで試してください。大きいモデルでタブが再読込される場合は、モデルを軽量化するかPCで処理してください。</p></details>
+  <details><summary>スライスが始まらない・設定が出ない</summary><p>初回はエンジンとプロファイルの取得にネット接続が必要です。回線を確認してページを再読込してください。モデルを配置し、対応するプリンター・材料・プロセスを選んでからSlice plateを押してください。エラーが出た場合は表示された設定項目を確認してください。</p></details>
+  <details><summary>PC版との違い</summary><p>OrcaSlicer 2.5.0のシングルスレッドWASMエンジンを使用します。デスクトップ版のすべての機能・プロジェクトとの完全互換は保証していません。この配布版ではクラウド保存、AI/MCP接続、Pythonプラグイン、preFlightエンジンを提供していません。Python処理が必要なプロジェクトは、理由を表示してスライスを停止します。</p></details>
+  <details><summary>プリンターへ送信するには</summary><p>まずG-codeを保存し、お使いのプリンターに適した方法で渡してください。直接送信はプリンター側のCORS・HTTPS対応などに左右されます。G-codeの生成とプレビューはプリンターへの接続なしで使えます。</p></details>
+  <details><summary>ファイルと保存について</summary><p>モデルはブラウザ内で処理し、外部のスライスサーバーへ送信しません。ページとエンジンはGitHub Pagesから読み込みます。自動保存はこのブラウザ内の補助機能です。大切なプロジェクトは3MFファイルとして保存してください。オフライン動作は保証していません。</p></details>
+  <footer>
+    <p>Powered by <a href="https://github.com/OrcaSlicer/OrcaSlicer" target="_blank" rel="noopener">OrcaSlicer</a>・<a href="https://github.com/JoshTheDerf/cubbyslicer" target="_blank" rel="noopener">CubbySlicer</a>・<a href="https://github.com/JoshTheDerf/orcaslicer-wasm" target="_blank" rel="noopener">orcaslicer-wasm</a>。非公式の派生版です。</p>
+    <div class="links"><a href="https://github.com/Psych0h3ad/orcaslicer-web">この配布版のソース</a><a href="./source.zip" download>フロントエンドのソースZIP</a><a href="./LICENSE.txt">AGPLライセンス</a><a href="./wasm/pages-assets-provenance.json">エンジン・資産の出典</a></div>
+    <p class="meta">エンジンバイナリのSHA-256と取得元はリポジトリに固定しています。配布元はビルドcommitを記録していないため、出典のソースSHAは取得時に観測した参照情報です。</p>
+  </footer>
+</main></body>
+</html>

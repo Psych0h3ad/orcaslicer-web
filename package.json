@@ -1,23 +1,27 @@
 {
-  "name": "cubby-slicer",
+  "name": "orcaslicer-web-pages",
   "version": "0.1.0",
-  "description": "Standalone browser slicer for CubbyCAD — upload an STL, pick a profile, slice to G-code. Runs OrcaSlicer and preFlight (PrusaSlicer fork) WASM engines (AGPL-3.0).",
+  "description": "Unofficial OrcaSlicer WebAssembly app for GitHub Pages and iPad, based on CubbySlicer.",
   "type": "module",
   "license": "AGPL-3.0-or-later",
-  "homepage": "https://cubbycad.com/slicer",
+  "homepage": "https://psych0h3ad.github.io/orcaslicer-web/",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/JoshTheDerf/cubbyslicer.git"
+    "url": "git+https://github.com/Psych0h3ad/orcaslicer-web.git"
   },
   "scripts": {
     "dev": "vite",
+    "assets": "node scripts/stage-pages-assets.mjs",
+    "assets:verify": "node scripts/stage-pages-assets.mjs --verify",
+    "prebuild": "npm run assets && node scripts/prepare-pages.mjs",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc -b",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:engine": "node scripts/test-pages-engine.mjs"
   },
   "dependencies": {
-    "@cubby/shared": "github:JoshTheDerf/cubby-shared",
+    "@cubby/shared": "git+https://github.com/JoshTheDerf/cubby-shared.git#38a54358e2ae740cbe3baf867952db65990db928",
     "@nuxt/ui": "^4.11.2",
     "manifold-3d": "^3.5.4",
     "meshoptimizer": "^1.3.0",
@@ -39,7 +43,12 @@
     "playwright": "^1.59.1",
     "typescript": "~5.9.3",
     "vite": "^7.2.5",
-    "vitest": "^3.2.7",
+    "vitest": "^5.1.0",
     "vue-tsc": "^3.1.4"
+  },
+  "overrides": {
+    "fontless": {
+      "esbuild": "^0.28.1"
+    }
   }
 }

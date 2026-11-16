@@ -1,8 +1,11 @@
 import { preferences } from '../../preferences';
 import type { Action } from '../types';
+import { helpUrl } from '../../../deployment';
 
 export function helpActions(): Action[] {
   return [
+    { id: 'help.guide', title: '使い方・iPadガイド', icon: 'i-lucide-circle-help', category: 'Help', aliases: ['help', 'ipad', 'guide', '使い方'],
+      run: () => { window.open(helpUrl, '_blank', 'noopener'); } },
     { id: 'help.palette', title: 'Command palette', icon: 'i-lucide-search', category: 'Help', aliases: ['commands', 'search', 'find action', 'speed dial'],
       binding: { key: 'k', ctrlOrMeta: true }, paletteHidden: true, run: (c) => c.dispatch.openPalette() },
     { id: 'help.palette-alt', title: 'Command palette', icon: 'i-lucide-search', category: 'Help', hidden: true, paletteHidden: true,
