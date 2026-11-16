@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
  * Download the single-threaded OrcaSlicer/CAD builds and their resource library.
- * Normal runs accept only the SHA-256/length pairs in pages-assets.lock.json.
+ * Normal runs accept only the SHA-256/length pairs in pages-assets.lock.json,
+ * restoring missing assets from its immutable, separately hashed release ZIP.
  * Maintainers can deliberately refresh the snapshot with --update-lock, inspect
- * its diff, and run the application smoke test before committing the new lock.
+ * its diff, publish an immutable ZIP, and set lock.snapshot before committing.
  * No assets are fetched by the deployed app from CubbyCAD: everything is staged
  * under public/ and served by the same GitHub Pages origin as the application.
  */
@@ -86,15 +87,64 @@ function check(path, bytes, entry) {
   if (/\.json$/.test(path)) parseJson(bytes.toString('utf8'));
 }
 
-async function stage(entry) {
+async function hasVerifiedLocalAsset(entry) {
   let bytes;
   try { bytes = await readFile(targetFor(entry.path)); } catch (error) { if (error.code !== 'ENOENT') throw error; }
-  if (bytes && bytes.length === entry.bytes && sha256(bytes) === entry.sha256) { check(entry.path, bytes, entry); reused++; return; }
-  if (verifyOnly) throw new Error(`Missing or modified staged asset: ${entry.path}`);
-  bytes = await fetchBytes(base + encodePath(entry.path));
+  if (!bytes || bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) return false;
   check(entry.path, bytes, entry);
-  await save(entry.path, bytes);
-  downloaded++;
+  reused++;
+  return true;
+}
+
+async function stageLockedSnapshot(lock) {
+  const known = new Map();
+  for (const entry of lock.files) {
+    targetFor(entry.path);
+    if (known.has(entry.path) || !Number.isSafeInteger(entry.bytes) || entry.bytes < 0 || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
+      throw new Error(`Invalid or duplicate locked asset: ${entry.path}`);
+    }
+    known.set(entry.path, entry);
+  }
+  const local = await parallel(lock.files, hasVerifiedLocalAsset);
+  const missing = lock.files.filter((entry, i) => !local[i]);
+  if (!missing.length) return;
+  if (verifyOnly) throw new Error(`Missing or modified staged asset: ${missing[0].path} (${missing.length} in total; --verify never downloads files)`);
+  if (!lock.snapshot) throw new Error('The asset lock has no immutable snapshot. Publish a ZIP containing exactly lock.files, then record its URL, byte length and SHA-256 in lock.snapshot before staging or CI deployment.');
+  const { url, bytes: expectedBytes, sha256: expectedHash } = lock.snapshot;
+  let sourceUrl;
+  try { sourceUrl = new URL(url); } catch { throw new Error('Invalid immutable snapshot URL'); }
+  if (sourceUrl.protocol !== 'https:' || sourceUrl.username || sourceUrl.password || !Number.isSafeInteger(expectedBytes) || expectedBytes <= 0 || !/^[a-f0-9]{64}$/.test(expectedHash)) {
+    throw new Error('Invalid immutable snapshot metadata in pages-assets.lock.json');
+  }
+  console.log(`Restoring ${missing.length} assets from the pinned release snapshot...`);
+  const archive = await fetchBytes(sourceUrl.href);
+  if (archive.length !== expectedBytes || sha256(archive) !== expectedHash) throw new Error('Immutable snapshot ZIP integrity mismatch; refusing to extract or modify staged assets.');
+  const { unzipSync } = await import('fflate');
+  const seen = new Set();
+  // Check names and expanded lengths before inflation. Reject extra entries,
+  // directory entries, duplicates and traversal rather than silently ignoring
+  // them. The archive contains public-relative file paths, never a public/ prefix.
+  const contents = unzipSync(archive, {
+    filter: ({ name, originalSize }) => {
+      targetFor(name);
+      const entry = known.get(name);
+      if (!entry || seen.has(name) || originalSize !== entry.bytes) throw new Error(`Unexpected, duplicate or wrong-sized snapshot entry: ${name}`);
+      seen.add(name);
+      return true;
+    },
+  });
+  if (seen.size !== known.size) throw new Error(`Incomplete immutable snapshot: expected ${known.size} files, found ${seen.size}`);
+  // Verify the complete archive before the first write, even when only one
+  // local file needs repair. A partially invalid ZIP cannot damage good files.
+  for (const entry of lock.files) {
+    const content = contents[entry.path];
+    if (!content) throw new Error(`Missing snapshot entry: ${entry.path}`);
+    check(entry.path, Buffer.from(content.buffer, content.byteOffset, content.byteLength), entry);
+  }
+  for (const entry of missing) {
+    await save(entry.path, contents[entry.path]);
+    downloaded++;
+  }
 }
 
 async function readJson(path) { return parseJson(await readFile(targetFor(path), 'utf8')); }
@@ -208,10 +258,11 @@ if (update) {
   };
   await validateSnapshot();
   await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
+  console.warn('Updated from upstream without an immutable snapshot. Publish the reviewed assets ZIP and add lock.snapshot { url, bytes, sha256 } before CI deployment.');
 } else {
   lock = JSON.parse(await readFile(lockPath, 'utf8'));
   if (lock.format !== 1 || lock.baseUrl !== base || !Array.isArray(lock.files) || !lock.files.length) throw new Error('Invalid pages-assets.lock.json');
-  await parallel(lock.files, stage);
+  await stageLockedSnapshot(lock);
 }
 
 const result = await validateSnapshot();
