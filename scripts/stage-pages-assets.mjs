@@ -7,6 +7,8 @@
  * its diff, publish an immutable ZIP, and set lock.snapshot before committing.
  * --add-covers preserves every existing locked byte and adds only printer
  * selection thumbnails, followed by publication of an expanded snapshot ZIP.
+ * --add-mt similarly adds the matching pthreads engine without refreshing ST,
+ * profiles or covers. Startup validation is separate from a real slice test.
  * No assets are fetched by the deployed app from CubbyCAD: everything is staged
  * under public/ and served by the same GitHub Pages origin as the application.
  */
@@ -21,8 +23,9 @@ const lockPath = join(root, 'scripts/pages-assets.lock.json');
 const update = process.argv.includes('--update-lock');
 const verifyOnly = process.argv.includes('--verify');
 const addCovers = process.argv.includes('--add-covers');
-if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify', '--add-covers'].includes(arg)) || [update, verifyOnly, addCovers].filter(Boolean).length > 1) {
-  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock | --add-covers]');
+const addMt = process.argv.includes('--add-mt');
+if (process.argv.slice(2).some((arg) => !['--update-lock', '--verify', '--add-covers', '--add-mt'].includes(arg)) || [update, verifyOnly, addCovers, addMt].filter(Boolean).length > 1) {
+  throw new Error('Usage: node scripts/stage-pages-assets.mjs [--verify | --update-lock | --add-covers | --add-mt]');
 }
 const base = 'https://cubbycad.com/slicer/';
 const concurrency = 4;
@@ -210,6 +213,16 @@ async function validateSnapshot() {
   if (cad.module !== 'orca-cad' || cad.orca !== version.version || cad.abi !== 1) throw new Error(`Unsupported CAD engine: ${JSON.stringify(cad)}`);
   const vendors = await readJson('wasm/orca/profiles/_index.json');
   const paths = new Set(lock.files.map((entry) => entry.path));
+  const mtPaths = ['slicer.mjs', 'slicer.wasm', 'slicer.data', 'version.json'].map((file) => `wasm/orca/mt/${file}`);
+  const hasMt = mtPaths.some((path) => paths.has(path));
+  if (hasMt) {
+    for (const path of mtPaths) if (!paths.has(path)) throw new Error(`Incomplete multi-threaded engine: ${path} is not locked`);
+    const mt = await readJson('wasm/orca/mt/version.json');
+    for (const key of ['engine', 'version', 'bridge']) {
+      if (mt[key] !== version[key] || lock.multiThreadedEngine?.version?.[key] !== version[key]) throw new Error(`Multi-threaded ${key} must match the single-threaded engine metadata`);
+    }
+    if (lock.multiThreadedEngine.workerEntrypoint !== 'wasm/orca/mt/slicer.mjs') throw new Error('Multi-threaded worker entrypoint is not locked');
+  } else if (lock.multiThreadedEngine) throw new Error('Multi-threaded metadata exists without its engine assets');
   const omittedCovers = new Set((lock.omittedOptionalAssets ?? []).filter((entry) => entry.kind === 'printer-cover' && entry.reasonCode && entry.reason).map((entry) => entry.path));
   let presets = 0;
   const covers = new Set();
@@ -237,22 +250,78 @@ async function validateSnapshot() {
     presets += Object.keys(bundle).length;
   }
   if (lock.printerCovers?.models !== covers.size) throw new Error(`Printer-cover coverage metadata is stale: expected ${covers.size} models`);
-  return { version, cad, vendors: vendors.length, presets, covers: covers.size };
+  return { version, cad, vendors: vendors.length, presets, covers: covers.size, hasMt };
 }
 
-async function validateEngineRuntime(expected) {
-  const { default: createEngine } = await import(pathToFileURL(targetFor('wasm/orca/slicer.mjs')).href);
-  const data = await readFile(targetFor('wasm/orca/slicer.data'));
-  const engine = await createEngine({
-    wasmBinary: await readFile(targetFor('wasm/orca/slicer.wasm')),
-    getPreloadedPackage: () => data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength),
-    print: () => {},
-    printErr: () => {},
-  });
-  const actual = JSON.parse(engine.UTF8ToString(engine._cs_version()));
-  for (const key of ['engine', 'version', 'bridge']) {
-    if (actual[key] !== expected[key]) throw new Error(`WASM runtime ${key} ${actual[key]} disagrees with version.json ${expected[key]}`);
+async function validateEngineRuntime(expected, mt = false) {
+  const dir = mt ? 'wasm/orca/mt/' : 'wasm/orca/';
+  const { default: createEngine } = await import(pathToFileURL(targetFor(`${dir}slicer.mjs`)).href);
+  const data = await readFile(targetFor(`${dir}slicer.data`));
+  let engine;
+  try {
+    engine = await createEngine({
+      ...(mt ? { csThreads: 2 } : {}),
+      locateFile: (file) => targetFor(`${dir}${file}`),
+      wasmBinary: await readFile(targetFor(`${dir}slicer.wasm`)),
+      getPreloadedPackage: () => data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength),
+      print: () => {},
+      printErr: () => {},
+    });
+    const actual = JSON.parse(engine.UTF8ToString(engine._cs_version()));
+    for (const key of ['engine', 'version', 'bridge']) {
+      if (actual[key] !== expected[key]) throw new Error(`${mt ? 'MT' : 'ST'} WASM runtime ${key} ${actual[key]} disagrees with version.json ${expected[key]}`);
+    }
+    if (mt && (!(engine.HEAPU8.buffer instanceof SharedArrayBuffer) || engine._cs_thread_count?.() !== 2 || typeof engine._cs_slice_start !== 'function')) throw new Error('Multi-threaded WASM did not start its two-thread shared-memory runtime');
+    return { version: actual, ...(mt ? { threads: engine._cs_thread_count(), sharedMemory: true, heapBytes: engine.HEAPU8.byteLength } : {}) };
+  } finally {
+    engine?.csTerminateThreads?.();
   }
+}
+
+async function captureMultiThreadedEngine(files, expected) {
+  const existing = files.size;
+  const dir = 'wasm/orca/mt/';
+  await parallel(['slicer.mjs', 'slicer.wasm', 'slicer.data'], async (file) => {
+    const path = dir + file;
+    if (files.has(path)) return;
+    const sourceUrl = base + path;
+    const bytes = await fetchBytes(sourceUrl);
+    const entry = { path, bytes: bytes.length, sha256: sha256(bytes), sourceUrl };
+    check(path, bytes, entry);
+    await save(path, bytes);
+    files.set(path, entry);
+    downloaded++;
+  });
+  // This Emscripten build boots workers by re-importing slicer.mjs itself.
+  // The successful factory startup below loads the actual pthread pool; a
+  // missing external worker dependency consequently fails before lock changes.
+  const runtime = await validateEngineRuntime(expected, true);
+  const path = `${dir}version.json`;
+  let metadataSource = { kind: 'existing-locked-version' };
+  if (!files.has(path)) {
+    const sourceUrl = base + path;
+    let bytes, metadata;
+    try {
+      bytes = await fetchBytes(sourceUrl);
+      try { metadata = parseJson(bytes.toString('utf8')); } catch { /* SPA HTML is not version metadata. */ }
+    } catch (error) { if (![404, 410].includes(error.status)) throw error; }
+    if (metadata) {
+      for (const key of ['engine', 'version', 'bridge']) if (metadata[key] !== runtime.version[key]) throw new Error(`Distributed MT version metadata disagrees with the actual WASM ${key}`);
+      metadataSource = { kind: 'upstream-json', sourceUrl };
+    } else {
+      bytes = Buffer.from(`${JSON.stringify(runtime.version, null, 2)}\n`);
+      metadataSource = { kind: 'wasm-runtime', generatedFrom: `${dir}slicer.wasm:_cs_version`, probedUrl: sourceUrl, reason: 'The upstream URL did not provide JSON version metadata; recorded the actual compiled engine version.' };
+    }
+    const entry = { path, bytes: bytes.length, sha256: sha256(bytes), ...(metadata ? { sourceUrl } : { generatedFrom: metadataSource.generatedFrom }) };
+    check(path, bytes, entry);
+    await save(path, bytes);
+    files.set(path, entry);
+    downloaded++;
+  } else {
+    const metadata = await readJson(path);
+    for (const key of ['engine', 'version', 'bridge']) if (metadata[key] !== runtime.version[key]) throw new Error(`Locked MT metadata disagrees with the actual WASM ${key}`);
+  }
+  return { observedAt: new Date().toISOString(), version: runtime.version, workerEntrypoint: `${dir}slicer.mjs`, metadataSource, startupValidation: { threads: runtime.threads, sharedMemory: runtime.sharedMemory, heapBytes: runtime.heapBytes }, added: files.size - existing };
 }
 
 let lock;
@@ -346,10 +415,24 @@ if (update) {
     console.log(`Printer covers: ${printerCovers.available}/${printerCovers.models} available; ${printerCovers.added} added, ${printerCovers.unavailable} unavailable in both upstream sources.`);
     if (printerCovers.added) console.warn('Existing asset hashes were preserved. Publish the expanded immutable ZIP and add lock.snapshot { url, bytes, sha256 } before CI deployment.');
   }
+  if (addMt) {
+    const original = lock.files;
+    const files = new Map(original.map((entry) => [entry.path, entry]));
+    const captured = await captureMultiThreadedEngine(files, lock.engine);
+    const multiThreadedEngine = captured.added || !lock.multiThreadedEngine ? captured : lock.multiThreadedEngine;
+    for (const entry of original) if (files.get(entry.path) !== entry) throw new Error(`Existing locked asset was replaced: ${entry.path}`);
+    lock = { ...lock, files: [...files.values()].sort((a, b) => a.path.localeCompare(b.path, 'en')), multiThreadedEngine };
+    if (captured.added) delete lock.snapshot;
+    await validateSnapshot();
+    await writeFile(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
+    console.log(`Multi-threaded engine: ${multiThreadedEngine.version.version}, bridge ${multiThreadedEngine.version.bridge}; two-thread startup passed, ${captured.added} assets added.`);
+    console.warn('Run the real asynchronous MT slicing integration check before enabling this engine. Publish an expanded immutable snapshot before CI deployment.');
+  }
 }
 
 const result = await validateSnapshot();
 await validateEngineRuntime(result.version);
+if (result.hasMt) await validateEngineRuntime(result.version, true);
 const totalBytes = lock.files.reduce((total, entry) => total + entry.bytes, 0);
 if (!verifyOnly) await writeFile(join(publicRoot, 'wasm/pages-assets-provenance.json'), `${JSON.stringify({ ...lock, files: undefined }, null, 2)}\n`);
 console.log(`Staged OrcaSlicer ${result.version.version} / bridge ${result.version.bridge}; CAD ABI ${result.cad.abi}; ${result.vendors} vendors / ${result.presets} presets.`);

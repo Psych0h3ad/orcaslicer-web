@@ -17,6 +17,10 @@ import {
 import { toast } from '../ui';
 import { paletteRecentCount, RECENT_COUNT_DEFAULT, RECENT_COUNT_MAX, RECENT_COUNT_MIN } from '../app/actions/recent';
 import { dialogs } from './state';
+import { clearThreadStartupAttempts, threadModeUrl, threadStartup, type ThreadPageMode } from '../platform/threadIsolation';
+import { flushAutosave } from '../project/persistence/autosave';
+import { lastSlice } from '../app/state';
+import { useSliceController } from '../app/slice';
 
 type Key = keyof Preferences;
 interface Item { value: string | number; label: string }
@@ -65,6 +69,18 @@ function revert(k: Key): void { set(k, DEFAULT_PREFERENCES[k]); }
 
 // ---- slicing threads (its own localStorage key, read by the engine workers) -------------------
 const mtAvailable = engineThreadsAvailable();
+const threadsRestarting = ref(false);
+const { status: sliceStatus } = useSliceController();
+async function restartThreads(mode: ThreadPageMode): Promise<void> {
+  if (threadsRestarting.value || sliceStatus.value === 'slicing') return;
+  threadsRestarting.value = true;
+  try {
+    if (!await flushAutosave()) { toast.error('保存できないため再読み込みを中止しました。3MFファイルを保存してから切り替えてください。'); return; }
+    setEngineThreadsPref(mode === 'single' ? 1 : 0);
+    clearThreadStartupAttempts();
+    location.assign(threadModeUrl(mode));
+  } finally { threadsRestarting.value = false; }
+}
 const cores = Math.max(1, navigator.hardwareConcurrency || 1);
 const threads = ref(engineThreadsPref());
 watch(threads, (n) => setEngineThreadsPref(n));
@@ -149,13 +165,21 @@ const shown = (id: string) => !mobileDialog.value || section.value === id;
         <div v-if="s.id === 'slicing'" class="pf__row">
           <div class="pf__lbl">
             <span>Slicing threads</span>
-            <small>{{ mtAvailable ? 'CPU threads the engine uses. Fewer keeps the page responsive while slicing.' : 'This page can’t run multi-threaded engines, so slicing uses one thread.' }}</small>
+            <small>{{ mtAvailable ? 'CPU threads the engine uses. Fewer keeps the page responsive while slicing.' : threadStartup.reason || 'このページではシングルスレッドを使います。' }}</small>
+            <small v-if="lastSlice?.report.threads">前回のスライス：{{ lastSlice.report.threads }}スレッド</small>
           </div>
           <div class="pf__ctl">
             <UButton v-if="threads" size="xs" variant="ghost" color="warning" icon="i-lucide-undo-2" square aria-label="Revert Slicing threads"
                      title="Revert to the default (Automatic)" @click="threads = 0" />
             <USelect v-model="threads" :items="threadItems" value-key="value" size="sm" class="w-44 phone:w-40" :disabled="!mtAvailable" aria-label="Slicing threads" />
           </div>
+        </div>
+        <div v-if="s.id === 'slicing'" class="flex flex-wrap items-center gap-2 py-2">
+          <UButton size="sm" variant="outline" icon="i-lucide-cpu" :label="threadStartup.experimental ? '実験的MTを試す・再読み込み' : 'MTを有効にして再読み込み'"
+                   :disabled="threadsRestarting || sliceStatus === 'slicing'" @click="restartThreads('multi')" />
+          <UButton size="sm" variant="ghost" color="neutral" label="シングルスレッドで再読み込み"
+                   :disabled="threadsRestarting || sliceStatus === 'slicing'" @click="restartThreads('single')" />
+          <p class="text-xs text-dimmed w-full">現在のプロジェクトをブラウザ内に保存して切り替えます。Safari / iPadのMTは実験的対応です。</p>
         </div>
       </section>
 

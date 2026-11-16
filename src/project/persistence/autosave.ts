@@ -81,6 +81,23 @@ let timer: ReturnType<typeof setTimeout> | null = null;
 let enabled = false;
 export let lastAutosaveError: string | null = null;
 
+/** Commit pending edits before an explicit application restart. */
+export async function flushAutosave(): Promise<boolean> {
+  if (timer) { clearTimeout(timer); timer = null; }
+  try {
+    if (!enabled || !await openDb()) {
+      lastAutosaveError = 'ブラウザ内にプロジェクトを保存できません。3MFとして保存してください。';
+      return false;
+    }
+    saving = saving.then(saveNow, saveNow);
+    await saving;
+    return lastAutosaveError === null;
+  } catch (error) {
+    lastAutosaveError = (error as Error)?.message ?? 'Autosave failed';
+    return false;
+  }
+}
+
 async function saveNow(): Promise<void> {
   const db = await openDb();
   if (!db) return;

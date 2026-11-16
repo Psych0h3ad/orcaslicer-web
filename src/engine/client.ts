@@ -13,6 +13,7 @@
  * error) tears all of those down too.
  */
 import { readString, removeKey, writeString } from '../lib/storage';
+import { engineCaps } from './capabilities';
 import type {
   ArrangeArgs, ArrangeResult, ConfigSchema, EngineId, EngineVersion, FlatConfig, PaintMap, SliceJob, SliceObjectInput, SliceProgress, SliceReport,
   SliceResult, ToolMesh, WorkerRequest, WorkerResponse,
@@ -37,8 +38,13 @@ export class SliceCancelled extends Error {
 const THREADS_KEY = 'cubby-slicer:engine-threads';
 /** Engine thread preference (localStorage `cubby-slicer:engine-threads`): 0 = auto, 1 = single-threaded, N = N threads. */
 export function engineThreadsPref(): number {
+  const requested = typeof location === 'undefined' ? null : new URLSearchParams(location.search).get('threads');
+  if (requested === 'single') return 1;
   const n = Number(readString(THREADS_KEY));
-  return Number.isFinite(n) && n >= 0 ? Math.min(64, Math.floor(n)) : 0;
+  const preferred = Number.isFinite(n) && n >= 0 ? Math.min(64, Math.floor(n)) : 0;
+  // A recovery URL always wins. An explicit MT URL also lets a user test it
+  // without first changing a saved ST preference; no storage is rewritten.
+  return requested === 'multi' && preferred === 1 ? 0 : preferred;
 }
 /** Set the thread preference (Preferences); idle engines restart so the next slice uses it. */
 export function setEngineThreadsPref(n: number): void {
@@ -228,9 +234,19 @@ export async function sliceJob(
   signal?: AbortSignal,
 ): Promise<SliceResult> {
   const w = workerFor(job.engine);
-  let res = await w.request({ type: 'slice', id: w.nextId(), job }, [], onProgress, signal);
-  if (res.type === 'error' && res.stalled) {
-    // The multi-threaded engine hung: restart the worker single-threaded and retry once.
+  const mayRetryMt = engineCaps(job.engine).multiThreaded && engineThreadsAvailable() && engineThreadsPref() !== 1 && !w.noMt;
+  let res: WorkerResponse;
+  try {
+    res = await w.request({ type: 'slice', id: w.nextId(), job }, [], onProgress, signal);
+  } catch (error) {
+    // The outer Worker's onerror rejects rather than sending an error reply.
+    // Keep it on the same single retry path as a trapped pthread or watchdog.
+    if (!mayRetryMt || !(error instanceof SliceError) || !error.fatal || signal?.aborted) throw error;
+    res = { type: 'error', id: 0, message: error.message, report: error.report ?? undefined, fatal: true };
+  }
+  if (mayRetryMt && res.type === 'error' && (res.stalled || res.fatal) && !signal?.aborted) {
+    // Retain the caller's mesh arrays, drop the entire pthread pool and make
+    // exactly one new request in ST mode. Validation errors and cancels never retry.
     console.warn(`[${job.engine}] ${res.message}; retrying single-threaded`);
     w.noMt = true;
     w.reset(new SliceError(res.message, null, true));

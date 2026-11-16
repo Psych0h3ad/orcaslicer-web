@@ -53,6 +53,7 @@
         <span class="flex items-center gap-1"><UIcon name="i-lucide-clock" class="size-3.5" />{{ fmtTime(stats.printTimeSec) }}</span>
         <span class="hidden 2xl:flex items-center gap-1"><UIcon name="i-lucide-weight" class="size-3.5" />{{ total(stats.filamentG).toFixed(1) }} g</span>
         <span class="sr-only">Layers {{ stats.layers }}</span>
+        <UBadge v-if="lastSlice?.report.threads" color="neutral" variant="subtle" size="sm" :label="`${lastSlice.report.threads}T`" :title="`このスライスに使用したスレッド数：${lastSlice.report.threads}`" />
         <UBadge v-if="isStale" color="warning" variant="subtle" size="sm" label="outdated" class="hidden 2xl:inline-flex" />
       </div>
     </template>

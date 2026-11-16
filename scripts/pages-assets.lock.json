@@ -416,6 +416,30 @@
       "sha256": "088e340c1ae37481d4c04a8039744ce25be8d9d423c7d6e3908446978023fa8c"
     },
     {
+      "path": "wasm/orca/mt/slicer.data",
+      "bytes": 297219,
+      "sha256": "88c64342a54942f41fe1f7f27930357d40a096903984d2d3baf170b12bf18502",
+      "sourceUrl": "https://cubbycad.com/slicer/wasm/orca/mt/slicer.data"
+    },
+    {
+      "path": "wasm/orca/mt/slicer.mjs",
+      "bytes": 99884,
+      "sha256": "3f7beb280eeb133d43e7443f68f0cf18c4701adae423bb36de9cea7a8ef6837e",
+      "sourceUrl": "https://cubbycad.com/slicer/wasm/orca/mt/slicer.mjs"
+    },
+    {
+      "path": "wasm/orca/mt/slicer.wasm",
+      "bytes": 16326141,
+      "sha256": "cee88134ca3a761f1791670e0a1c760141aa1cadebb8df672014d8f8d82be6e1",
+      "sourceUrl": "https://cubbycad.com/slicer/wasm/orca/mt/slicer.wasm"
+    },
+    {
+      "path": "wasm/orca/mt/version.json",
+      "bytes": 82,
+      "sha256": "75eabb98ec1f969dcb9026d113896b3ffc91a3fcc07df6f055e6a33fc0654968",
+      "generatedFrom": "wasm/orca/mt/slicer.wasm:_cs_version"
+    },
+    {
       "path": "wasm/orca/profiles/_bundles/Afinia.json",
       "bytes": 32871,
       "sha256": "45de1a69dcabb1d92b9b038ed29706bcb99e0288fa93b66b053ef8771d04fc23"
@@ -6548,9 +6572,31 @@
     "unavailable": 13,
     "added": 442
   },
+  "multiThreadedEngine": {
+    "observedAt": "2026-11-16T10:30:34.921Z",
+    "version": {
+      "bridge": 1,
+      "build": "release",
+      "engine": "orca",
+      "version": "2.5.0"
+    },
+    "workerEntrypoint": "wasm/orca/mt/slicer.mjs",
+    "metadataSource": {
+      "kind": "wasm-runtime",
+      "generatedFrom": "wasm/orca/mt/slicer.wasm:_cs_version",
+      "probedUrl": "https://cubbycad.com/slicer/wasm/orca/mt/version.json",
+      "reason": "The upstream URL did not provide JSON version metadata; recorded the actual compiled engine version."
+    },
+    "startupValidation": {
+      "threads": 2,
+      "sharedMemory": true,
+      "heapBytes": 134217728
+    },
+    "added": 4
+  },
   "snapshot": {
-    "url": "https://github.com/Psych0h3ad/orcaslicer-web/releases/download/assets-2026-11-16-covers/pages-assets.zip",
-    "bytes": 57591492,
-    "sha256": "521cd591ef53a420ac827459b61320a3f7bf89d92ff11288863d1c061bd78254"
+    "url": "https://github.com/Psych0h3ad/orcaslicer-web/releases/download/assets-2026-11-16-mt/pages-assets.zip",
+    "bytes": 62912969,
+    "sha256": "a4411dd47399e262b18d736e083d2c44597e95a57835cd4c4737bfdeceab434f"
   }
 }

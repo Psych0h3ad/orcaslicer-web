@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 /**
- * Real, offline integration check for the GitHub Pages single-threaded build.
+ * Real, offline integration check for the GitHub Pages slicing builds.
  * Uses the application's STL importer dependency, preset catalog, config
  * resolution, blob packer and heap helpers; no mocked slicer or browser.
  * Run after `npm run stage:pages` (or `node scripts/stage-pages-assets.mjs`).
+ * Default: ST. Add --mt (or --all) to also check MT against the ST result.
  */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { Worker } from 'node:worker_threads';
 import { createServer } from 'vite';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 
@@ -18,6 +20,7 @@ const profilesDir = join(engineDir, 'profiles');
 const outputDir = join(root, 'e2e-out/engine-smoke');
 const textDecoder = new TextDecoder();
 const started = performance.now();
+const checkMt = process.argv.includes('--mt') || process.argv.includes('--all');
 
 // Load production TypeScript modules without opening a development server.
 const vite = await createServer({
@@ -164,6 +167,8 @@ try {
     writeFile(join(outputDir, 'cube.stl'), stl),
     writeFile(join(outputDir, 'cube.gcode'), sliced.gcode),
     writeFile(join(outputDir, 'report.json'), `${JSON.stringify(sliced.report, null, 2)}\n`),
+    writeFile(join(outputDir, 'job.json'), packed.json),
+    writeFile(join(outputDir, 'mesh.bin'), packed.blob),
   ]);
   console.log(JSON.stringify({
     ok: true, version: sliced.version, mode: 'single-threaded',
@@ -175,11 +180,180 @@ try {
     elapsedMs: Math.round(performance.now() - started),
     artifacts: relative(root, outputDir).split(sep).join('/'),
   }, null, 2));
+
+  if (checkMt) {
+    // An independent host Worker makes the deadline enforceable even if a
+    // buggy pthread build blocks its host. Cleanup terminates the pool first,
+    // and the parent always terminates the host before resolving/rejecting.
+    const mt = await runMtCheck(join(engineDir, 'mt'), packed, 60_000);
+    assert.deepEqual(mt.version, stagedVersion, 'MT and ST must expose the same engine/bridge versions');
+    assert.equal(mt.sharedMemory, true, 'The MT engine must use SharedArrayBuffer-backed memory');
+    assert.ok(mt.threads >= 2, 'The MT engine must use at least two threads');
+    assert.equal(mt.rc, 0, mt.report?.error ?? 'MT slice failed');
+    assert.equal(mt.report.ok, true, mt.report.error ?? 'MT slice failed');
+    assert.equal(mt.report.stats.layers, sliced.report.stats.layers);
+    assert.ok(Math.abs(mt.report.stats.maxZ - sliced.report.stats.maxZ) < 1e-6);
+    assert.ok(Math.abs(mt.report.stats.filamentMm[0] - sliced.report.stats.filamentMm[0]) < sliced.report.stats.filamentMm[0] * 0.01,
+      'MT and ST extrusion estimates must agree within 1%');
+    const mtGcode = textDecoder.decode(mt.gcode);
+    assert.match(mtGcode, /OrcaSlicer/i);
+    assert.match(mtGcode, /^G1\s[^\r\n]*[XY][^\r\n]*\sE[-\d.]+/m);
+    assert.match(mtGcode, /^M(?:104|109)\s[^\r\n]*S\d+/m);
+    assert.doesNotMatch(mtGcode, /\b(?:NaN|Infinity)\b/);
+    const countExtrusions = (text) => [...text.matchAll(/^G1\s[^\r\n]*[XY][^\r\n]*\sE[-\d.]+/gm)].length;
+    assert.equal(countExtrusions(mtGcode), countExtrusions(gcode), 'MT and ST must generate the same number of extruding moves for the cube');
+    await Promise.all([
+      writeFile(join(outputDir, 'cube-mt.gcode'), mt.gcode),
+      writeFile(join(outputDir, 'report-mt.json'), `${JSON.stringify(mt.report, null, 2)}\n`),
+    ]);
+    console.log(JSON.stringify({ ok: true, mode: 'multi-threaded', version: mt.version, threads: mt.threads,
+      sharedMemory: mt.sharedMemory, layers: mt.report.stats.layers, gcodeBytes: mt.gcode.byteLength,
+      progressEvents: mt.progressEvents, elapsedMs: mt.elapsedMs, matchesSingleThreaded: true }, null, 2));
+  }
 } finally {
   await vite.close();
 }
 
 async function readJson(file) { return JSON.parse(await readFile(file, 'utf8')); }
+
+async function runMtCheck(directory, payload, timeoutMs) {
+  const source = `(${mtWorkerMain.toString()})()`;
+  const worker = new Worker(source, {
+    eval: true,
+    workerData: { directory, json: payload.json, blob: payload.blob, timeoutMs: timeoutMs - 5_000 },
+  });
+  return new Promise((resolveResult, rejectResult) => {
+    let settled = false;
+    let latest = null;
+    const finish = async (error, value) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      await worker.terminate();
+      if (error) rejectResult(error); else resolveResult(value);
+    };
+    const timer = setTimeout(() => {
+      void finish(new Error(`MT slice exceeded ${timeoutMs / 1000}s; host and pthread pool terminated. Last status: ${JSON.stringify(latest)}`));
+    }, timeoutMs);
+    worker.on('message', (message) => {
+      if (message.status) { latest = message; return; }
+      if (message.error) void finish(new Error(`MT slice failed: ${message.error}; diagnostics: ${JSON.stringify(message.diagnostics)}`));
+      else void finish(null, message.result);
+    });
+    worker.on('error', (error) => { void finish(error); });
+    worker.on('exit', (code) => {
+      if (!settled) void finish(new Error(`MT host exited before returning a result (code ${code})`));
+    });
+  });
+}
+
+/** Self-contained because it is serialized into a Node host Worker. */
+async function mtWorkerMain() {
+  const { parentPort, workerData } = await import('node:worker_threads');
+  const { readFile } = await import('node:fs/promises');
+  const { join } = await import('node:path');
+  const { pathToFileURL } = await import('node:url');
+  const { directory, json, blob, timeoutMs } = workerData;
+  const started = performance.now();
+  // Atomics.waitAsync alone does not keep a Node Worker alive, and the
+  // Emscripten pool deliberately unrefs idle pthreads.
+  const keepAlive = setInterval(() => {}, 1_000);
+  const diagnostics = { progress: [], stderr: [], version: null, threads: 0, sharedMemory: false, state: null };
+  let mod, message;
+  let inputs = [], output = 0, state = 0, gcodePtr = 0, reportPtr = 0;
+  const readWord = (pointer) => { mod.csSyncHeap?.(); return mod.HEAPU32[(pointer >>> 0) >>> 2] >>> 0; };
+  const copyOut = (pointer, length) => {
+    mod.csSyncHeap?.();
+    if (!pointer || pointer + length > mod.HEAPU8.byteLength) throw new Error('MT engine returned an invalid buffer');
+    return mod.HEAPU8.slice(pointer, pointer + length);
+  };
+  try {
+    const [wasm, data, factory] = await Promise.all([
+      readFile(join(directory, 'slicer.wasm')),
+      readFile(join(directory, 'slicer.data')),
+      import(pathToFileURL(join(directory, 'slicer.mjs')).href).then((module) => module.default),
+    ]);
+    const compiled = await WebAssembly.compile(wasm);
+    mod = await factory({
+      csThreads: 2,
+      locateFile: (file) => join(directory, file),
+      // Node's Worker constructor wants an absolute native path; browsers use
+      // the equivalent same-origin URL in the production runtime.
+      mainScriptUrlOrBlob: join(directory, 'slicer.mjs'),
+      getPreloadedPackage: () => data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength),
+      instantiateWasm(imports, done) {
+        WebAssembly.instantiate(compiled, imports).then((instance) => done(instance, compiled));
+        return {};
+      },
+      csProgress(percent, text) {
+        diagnostics.progress.push({ percent, text });
+        if (diagnostics.progress.length > 10) diagnostics.progress.shift();
+        parentPort.postMessage({ status: 'progress', percent, text });
+      },
+      print: () => {},
+      printErr: (line) => { diagnostics.stderr.push(line); if (diagnostics.stderr.length > 10) diagnostics.stderr.shift(); },
+    });
+    diagnostics.version = JSON.parse(mod.UTF8ToString(mod._cs_version()));
+    diagnostics.threads = mod._cs_thread_count();
+    diagnostics.sharedMemory = mod.HEAPU8.buffer instanceof SharedArrayBuffer;
+    parentPort.postMessage({ status: 'ready', ...diagnostics });
+    const allocate = (bytes) => {
+      const pointer = mod._malloc(Math.max(1, bytes.byteLength)) >>> 0;
+      if (!pointer) throw new Error('MT engine allocation failed');
+      inputs.push(pointer);
+      mod.csSyncHeap?.();
+      mod.HEAPU8.set(bytes, pointer);
+      return pointer;
+    };
+    const jobPtr = allocate(json), blobPtr = allocate(blob);
+    output = allocate(new Uint8Array(16));
+    state = allocate(new Uint8Array(8));
+    const rc = mod._cs_slice_start(jobPtr, json.byteLength, blobPtr, blob.byteLength,
+      output, output + 4, output + 8, output + 12, state);
+    if (rc !== 0) throw new Error(`MT asynchronous entry point refused to start: ${rc}`);
+    parentPort.postMessage({ status: 'slice-started', threads: diagnostics.threads });
+    const deadline = started + timeoutMs;
+    while (true) {
+      mod.csSyncHeap?.();
+      const shared = mod.HEAP32;
+      const index = (state >>> 0) >>> 2;
+      diagnostics.state = [Atomics.load(shared, index), Atomics.load(shared, index + 1)];
+      if (diagnostics.state[0] !== 0) break;
+      if (performance.now() >= deadline) throw new Error(`MT slice timed out after ${timeoutMs / 1000}s`);
+      // Never Atomics.wait: pthread startup and proxied calls need this host's
+      // event loop. waitAsync lets Emscripten process those messages.
+      const waiting = Atomics.waitAsync(shared, index, 0, 100);
+      if (waiting.async) await waiting.value;
+      else await new Promise((resolve) => setTimeout(resolve, 0));
+    }
+    gcodePtr = readWord(output);
+    reportPtr = readWord(output + 8);
+    const report = JSON.parse(new TextDecoder().decode(copyOut(reportPtr, readWord(output + 12))));
+    const gcodeLen = readWord(output + 4);
+    message = { result: {
+      rc: diagnostics.state[1], version: diagnostics.version, threads: diagnostics.threads,
+      sharedMemory: diagnostics.sharedMemory, report,
+      gcode: gcodeLen ? copyOut(gcodePtr, gcodeLen) : new Uint8Array(),
+      progressEvents: diagnostics.progress.length, elapsedMs: Math.round(performance.now() - started),
+    } };
+  } catch (error) {
+    message = { error: String(error.stack ?? error), diagnostics };
+  } finally {
+    // A completed slice has released its inputs. After a timeout/trap do not
+    // free live data; terminate the pool and let host teardown reclaim memory.
+    if (message?.result) {
+      try {
+        if (gcodePtr) mod._cs_free(gcodePtr);
+        if (reportPtr) mod._cs_free(reportPtr);
+        for (const pointer of inputs) mod._free(pointer);
+      } catch { /* do not mask the useful failure */ }
+    }
+    try { mod?.csTerminateThreads?.(); } catch { /* parent also terminates the host */ }
+    clearInterval(keepAlive);
+  }
+  parentPort.postMessage(message);
+  parentPort.close();
+}
 
 function cubeStl(size) {
   const vertices = [[0,0,0],[size,0,0],[size,size,0],[0,size,0],[0,0,size],[size,0,size],[size,size,size],[0,size,size]];

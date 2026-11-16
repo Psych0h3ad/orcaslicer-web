@@ -3,15 +3,15 @@ import vue from '@vitejs/plugin-vue'
 import ui from '@nuxt/ui/vite'
 import { fileURLToPath } from 'node:url'
 
-// Match GitHub Pages locally: no COOP/COEP headers and no SharedArrayBuffer.
-// The engine has a genuine single-threaded WASM build, running in a Worker.
+// Match GitHub Pages locally: no server-provided COOP/COEP headers.
+// The scoped Service Worker can enable isolation; ST remains the fallback.
 // configure-pages supplies the real base path (including custom domains).
 const base = process.env.BASE_PATH ?? '/'
 if (!base.startsWith('/') || !base.endsWith('/')) {
   throw new Error('BASE_PATH must start and end with / (for example /orcaslicer-web/)')
 }
 
-// Unofficial GitHub Pages distribution of CubbySlicer with Orca's ST engine.
+// Unofficial GitHub Pages distribution of CubbySlicer with Orca WASM engines.
 // See LICENSE + README.md for the upstream sources and distribution scope.
 export default defineConfig({
   // Pinned: vitest run from a subdirectory would otherwise make that the root, and Nuxt UI
